@@ -1,0 +1,185 @@
+<div class="statistic d-flex">
+  <div class="statistic__sidebar"></div>
+  <div class="statistic__chart">
+    <div class="button-row">
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="menuDay">
+        Ngày
+      </button>
+      <button mat-raised-button color="warn" [matMenuTriggerFor]="menuMonth">
+        Tháng
+      </button>
+      <button mat-raised-button color="accent" [matMenuTriggerFor]="menuYear">
+        Năm
+      </button>
+      <mat-menu #menuDay="matMenu" xPosition="before" style="padding: 16px">
+        <mat-form-field color="warn" appearance="fill">
+          <mat-label>Ngày bắt đầu</mat-label>
+          <input
+            matInput
+            [matDatepicker]="pickerStartDate"
+            #startDate
+            (dateChange)="getDate('start', $event)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="pickerStartDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerStartDate></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field color="warn" appearance="fill">
+          <mat-label>Ngày kết thúc</mat-label>
+          <input
+            matInput
+            [matDatepicker]="pickerEndDate"
+            #endDate
+            (dateChange)="getDate('end', $event)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="pickerEndDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerEndDate></mat-datepicker>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!startDate.value || !endDate.value"
+          (click)="getStatistic('day')"
+        >
+          Tiếp tục
+        </button>
+      </mat-menu>
+      <mat-menu #menuMonth="matMenu" xPosition="before" style="padding: 16px">
+        <mat-form-field color="warn" appearance="fill">
+          <mat-label>Tháng bắt đầu</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            #startMonth
+            (dateChange)="getMonth('start', startMonth)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #picker1
+            startView="multi-year"
+            (monthSelected)="
+              chooseMonthHandler('start', $event, picker1, startMonth)
+            "
+          ></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field color="warn" appearance="fill">
+          <mat-label>Tháng kết thúc</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            #endMonth
+            (dateChange)="getMonth('end', endMonth)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #picker2
+            startView="multi-year"
+            (monthSelected)="
+              chooseMonthHandler('end', $event, picker2, endMonth)
+            "
+          ></mat-datepicker>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="warn"
+          [disabled]="!startMonth.value || !endMonth.value"
+          (click)="getStatistic('month')"
+        >
+          Tiếp tục
+        </button>
+      </mat-menu>
+      <mat-menu #menuYear="matMenu" xPosition="before" style="padding: 16px">
+        <mat-form-field color="accent" appearance="fill">
+          <mat-label>Năm bắt đầu</mat-label>
+          <input
+            matInput
+            [matDatepicker]="pickerStartYear"
+            #startYear
+            (dateChange)="getYear('start', startYear)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="pickerStartYear"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #pickerStartYear
+            startView="multi-year"
+            (yearSelected)="
+              chooseYearHandler('start', $event, pickerStartYear, startYear)
+            "
+          ></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field color="accent" appearance="fill">
+          <mat-label>Năm kết thúc</mat-label>
+          <input
+            matInput
+            [matDatepicker]="pickerEndYear"
+            #endYear
+            (dateChange)="getYear('end', endYear)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="pickerEndYear"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #pickerEndYear
+            startView="multi-year"
+            (yearSelected)="
+              chooseYearHandler('end', $event, pickerEndYear, endYear)
+            "
+          ></mat-datepicker>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="accent"
+          [disabled]="!startYear.value || !endYear.value"
+          (click)="getStatistic('year')"
+        >
+          Tiếp tục
+        </button>
+      </mat-menu>
+    </div>
+    <div class="flex">
+      <div class="flex-item">
+        <div style="display: block; position: relative">
+          <canvas
+            baseChart
+            width="300"
+            height="132"
+            [data]="lineChartData"
+            [options]="lineChartOptions"
+            [type]="chartTypeOption"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"
+          ></canvas>
+          <div class="spinner" *ngIf="isStatistic">
+            <app-spinner></app-spinner>
+          </div>
+        </div>
+      </div>
+      <div class="button-row" style="margin-top: 16px">
+        <button mat-raised-button color="primary" (click)="resetChartZoom()">
+          Reset Zoom
+        </button>
+        <button mat-raised-button color="warn" [matMenuTriggerFor]="chartType">
+          Đổi Chart
+        </button>
+        <mat-menu #chartType="matMenu">
+          <button mat-menu-item (click)="changeChartType('bar')">Bars</button>
+          <button mat-menu-item (click)="changeChartType('line')">Line</button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</div>
