@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { StatisticComponent } from './statistic/statistic.component';
+import { StatisticComponent } from './components/statistic/statistic.component';
 import { NgChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,9 +18,16 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerComponent } from './share/spinner/spinner.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { InvoiceComponent } from './components/invoice/invoice.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
-  declarations: [AppComponent, StatisticComponent, SpinnerComponent],
+  declarations: [
+    AppComponent,
+    StatisticComponent,
+    SpinnerComponent,
+    InvoiceComponent,
+  ],
   imports: [
     BrowserModule,
     NgChartsModule,
@@ -37,6 +44,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     FormsModule,
     MatNativeDateModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

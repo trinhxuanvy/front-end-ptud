@@ -9,7 +9,7 @@ import {
 import { BaseChartDirective } from 'ng2-charts';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { StatisticService } from '../services/statistic.service';
+import { StatisticService } from '../../services/statistic.service';
 import zoomPlugin from 'chartjs-plugin-zoom';
 
 Chart.register(zoomPlugin);
