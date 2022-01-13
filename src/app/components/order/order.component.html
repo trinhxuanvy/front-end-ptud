@@ -1,0 +1,41 @@
+<div class="statistic-title">Danh sách đơn hàng</div>
+<div class="statistic-table">
+    <div class="statistic-table--title">
+        <div>Mã đơn hàng</div>
+        <div>Mã người mua</div>
+        <div>Tình trạng</div>
+        <div>Thời gian đặt</div>
+        <div>Phương thức thanh toán</div>
+        <div>Shipper</div>
+        <div>Mã cửa hàng</div>
+        <div>KH đánh giá</div>
+        <div>CH đánh giá</div>
+        <div>Tổng tiền</div>
+    </div>
+    <div class="statistic-table--row">
+        <order--row *ngFor="let donHang of donHangs"
+          [maDonHang]="donHang._id"
+          [maNguoiMua]="donHang.nguoiMua"
+          [tinhTrang]="donHang.tinhTrang"
+          [thoiGianDat]="donHang.thoiGianDat"
+          [phuongThucThanhToan]="donHang.phuongThucThanhToan"
+          [shipper]="donHang.shipper"
+          [maCuaHang]="donHang.cuaHang"
+          [kHDanhGia]="donHang.danhGiaCuaKH"
+          [cHDanhGia]="donHang.danhGiaCuaNhaCC"
+          [tongTien]="donHang.tongTien"
+        ></order--row>
+    </div>
+    <div class="statistic-page">
+        <img src="../../../assets/svg/image 107.svg" alt="">
+        <div class="page-selected">1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>...</div>
+        <img src="../../../assets/svg/image 108.svg" alt="">
+    </div>
+
+</div>

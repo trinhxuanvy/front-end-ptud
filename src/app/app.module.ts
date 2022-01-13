@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { AppComponent } from './app.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
@@ -20,6 +22,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { OrderComponent } from './components/order/order.component';
+import { AppRoutingModule } from './app-routing.module';
+import { OrderRowComponent } from './components/order/order--row/order--row.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +32,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     StatisticComponent,
     SpinnerComponent,
     InvoiceComponent,
+    OrderComponent,
+    OrderRowComponent
   ],
   imports: [
+    AppRoutingModule,
+    RouterModule,
     BrowserModule,
     NgChartsModule,
     BrowserAnimationsModule,
@@ -45,6 +54,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FormsModule,
     MatNativeDateModule,
     MatCheckboxModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
