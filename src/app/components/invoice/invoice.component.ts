@@ -1,6 +1,5 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { FormBuilder, FormGroup, NgModel } from '@angular/forms';
 import { InvoiceService } from '../../services/invoice.service';
 
 @Component({
@@ -14,7 +13,7 @@ export class InvoiceComponent implements OnInit {
   rowSpanData: Array<number> = [];
   isHistorical: boolean = false;
   isHistoricalv2: any;
-  
+
   displayedColumns: string[] = [
     'invoiceID',
     'timeOrder',

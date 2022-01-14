@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import {MatToolbarModule} from '@angular/material/toolbar';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppComponent } from './app.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
 import { NgChartsModule } from 'ng2-charts';
@@ -13,7 +13,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -25,6 +24,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { OrderComponent } from './components/order/order.component';
 import { AppRoutingModule } from './app-routing.module';
 import { OrderRowComponent } from './components/order/order--row/order--row.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { FortestComponent } from './components/fortest/fortest.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { OrderRowComponent } from './components/order/order--row/order--row.comp
     SpinnerComponent,
     InvoiceComponent,
     OrderComponent,
-    OrderRowComponent
+    OrderRowComponent,
+    CheckoutComponent,
+    FortestComponent,
   ],
   imports: [
     AppRoutingModule,

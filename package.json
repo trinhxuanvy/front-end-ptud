@@ -33,6 +33,7 @@
     "mini-css-extract-plugin": "^2.4.6",
     "ng2-charts": "^3.0.2",
     "ngx-spinner": "^13.0.0",
+    "popper.js": "^1.16.1",
     "postcss-loader": "^6.2.1",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
