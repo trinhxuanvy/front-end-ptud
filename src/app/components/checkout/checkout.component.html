@@ -1,6 +1,5 @@
 <div class="container">
     <div class="py-5 text-center">
-
         <h2>Thanh toán hoá đơn</h2>
     </div>
 
@@ -60,31 +59,93 @@
                 <div class="card">
                     <h5 class="card-header">Thông tin cá nhân</h5>
                     <div class="card-body">
-                        <div class="form-group">
-                            <div>
-                                <label for="firstName">Tên</label>
-                                <div *ngIf="!formGroup.get('firstName')?.valid && submitted">*</div>
+                        <div class="row" style="width: 100%;">
+                            <div class="form-group col-6">
+                                <div style="display: flex;">
+                                    <label for="firstName">Tên </label>
+                                    <div *ngIf="(!formGroup.get('firstName')?.valid && submitted) || formGroup.get('firstName')?.errors"
+                                        style="color: red;"> *</div>
+                                </div>
+                                <input type="text" formControlName="firstName" class="form-control mt-1"
+                                    (change)="test(formGroup.get('firstName'))" placeholder="Hưng Thịnh"
+                                    style="width: 100%;" />
+                                <div *ngIf="formGroup.get('firstName')?.invalid && (formGroup.get('firstName')?.dirty || formGroup.get('firstName')?.touched)"
+                                    class="alert alert-danger mt-1">
+                                    <div *ngIf="formGroup.get('firstName')?.errors?.['required']">
+                                        Tên là thông tin bắt buộc.
+                                    </div>
+                                    <div *ngIf="!formGroup.get('firstName')?.errors?.['required'] && (formGroup.get('firstName')?.invalid && (formGroup.get('firstName')?.dirty || formGroup.get('firstName')?.touched))">
+                                        Thông tin chưa chính xác.
+                                    </div>
+                                </div>
                             </div>
-                            <input type="text" formControlName="firstName" class="form-control"
-                                (change)="test(formGroup.get('firstName'))" placeholder="Hưng Thịnh" />
+
+                            <div class="form-group col-6">
+                                <div style="display: flex;">
+                                    <label for="lastName">Họ </label>
+                                    <div *ngIf="(!formGroup.get('lastName')?.valid && submitted) || formGroup.get('lastName')?.errors"
+                                        style="color: red;"> *</div>
+                                </div>
+                                <input type="text" formControlName="lastName" class="form-control mt-1" (change)="test(formGroup.get('lastName'))"
+                                    placeholder="Hưng Thịnh" style="width: 100%;" />
+                                <div *ngIf="formGroup.get('lastName')?.invalid && (formGroup.get('lastName')?.dirty || formGroup.get('lastName')?.touched)"
+                                    class="alert alert-danger mt-1">
+                                    <div *ngIf="formGroup.get('lastName')?.errors?.['required']">
+                                        Họ là thông tin bắt buộc.
+                                    </div>
+                                    <div
+                                        *ngIf="!formGroup.get('lastName')?.errors?.['required'] && (formGroup.get('lastName')?.invalid && (formGroup.get('lastName')?.dirty || formGroup.get('lastName')?.touched))">
+                                        Thông tin bị lỗi.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <div style="display: flex;">
+                                <label for="phoneNumber">Số điện thoại </label>
+                                <div *ngIf="(!formGroup.get('phoneNumber')?.valid && submitted) || formGroup.get('phoneNumber')?.errors"
+                                    style="color: red;"> *</div>
+                            </div>
+                            <input type="text" formControlName="phoneNumber" class="form-control mt-1" (change)="test(formGroup.get('phoneNumber'))"
+                                placeholder="Hưng Thịnh" style="width: 100%;" />
+                            <div *ngIf="formGroup.get('phoneNumber')?.invalid && (formGroup.get('phoneNumber')?.dirty || formGroup.get('phoneNumber')?.touched)"
+                                class="alert alert-danger mt-1">
+                                <div *ngIf="formGroup.get('phoneNumber')?.errors?.['required']">
+                                    Số điện thoại là thông tin bắt buộc.
+                                </div>
+                                <div
+                                    *ngIf="!formGroup.get('phoneNumber')?.errors?.['required'] && (formGroup.get('phoneNumber')?.invalid && (formGroup.get('phoneNumber')?.dirty || formGroup.get('phoneNumber')?.touched))">
+                                    Thông tin chưa chính xác.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <div style="display: flex;">
+                                <label for="address">Địa chỉ nhận hàng </label>
+                                <div *ngIf="(!formGroup.get('address')?.valid && submitted) || formGroup.get('address')?.errors"
+                                    style="color: red;"> *</div>
+                            </div>
+                            <input type="text" formControlName="address" class="form-control mt-1" (change)="test(formGroup.get('address'))"
+                                placeholder="69, Rạch Mây, Tuyên Bình, Vĩnh Hưng, Long An" style="width: 100%;" />
+                            <div *ngIf="formGroup.get('address')?.invalid && (formGroup.get('address')?.dirty || formGroup.get('address')?.touched)"
+                                class="alert alert-danger mt-1">
+                                <div *ngIf="formGroup.get('address')?.errors?.['required']">
+                                    Địa chỉ là thông tin bắt buộc.
+                                </div>
+                                <div
+                                    *ngIf="!formGroup.get('address')?.errors?.['required'] && (formGroup.get('address')?.invalid && (formGroup.get('address')?.dirty || formGroup.get('address')?.touched))">
+                                    Thông tin chưa chính xác.
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <div>
-                                <label for="lastName">Họ</label>
-                                <div *ngIf="!formGroup.get('lastName')?.valid && submitted">*</div>
-                            </div>
-                            <input type="text" formControlName="lastName" class="form-control"
-                                (change)="test(formGroup.get('lastName'))" placeholder="Nguyễn Phúc" />
-                        </div>
-
-                        <div class="form-group">
-                            <div>
-                                <label for="phoneNumber">Số điện thoại</label>
-                                <div *ngIf="!formGroup.get('phoneNumber')?.valid && submitted">*</div>
-                            </div>
-                            <input type="text" formControlName="phoneNumber" class="form-control"
-                                (change)="test(formGroup.get('phoneNumber'))" placeholder="0829060806" />
+                        <div class="mt-3">
+                            <mat-checkbox class="checkbox" color='primary' (change)="ClickCheckbox()"
+                                style="text-align: left; display: block; ">Khi bạn
+                                chọn vào đây bạn đã đồng ý
+                                rằng những thông tin bạn cung cấp cho chúng tôi đều là chính xác, chúng tôi có thể tìm
+                                thấy
+                                bạn để giao hàng và bạn đã đồng ý với các điều khoản của chúng tôi. </mat-checkbox>
                         </div>
                     </div>
                 </div>
