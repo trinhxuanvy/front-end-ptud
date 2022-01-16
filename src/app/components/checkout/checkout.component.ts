@@ -15,10 +15,11 @@ import { CheckoutService } from '../../services/checkout.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckoutComponent implements OnInit {
-  items = this.checkoutService.getItems();
-  loading = false;
   submitted = false;
   isAgree = false;
+  customerID = '61b76361241874f48b599885';
+  myData: any;
+
   formGroup = this.formBuilder.group({
     firstName: new FormControl('', [
       Validators.required,
@@ -43,23 +44,30 @@ export class CheckoutComponent implements OnInit {
     private checkoutService: CheckoutService,
     private formBuilder: FormBuilder
   ) {}
-  test(event: any): void {
-    this.submitted = true;
-  }
+
   ClickCheckbox(): void {
     this.isAgree = this.isAgree ? false : true;
   }
+
   onSubmit(): void {
     this.submitted = true;
-    this.items = this.checkoutService.clearCart();
-    if (this.formGroup.invalid) {
+    if (this.formGroup.invalid || !this.isAgree) {
       return;
     }
-    this.loading = true;
+    
+    this.isAgree = false;
     this.formGroup.reset();
-    this.checkoutService.doSomething();
-    console.log(this.formGroup);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.checkoutService.getInformation(this.customerID).subscribe((data) => {
+      this.myData = data;
+      //console.log(this.myData);
+      this.formGroup.controls['phoneNumber'].setValue(this.myData.phoneNumber);
+      this.formGroup.controls['address'].setValue(this.myData.address);
+      this.formGroup.controls['firstName'].setValue(this.myData.firstName);
+      this.formGroup.controls['lastName'].setValue(this.myData.lastName);
+    });
+  }
 }
+
