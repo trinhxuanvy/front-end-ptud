@@ -16,7 +16,7 @@ export class InvoiceService {
   CancelInvoice(id: string): Observable<any> {
     const body = { title: 'CancelInvoice' };
     return this.httpClient.put(
-      `https://localhost:44349/api/donhang/${id}`,
+      `https://localhost:44349/api/donhang/huydonhang/${id}`,
       body
     );
   }

@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerComponent } from './share/spinner/spinner.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -58,6 +59,7 @@ import { FortestComponent } from './components/fortest/fortest.component';
     MatNativeDateModule,
     MatCheckboxModule,
     MatToolbarModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -2,3 +2,7 @@
   display: block !important;
   white-space: normal !important;
 }
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
