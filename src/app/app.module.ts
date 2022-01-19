@@ -21,6 +21,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { JwtModule } from '@auth0/angular-jwt';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
 
 //Component
@@ -45,6 +46,8 @@ import { RegisterComponent } from './components/register/register.component';
 // Service
 import { AuthService } from './share/auth/auth.service';
 import { AuthGuard } from './auth.guard';
+import { HeaderComponent } from './share/header/header.component';
+import { FooterComponent } from './share/footer/footer.component';
 
 export function tokenGetter() {
   return localStorage.getItem("contact-manager-jwt");
@@ -66,6 +69,8 @@ export function tokenGetter() {
     ListStoreComponent,
     LoginComponent,
     RegisterComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -89,6 +94,7 @@ export function tokenGetter() {
     MatToolbarModule,
     MatRadioModule,
     MatCardModule,
+    NgbDropdownModule,
 
     JwtModule.forRoot({
       config: {

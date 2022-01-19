@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
       const token = (<any>response).token;
       this.auth.setToken(token);
       const user = (<any>response).user;
-      console.log(response);
-      this.router.navigate(['/home']);
+      console.log(user);
+      this.router.navigate(['/store']);
     }, err =>
     {
       this.invalidAccount = true;
