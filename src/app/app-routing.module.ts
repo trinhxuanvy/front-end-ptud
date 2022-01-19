@@ -10,6 +10,7 @@ import { StatisticComponent } from './components/statistic/statistic.component';
 import { ListStoreComponent } from './components/list-store/list-store.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
@@ -30,8 +31,9 @@ const routes: Routes = [
   {
     path: 'find/store',
     component: ListStoreComponent
-  }
+  },
   //{path:'userinside',component:UserinfoComponent },
+  {path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent}
 ];
 
 @NgModule({

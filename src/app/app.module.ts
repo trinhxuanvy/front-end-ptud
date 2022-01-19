@@ -39,6 +39,7 @@ import { StoreCertificationComponent } from './components/store-certification/st
 import { SideboardComponent } from './share/sideboard/sideboard.component';
 import { HeaderStoreComponent } from './share/header-store/header-store.component';
 import { ListStoreComponent } from './components/list-store/list-store.component';
+import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
@@ -67,6 +68,7 @@ export function tokenGetter() {
     SideboardComponent,
     HeaderStoreComponent,
     ListStoreComponent,
+    InvoiceOfStoreComponent,
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
@@ -95,7 +97,6 @@ export function tokenGetter() {
     MatRadioModule,
     MatCardModule,
     NgbDropdownModule,
-
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
