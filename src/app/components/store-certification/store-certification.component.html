@@ -1,0 +1,65 @@
+<div class="store-certificate">
+  <div class="row">
+    <div class="col-6">
+      <div class="store-certificate__item">
+        <div class="store-certificate__image">
+          <div class="store-certificate__cover">
+            <p class="store-certificate__status">Uploading 100%</p>
+          </div>
+          <img
+            src="/assets/images/So-dang-ky-kinh-doanh-la-gi-1-748x1024.jpg"
+            alt=""
+          />
+        </div>
+        <div class="store-certificate__form">
+          <form enctype="multipart/form-data" [formGroup]="formUpload">
+            <input
+              formControlName="file"
+              #input1
+              type="file"
+              hidden="true"
+              accept=".jpg"
+              (change)="getFile($event)"
+            />
+            <button
+              class="store-certificate__button"
+              mat-flat-button
+              color="warn"
+              (click)="input1.click()"
+            >
+              Chọn ảnh khác
+            </button>
+            <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Upload</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="store-certificate__item">
+        <div class="store-certificate__image">
+          <img
+            src="/assets/images/So-dang-ky-kinh-doanh-la-gi-1-748x1024.jpg"
+            alt=""
+          />
+        </div>
+        <div class="store-certificate__form">
+          <input
+            #input2
+            type="file"
+            hidden="true"
+            accept=".jpg"
+            (change)="getFile($event)"
+          />
+          <button
+            class="store-certificate__button"
+            mat-flat-button
+            color="warn"
+            (click)="input2.click()"
+          >
+            Chọn ảnh khác
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

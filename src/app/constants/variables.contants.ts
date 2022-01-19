@@ -15,4 +15,6 @@ const MONTH = [
 
 const QUARTER = ['Quý 1', 'Quý 2', 'Quý 3', 'Quý 4'];
 
-export { MONTH, QUARTER };
+const NAVIGATION = ['Chứng nhận', 'Phân tích', 'Sản phẩm'];
+
+export { MONTH, QUARTER, NAVIGATION };

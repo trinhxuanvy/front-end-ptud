@@ -1,0 +1,16 @@
+@import "../../../assets/styles/scss/index.scss";
+
+.header {
+    margin-left: 260px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    @include boxShadow($c-flint, 0.3);
+
+    &__title {
+        font-weight: bolder;
+        text-transform: uppercase;
+        color: $c-japanese-laurel;
+        margin-left: 16px;
+    }
+}
