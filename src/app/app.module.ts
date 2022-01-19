@@ -27,6 +27,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { OrderRowComponent } from './components/order/order--row/order--row.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FortestComponent } from './components/fortest/fortest.component';
+import { StoreComponent } from './components/store/store.component';
+import { StoreCertificationComponent } from './components/store-certification/store-certification.component';
+import { SideboardComponent } from './share/sideboard/sideboard.component';
+import { HeaderStoreComponent } from './share/header-store/header-store.component';
+import { ListStoreComponent } from './components/list-store/list-store.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +43,11 @@ import { FortestComponent } from './components/fortest/fortest.component';
     OrderRowComponent,
     CheckoutComponent,
     FortestComponent,
+    StoreComponent,
+    StoreCertificationComponent,
+    SideboardComponent,
+    HeaderStoreComponent,
+    ListStoreComponent,
   ],
   imports: [
     AppRoutingModule,

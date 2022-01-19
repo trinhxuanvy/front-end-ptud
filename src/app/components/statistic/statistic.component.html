@@ -1,5 +1,4 @@
-<div class="statistic d-flex">
-  <div class="statistic__sidebar"></div>
+<div class="statistic">
   <div class="statistic__chart">
     <div class="button-row">
       <button mat-raised-button color="primary" [matMenuTriggerFor]="menuDay">
@@ -156,7 +155,7 @@
           <canvas
             baseChart
             width="300"
-            height="132"
+            height="90"
             [data]="lineChartData"
             [options]="lineChartOptions"
             [type]="chartTypeOption"

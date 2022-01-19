@@ -1,0 +1,66 @@
+@import "../../../assets/styles/scss/index.scss";
+
+.sidebar-wrapper {
+  width: 260px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: $c-white;
+  z-index: 1000;
+  @include boxShadow($c-flint, 0.3);
+
+  &__logo {
+    padding: 16px 0;
+    background-color: $c-japanese-laurel;
+    height: 62px;
+  }
+
+  &__simple-text {
+    text-align: center;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: $c-white;
+    display: block;
+    font-weight: bolder;
+  }
+
+  &__nav {
+    padding: 16px;
+  }
+
+  &__nav-item {
+  }
+
+  &__nav-link {
+    display: flex;
+    justify-content: flex-start;
+    color: $c-flint;
+    padding: 16px 0;
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+      background-color: $c-japanese-laurel;
+      color: $c-white;
+      justify-content: center;
+    }
+    i {
+      font-size: 20px;
+      margin-right: 8px;
+    }
+    div {
+      text-transform: uppercase;
+      font-weight: bolder;
+    }
+  }
+
+  .active {
+    background-color: $c-japanese-laurel;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .sidebar-wrapper__nav-link {
+      color: $c-white;
+    }
+  }
+}
