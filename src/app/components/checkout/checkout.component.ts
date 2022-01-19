@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CheckoutService } from '../../services/checkout.service';
+import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-checkout',
@@ -63,20 +64,18 @@ export class CheckoutComponent implements OnInit {
       return;
     }
 
-    if (this.paymentType == 'Tiền mặt') {
-      console.log(this.checkoutService.doSomeThingWithPaymentByHand());
+    if (this.paymentType == 'Online') {
+      this.pay(this.myData?.total / 23000);
     } else {
-      if (this.paymentType == 'Online') {
-        this.pay(this.myData?.total / 23000);
-      } else {
-        console.log(this.checkoutService.doSomeThingWithPaymentByHand());
-      }
+      this.makeResult();
     }
     //this.formGroup.reset();
     //this.isAgree = false;
+  }
 
-    this.postData.tinhTrang = 'Đóng gói';
+  makeResult(): void {
     var now = new Date();
+    this.postData.tinhTrang = 'Đóng gói';
     this.postData.thoiGianDat = now;
     this.postData.nguoiMua = this.customerID;
     this.postData.phuongThucThanhToan = this.paymentType;
@@ -84,7 +83,7 @@ export class CheckoutComponent implements OnInit {
     this.postData.tongTien = this.myData.total;
     this.postData.tinhTrangCu = '';
 
-    this.checkoutService.makeInvoice(this.postData).subscribe((data) => {
+    this.checkoutService.makeInvoice(this.postData).subscribe((data: any) => {
       this.myData.product.forEach((element: any) => {
         this.postInvoiceDetail = {
           sanPham: element.productid,
@@ -93,14 +92,13 @@ export class CheckoutComponent implements OnInit {
         };
         this.checkoutService
           .makeInvoiceDetails(this.postInvoiceDetail)
-          .subscribe((result) => {});
+          .subscribe((result: any) => {});
       });
       this.checkoutService.clearCart(this.customerID).subscribe(() => {
         this.router.navigate(['/invoice']);
       });
     });
   }
-
   ngOnInit(): void {
     this.loadStripe();
     this.checkoutService.getInformation(this.customerID).subscribe((data) => {
@@ -126,6 +124,8 @@ export class CheckoutComponent implements OnInit {
             // You can access the token ID with `token.id`.
             // Get the token ID to your server-side code for use.
             console.log(token);
+            //this.ClickCheckbox();
+            console.log(1);
           },
         });
       };
@@ -133,14 +133,15 @@ export class CheckoutComponent implements OnInit {
       window.document.body.appendChild(s);
     }
   }
-  pay(amount: any) {
+  pay(amount: any): any {
     var handler = (<any>window).StripeCheckout.configure({
       key: 'pk_test_51KIOLjHfeS4VmIfgULaQTOWsNTY9TXcP0X3oFKdvIB9x6Zpa14sbx8ae6o7UNhvrJ4LZS9AWrJom05KwNJU993Zn000djcF9ll',
       locale: 'auto',
-      token: function (token: any) {
+      token: function (tokenResult: any) {
         // You can access the token ID with `token.id`.
         // Get the token ID to your server-side code for use.
-        console.log(token);
+        console.log(tokenResult);
+        console.log(1);
       },
     });
 
