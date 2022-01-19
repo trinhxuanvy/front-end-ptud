@@ -1,0 +1,57 @@
+@import "../../../assets/styles/scss/index.scss";
+
+.list-store {
+  padding: 32px 80px;
+  &__header {
+    margin-bottom: 32px;
+    &__text {
+      span {
+        color: $c-japanese-laurel;
+      }
+    }
+  }
+
+  &__item {
+    &__link {
+      &__image {
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 16px;
+      }
+
+      &__title {
+        color: $c-mine-shaft;
+      }
+
+      &__type {
+        color: $c-flint;
+      }
+
+      &__note {
+        display: flex;
+        align-items: center;
+        &__rating {
+          display: flex;
+          align-items: center;
+          margin-right: 16px;
+          i {
+            color: $c-saffron;
+            margin-right: 8px;
+          }
+          section {
+            color: $c-flint;
+          }
+        }
+        &__distance {
+          color: $c-flint;
+          display: flex;
+          align-items: center;
+          i {
+            margin-right: 8px;
+            color: $c-dodger-blue;
+          }
+        }
+      }
+    }
+  }
+}
