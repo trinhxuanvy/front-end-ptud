@@ -13,6 +13,11 @@ export class InvoiceService {
       `https://localhost:44349/api/donhang/nguoimua/${id}`
     );
   }
+  GetInfOfInvoicesByStore(id: string): Observable<any> {
+    return this.httpClient.get(
+      `https://localhost:44349/api/donhang/cuahang/${id}`
+    );
+  }
   CancelInvoice(id: string): Observable<any> {
     const body = { title: 'CancelInvoice' };
     return this.httpClient.put(
