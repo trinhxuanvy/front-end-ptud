@@ -32,6 +32,7 @@ import { StoreCertificationComponent } from './components/store-certification/st
 import { SideboardComponent } from './share/sideboard/sideboard.component';
 import { HeaderStoreComponent } from './share/header-store/header-store.component';
 import { ListStoreComponent } from './components/list-store/list-store.component';
+import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ListStoreComponent } from './components/list-store/list-store.component
     SideboardComponent,
     HeaderStoreComponent,
     ListStoreComponent,
+    InvoiceOfStoreComponent,
   ],
   imports: [
     AppRoutingModule,
