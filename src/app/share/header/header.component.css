@@ -1,0 +1,60 @@
+.header-homepage {
+  position: fixed;
+  opacity: 90%;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-logo{
+  margin-left: 100px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+.header-login a{
+  color: #00AA50;
+  margin: 0  60px 0 22px;
+
+}
+.header-register a{
+  color: #00AA50;
+  margin: 0 22px;
+
+}
+.header-transport.a{
+  margin: 0 22px;
+  font-weight: normal;
+
+}
+
+.header-partner{
+  margin: 0 22px;
+  font-weight : 600px;
+
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar{
+  color:#F2F2F2;
+  font-family:  'Roboto', sans-serif;
+  font-size: 16px;
+  height: 90px;
+
+}
+.space {
+  border-left: #999999 1px solid;
+  width: 1px;
+  height:
+  31px;
+}
+.btn{
+  font-weight: 500;
+}
+.space-between{
+  padding-top: 90px;
+}
