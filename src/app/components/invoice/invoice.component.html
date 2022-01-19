@@ -1,154 +1,51 @@
-<div *ngIf="!isHistorical">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
-
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> Priority </th>
-            <ng-container *matCellDef="let data">
-                <td mat-cell *ngIf="data.id" [attr.rowspan]="rowSpanData[data.id]">
-                    {{ data.id }}
-                </td>
-            </ng-container>
-        </ng-container>
-
-        <ng-container matColumnDef="invoiceID">
-            <th mat-header-cell *matHeaderCellDef> Mã đơn hàng </th>
-            <ng-container *matCellDef="let data">
-                <td mat-cell *ngIf="data.invoiceID" [attr.rowspan]="rowSpanData[data.id]">
-                    {{ data.invoiceID }}
-                </td>
-            </ng-container>
-        </ng-container>
-
-        <ng-container matColumnDef="timeOrder">
-            <th mat-header-cell *matHeaderCellDef> Thời gian đặt </th>
-            <ng-container *matCellDef="let data">
-                <td mat-cell *ngIf="data.invoiceID" [attr.rowspan]="rowSpanData[data.id]">
-                    {{ data.timeOrder }}
-                </td>
-            </ng-container>
-        </ng-container>
-
-        <ng-container matColumnDef="product">
-            <th mat-header-cell *matHeaderCellDef> Sản phẩm </th>
-            <td mat-cell *matCellDef="let data"> {{ data.product }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef> Giá(VND) </th>
-            <td mat-cell *matCellDef="let data"> {{ data.price }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="numOfElement">
-            <th mat-header-cell *matHeaderCellDef> Số lượng </th>
-            <td mat-cell *matCellDef="let data"> {{ data.numOfElement }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="unit">
-            <th mat-header-cell *matHeaderCellDef> Đơn vị </th>
-            <td mat-cell *matCellDef="let data"> {{ data.unit }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="total">
-            <th mat-header-cell *matHeaderCellDef> Tổng tiền </th>
-            <ng-container *matCellDef="let data">
-                <td mat-cell *ngIf="data.invoiceID" [attr.rowspan]="rowSpanData[data.id]">
-                    {{ data.total }}
-                </td>
-            </ng-container>
-        </ng-container>
-
-        <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef> Tình trạng </th>
-            <ng-container *matCellDef="let data">
-                <td mat-cell *ngIf="data.invoiceID" [attr.rowspan]="rowSpanData[data.id]">
-                    {{ data.status }}
-                </td>
-            </ng-container>
-        </ng-container>
-
-        <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef>
-            </th>
-            <ng-container *matCellDef="let data">
-                <td mat-cell *ngIf="data.invoiceID" [attr.rowspan]="rowSpanData[data.id]" class="hov">
-                    <div *ngIf="data.action && !isHistorical">
-                        <button mat-raised-button color="primary" (click)="CancelInvoice(data)" class="mousehover"
-                            id="button">Huỷ đơn
-                            hàng</button>
+<ul class="list-group mb-3">
+    <li class="list-group-item" *ngFor="let item of this.data">
+        <div>
+            <div class="d-flex justify-content-between align-items-center">
+                <div (click)="clickShow(item.id - 1)" class="data-show">
+                    <div>
+                        <h6 style="font-size: 17px;">Đơn hàng {{item?.invoiceID}} của bạn</h6>
+                        <small class="text-muted" style="font-size: 15px;">Thời gian đặt: {{item?.timeOrder}}</small>
+                        <br>
+                        <small class="text-muted" style="font-size: 15px;">Phương thức thanh toán: {{item?.payment}}</small>
+                        <br>
+                        <div>
+                            <small *ngIf="item?.oldStatus !=''" class="text-muted" style="font-size: 15px;">Tình trạng:
+                                {{item?.oldStatus}} ->
+                                {{item?.status}}</small>
+                            <small *ngIf="item?.oldStatus ==''" class="text-muted" style="font-size: 15px;">Tình trạng:
+                                {{item?.status}}</small>
+                        </div>
+                        <small class="text-muted" style="font-size: 15px;">Tổng tiền: {{item?.total}} VND</small>
+                        <br>
                     </div>
-                    <div *ngIf="!data.action && !isHistorical" id="button">
-                        <button mat-raised-button disabled>Huỷ đơn hàng</button>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" class="mousehover" id="button" [disabled]="!item?.action"
+                        (click)="CancelInvoice(item?.invoiceID)">Huỷ
+                        đơn
+                        hàng</button>
+                </div>
+            </div>
+            <div [hidden]="this.datashow[item.id - 1]" class="row">
+                <div class="col-10">
+                    <div class="row" *ngFor="let dataInvoice of item?.invoiceDetail">
+                        <div class="col-6">
+                            <small class="text-muted" style="font-size: 13px;">Sản phẩm:
+                                {{dataInvoice?.product}}</small>
+                            <br>
+                            <small class="text-muted" style="font-size: 13px;">Số lượng:
+                                {{dataInvoice?.numOfElement}}</small>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted" style="font-size: 13px;">Đơn giá: {{dataInvoice?.price}}
+                                VND</small>
+                            <br>
+                            <small class="text-muted" style="font-size: 13px;">Đơn vị: {{dataInvoice?.unit}}</small>
+                        </div>
                     </div>
-                </td>
-            </ng-container>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-</div>
-<div *ngIf="isHistorical">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
-
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> Priority </th>
-            <ng-container *matCellDef="let data">
-                <td mat-cell *ngIf="data.id" [attr.rowspan]="rowSpanData[data.id]">
-                    {{ data.id }}
-                </td>
-            </ng-container>
-        </ng-container>
-
-        <ng-container matColumnDef="timeOrder">
-            <th mat-header-cell *matHeaderCellDef> Thời gian đặt </th>
-            <ng-container *matCellDef="let data">
-                <td mat-cell *ngIf="data.invoiceID" [attr.rowspan]="rowSpanData[data.id]">
-                    {{ data.timeOrder }}
-                </td>
-            </ng-container>
-        </ng-container>
-
-        <ng-container matColumnDef="product">
-            <th mat-header-cell *matHeaderCellDef> Sản phẩm </th>
-            <td mat-cell *matCellDef="let data"> {{ data.product }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef> Giá(VND) </th>
-            <td mat-cell *matCellDef="let data"> {{ data.price }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="numOfElement">
-            <th mat-header-cell *matHeaderCellDef> Số lượng </th>
-            <td mat-cell *matCellDef="let data"> {{ data.numOfElement }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="unit">
-            <th mat-header-cell *matHeaderCellDef> Đơn vị </th>
-            <td mat-cell *matCellDef="let data"> {{ data.unit }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="total">
-            <th mat-header-cell *matHeaderCellDef> Tổng tiền </th>
-            <ng-container *matCellDef="let data">
-                <td mat-cell *ngIf="data.invoiceID" [attr.rowspan]="rowSpanData[data.id]">
-                    {{ data.total }}
-                </td>
-            </ng-container>
-        </ng-container>
-
-        <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef>Tình trạng</th>
-            <ng-container *matCellDef="let data">
-                <td mat-cell *ngIf="data.invoiceID" [attr.rowspan]="rowSpanData[data.id]">
-                    {{ data.status }}
-                </td>
-            </ng-container>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumnsHistorical"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumnsHistorical;"></tr>
-    </table>
-</div>
-<div>
-    <mat-checkbox class="checkbox" (change)="ClickCheckbox()"> Lịch sử mua hàng </mat-checkbox>
-</div>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
