@@ -4,9 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+
+//Material
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { AppComponent } from './app.component';
-import { StatisticComponent } from './components/statistic/statistic.component';
 import { NgChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,11 +17,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { SpinnerComponent } from './share/spinner/spinner.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { InvoiceComponent } from './components/invoice/invoice.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { JwtModule } from '@auth0/angular-jwt';
+import { MatCardModule } from '@angular/material/card';
+
+//Component
+import { SpinnerComponent } from './share/spinner/spinner.component';
+import { AppComponent } from './app.component';
+import { StatisticComponent } from './components/statistic/statistic.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
 import { OrderComponent } from './components/order/order.component';
 import { AppRoutingModule } from './app-routing.module';
 import { OrderRowComponent } from './components/order/order--row/order--row.component';
@@ -32,7 +38,17 @@ import { StoreCertificationComponent } from './components/store-certification/st
 import { SideboardComponent } from './share/sideboard/sideboard.component';
 import { HeaderStoreComponent } from './share/header-store/header-store.component';
 import { ListStoreComponent } from './components/list-store/list-store.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
+
+// Service
+import { AuthService } from './share/auth/auth.service';
+import { AuthGuard } from './auth.guard';
+
+export function tokenGetter() {
+  return localStorage.getItem("contact-manager-jwt");
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +64,8 @@ import { ListStoreComponent } from './components/list-store/list-store.component
     SideboardComponent,
     HeaderStoreComponent,
     ListStoreComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -70,8 +88,17 @@ import { ListStoreComponent } from './components/list-store/list-store.component
     MatCheckboxModule,
     MatToolbarModule,
     MatRadioModule,
+    MatCardModule,
+
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["https://localhost:44349"],
+        disallowedRoutes: []
+      }
+    })
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
