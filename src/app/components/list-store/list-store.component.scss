@@ -90,9 +90,31 @@
     }
 
     &__button {
-      display: block;
       width: 100%;
       margin-top: 32px;
     }
   }
+}
+
+
+.mat-raised-button.mat-success,
+.mat-flat-button.mat-success,
+.mat-fab.mat-success,
+.mat-mini-fab.mat-success {
+  color: $c-white;
+  background-color: $c-japanese-laurel;
+}
+
+.mat-icon-button.mat-success {
+  color: $c-japanese-laurel;
+}
+
+.mat-progress-spinner.mat-light circle {
+  stroke: $c-white;
+}
+
+.mat-button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

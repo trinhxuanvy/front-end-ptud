@@ -23,6 +23,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 //Component
 import { SpinnerComponent } from './share/spinner/spinner.component';
@@ -101,6 +102,7 @@ export function tokenGetter() {
     CarouselModule,
     MatCardModule,
     NgbDropdownModule,
+    MatProgressSpinnerModule
     // JwtModule.forRoot({
     //   config: {
     //     tokenGetter: tokenGetter,

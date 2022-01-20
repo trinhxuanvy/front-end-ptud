@@ -1,26 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Store, Location } from '../../interfaces/interfaces';
+import {
+  Store,
+  Location,
+  Product,
+  ProductOfStore,
+} from '../../interfaces/interfaces';
 import { LocationService } from '../../services/location.service';
 import { StoreService } from '../../services/store.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-list-store',
   templateUrl: './list-store.component.html',
   styleUrls: ['./list-store.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ListStoreComponent implements OnInit {
-  radius = 6378; // km
+  isFinding = false;
+  radius = 6371;
   limitDistance = 5;
   listLocation: Location[] = [];
+  listProduct: Product[] = [];
   listStore: Store[] = [];
-  filterStore: Store[] = [];
+  listProductOfStore: ProductOfStore[] = [];
   myLocation = {
     latitude: 0,
     longtitude: 0,
   };
   carouselOption: OwlOptions = {
     loop: true,
+    autoplay: true,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
@@ -49,17 +59,17 @@ export class ListStoreComponent implements OnInit {
     },
     nav: false,
   };
-  
 
   constructor(
     private locationService: LocationService,
-    private storeSerive: StoreService
+    private storeSerive: StoreService,
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
-    this.storeSerive.getAllStore().subscribe((data) => {
-      this.listStore = data;
-    });
+    this.getMyLocation();
+    this.getListProduct();
+    this.getListStore();
   }
 
   getMyLocation() {
@@ -71,24 +81,53 @@ export class ListStoreComponent implements OnInit {
     }
   }
 
-  getListStore() {
-    let tempD;
-    let tempObj;
-    this.filterStore = [];
-    this.locationService.getLocationStore().subscribe((data) => {
-      data.forEach((item) => {
-        tempD = this.getDistance(
-          this.myLocation.latitude,
-          this.myLocation.longtitude,
-          item.latitude,
-          item.longtitude
-        );
+  getListProduct() {
+    this.productService.getAllProduct().subscribe((data) => {
+      this.listProduct = data;
+    });
+  }
 
-        if (tempD <= this.limitDistance) {
-          tempObj = this.listStore.filter((store) => store.id == item.objectId);
-          this.filterStore.push(tempObj[0]);
-        }
-      });
+  getListStore() {
+    this.storeSerive.getAllStore().subscribe((data) => {
+      this.listStore = data;
+    });
+  }
+
+  getListProductOfStore() {
+    let tempD;
+    let tempObjProduct: Product[] = [];
+    let tempObjStore: Store[] = [];
+
+    this.isFinding = true;
+
+    this.locationService.getLocationStore().subscribe((data) => {
+      if (data.length > 0) {
+        this.listProductOfStore = [];
+
+        data.slice(0, 5).forEach((item) => {
+          tempD = this.getDistance(
+            this.myLocation.latitude,
+            this.myLocation.longtitude,
+            item.latitude,
+            item.longtitude
+          );
+          if (tempD <= this.limitDistance) {
+            tempObjStore = this.listStore.filter(
+              (store) => store.id == item.objectId
+            );
+            tempObjProduct = this.listProduct.filter(
+              (product) => product.cuaHang == item.objectId
+            );
+            this.listProductOfStore.push({
+              store: tempObjStore[0],
+              products: tempObjProduct,
+              distance: tempD,
+            });
+          }
+        });
+      }
+
+      this.isFinding = false;
     });
   }
 

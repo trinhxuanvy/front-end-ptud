@@ -6,103 +6,50 @@
     </h2>
     <button
       class="find-box__container__button"
-      (click)="getListStore()"
-      [disabled]="listStore.length == 0"
+      (click)="getListProductOfStore()"
+      [disabled]="listProduct.length == 0 || listStore.length == 0"
       mat-raised-button
-      color="warn"
+      color="success"
     >
       Tìm kiếm
+      <mat-spinner
+        *ngIf="isFinding"
+        style="margin-left: 8px"
+        [diameter]="20"
+        color="light"
+      ></mat-spinner>
     </button>
   </div>
 </div>
-<div class="list-store">
+<div class="list-store" *ngFor="let item of listProductOfStore">
   <div class="list-store__header">
     <h2 class="list-store__header__text">
-      Available Restaurants in
-      <span>965 Âu Cơ, Phường Tân Sơn Nhì, Quận Tân Phú</span>
+      Cửa hàng ở
+      <span>{{ item.store.diaChi }}</span>
     </h2>
   </div>
   <div class="list-store__body">
     <owl-carousel-o [options]="carouselOption">
-      <ng-template carouselSlide>
+      <ng-template carouselSlide *ngFor="let product of item.products">
         <div class="list-store__item">
           <a href="" class="list-store__item__link">
             <div class="list-store__item__link__image">
-              <img src="/assets/images/com-van-phong-rio.png" alt="" />
+              <img src="{{ product.hinhAnh }}" alt="" />
             </div>
-            <h5 class="list-store__item__link__title">Cơm Văn Phòng Rio</h5>
-            <p class="list-store__item__link__type">Cơm</p>
+            <h5 class="list-store__item__link__title">
+              {{ product.tenSanPham }}
+            </h5>
+            <p class="list-store__item__link__type">
+              {{ product.tenLoaiHang }}
+            </p>
             <div class="list-store__item__link__note">
               <div class="list-store__item__link__note__rating">
                 <i class="material-icons">star_half</i>
-                <section>4.3</section>
+                <section>{{ item.store.doUyTin }}</section>
               </div>
               <div class="list-store__item__link__note__distance">
                 <i class="material-icons">place</i>
-                3.2 km
-              </div>
-            </div>
-          </a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="list-store__item">
-          <a href="" class="list-store__item__link">
-            <div class="list-store__item__link__image">
-              <img src="/assets/images/com-ga-tan-hai-nam.png" alt="" />
-            </div>
-            <h5 class="list-store__item__link__title">Cơm Gà Tân Hải Nam</h5>
-            <p class="list-store__item__link__type">Cơm</p>
-            <div class="list-store__item__link__note">
-              <div class="list-store__item__link__note__rating">
-                <i class="material-icons">star_half</i>
-                <section>4.3</section>
-              </div>
-              <div class="list-store__item__link__note__distance">
-                <i class="material-icons">place</i>
-                3.2 km
-              </div>
-            </div>
-          </a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="list-store__item">
-          <a href="" class="list-store__item__link">
-            <div class="list-store__item__link__image">
-              <img src="/assets/images/bun-dau-mam-tom-a-chay.png" alt="" />
-            </div>
-            <h5 class="list-store__item__link__title">Bún Đậu Mắm Tôm</h5>
-            <p class="list-store__item__link__type">Bún Đậu</p>
-            <div class="list-store__item__link__note">
-              <div class="list-store__item__link__note__rating">
-                <i class="material-icons">star_half</i>
-                <section>4.3</section>
-              </div>
-              <div class="list-store__item__link__note__distance">
-                <i class="material-icons">place</i>
-                3.2 km
-              </div>
-            </div>
-          </a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="list-store__item">
-          <a href="" class="list-store__item__link">
-            <div class="list-store__item__link__image">
-              <img src="/assets/images/com-van-phong-hong.png" alt="" />
-            </div>
-            <h5 class="list-store__item__link__title">Cơm Văn Phòng Hồng</h5>
-            <p class="list-store__item__link__type">Cơm</p>
-            <div class="list-store__item__link__note">
-              <div class="list-store__item__link__note__rating">
-                <i class="material-icons">star_half</i>
-                <section>4.3</section>
-              </div>
-              <div class="list-store__item__link__note__distance">
-                <i class="material-icons">place</i>
-                3.2 km
+                {{ item.distance | number: "1.1-1" }} km
               </div>
             </div>
           </a>
