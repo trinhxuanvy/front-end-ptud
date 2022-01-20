@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Location, Shipper } from '../../interfaces/interfaces';
+import { Location, Shipper, NearestShipper } from '../../interfaces/interfaces';
 import { LocationService } from '../../services/location.service';
-import { StoreService } from '../../services/store.service';
 import { ShipperService } from '../../services/shipper.service';
 
 @Component({
@@ -11,17 +10,21 @@ import { ShipperService } from '../../services/shipper.service';
   styleUrls: ['./fortest.component.scss'],
 })
 export class FortestComponent implements OnInit {
-  radius = 6378; // km
+  isFinding = false;
+  radius = 6378;
   limitDistance = 5;
   storeID = '61e8d9a95166a6fbc8b8df0c';
   listLocation: Location[] = [];
   listShipper: Shipper[] = [];
   filterShipper: Shipper[] = [];
 
+  listNearestShipper: NearestShipper[] = [];
+
   myLocation!: Location;
 
   carouselOption: OwlOptions = {
     loop: true,
+    autoplay: true,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
@@ -57,10 +60,7 @@ export class FortestComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.shipperService.getAllShipper().subscribe((data) => {
-      this.listShipper = data;
-    });
-
+    this.getShipper();
     this.getMyLocation();
   }
 
@@ -69,28 +69,42 @@ export class FortestComponent implements OnInit {
       this.myLocation = data;
     });
   }
+  getShipper() {
+    this.shipperService.getAllShipper().subscribe((data) => {
+      this.listShipper = data;
+    });
+  }
 
   getListShipper() {
     let tempD;
     let tempObj;
-    this.filterShipper = [];
 
     this.locationService.getLocationShipper().subscribe((data) => {
-      data.forEach((item) => {
-        tempD = this.getDistance(
-          this.myLocation.latitude,
-          this.myLocation.longtitude,
-          item.latitude,
-          item.longtitude
-        );
+      if (data.length > 0) {
+        this.filterShipper = [];
 
-        if (tempD <= this.limitDistance) {
-          tempObj = this.listShipper.filter(
-            (shipper) => shipper._id == item.objectId
+        data.slice(0, 5).forEach((item) => {
+          tempD = this.getDistance(
+            this.myLocation.latitude,
+            this.myLocation.longtitude,
+            item.latitude,
+            item.longtitude
           );
-          this.filterShipper.push(tempObj[0]);
-        }
-      });
+
+          if (tempD <= this.limitDistance) {
+            tempObj = this.listShipper.filter(
+              (shipper) => shipper._id == item.objectId
+            );
+            this.listNearestShipper.push({
+              shipper: tempObj[0],
+              distance: tempD
+            });
+            
+            this.filterShipper.push(tempObj[0]);
+          }
+        });
+      }
+      this.isFinding = false;
     });
   }
 

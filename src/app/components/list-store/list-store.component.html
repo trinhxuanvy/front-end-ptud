@@ -4,15 +4,10 @@
     <h2 class="find-box__container__title">
       Tìm kiếm cửa hàng gần bạn <i class="material-icons">gps_fixed</i>
     </h2>
-    <button class="find-box__container__button" (click)="getListStore()" [disabled]="listStore.length == 0"
-      mat-raised-button color="warn">
+    <button class="find-box__container__button" (click)="getListProductOfStore()"
+      [disabled]="listProduct.length == 0 || listStore.length == 0" mat-raised-button color="success">
       Tìm kiếm
-      <mat-spinner
-        *ngIf="isFinding"
-        style="margin-left: 8px"
-        [diameter]="20"
-        color="light"
-      ></mat-spinner>
+      <mat-spinner *ngIf="isFinding" style="margin-left: 8px" [diameter]="20" color="light"></mat-spinner>
     </button>
   </div>
 </div>

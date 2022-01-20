@@ -58,4 +58,9 @@ declare interface ProductOfStore {
   distance: number;
 }
 
-export { Store, Location, Product, ProductOfStore, Shipper };
+declare interface NearestShipper {
+  shipper: Shipper;
+  distance: number;
+}
+
+export { Store, Location, Product, ProductOfStore, Shipper, NearestShipper };
