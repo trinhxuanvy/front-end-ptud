@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Store } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,11 @@ export class StoreService {
 
   constructor(private http: HttpClient) { }
 
-  getStoreById(id: string): Observable<any> {
-    return this.http.get(this.apiURL + `/${id}`);
+  getStoreById(id: string): Observable<Store> {
+    return this.http.get<Store>(this.apiURL + `/${id}`);
+  }
+
+  getAllStore(): Observable<Store[]> {
+    return this.http.get<Store[]>(this.apiURL);
   }
 }

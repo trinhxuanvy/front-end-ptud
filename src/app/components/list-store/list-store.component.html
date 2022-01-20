@@ -1,3 +1,20 @@
+<div class="find-box">
+  <div class="find-box__container">
+    <h4 class="find-box__container__header">Xin chào</h4>
+    <h2 class="find-box__container__title">
+      Tìm kiếm cửa hàng gần bạn <i class="material-icons">gps_fixed</i>
+    </h2>
+    <button
+      class="find-box__container__button"
+      (click)="getListStore()"
+      [disabled]="listStore.length == 0"
+      mat-raised-button
+      color="warn"
+    >
+      Tìm kiếm
+    </button>
+  </div>
+</div>
 <div class="list-store">
   <div class="list-store__header">
     <h2 class="list-store__header__text">
@@ -6,44 +23,8 @@
     </h2>
   </div>
   <div class="list-store__body">
-    <div class="row">
-      <div class="col-3">
-        <div class="list-store__item">
-          <a href="" class="list-store__item__link">
-            <div class="list-store__item__link__image">
-              <img src="/assets/images/com-van-phong-rio.png" alt="" />
-            </div>
-            <h5 class="list-store__item__link__title">Cơm Văn Phòng Rio</h5>
-            <p class="list-store__item__link__type">Cơm</p>
-            <div class="list-store__item__link__note">
-              <div class="list-store__item__link__note__rating">
-                <i class="material-icons">star_half</i>
-                <section>4.3</section>
-              </div>
-              <div class="list-store__item__link__note__distance">3.2 km</div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="list-store__item">
-          <a href="" class="list-store__item__link">
-            <div class="list-store__item__link__image">
-              <img src="/assets/images/com-van-phong-rio.png" alt="" />
-            </div>
-            <h5 class="list-store__item__link__title">Cơm Văn Phòng Rio</h5>
-            <p class="list-store__item__link__type">Cơm</p>
-            <div class="list-store__item__link__note">
-              <div class="list-store__item__link__note__rating">
-                <i class="material-icons">star_half</i>
-                <section>4.3</section>
-              </div>
-              <div class="list-store__item__link__note__distance">3.2 km</div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="col-3">
+    <owl-carousel-o [options]="carouselOption">
+      <ng-template carouselSlide>
         <div class="list-store__item">
           <a href="" class="list-store__item__link">
             <div class="list-store__item__link__image">
@@ -63,25 +44,70 @@
             </div>
           </a>
         </div>
-      </div>
-      <div class="col-3">
+      </ng-template>
+      <ng-template carouselSlide>
         <div class="list-store__item">
           <a href="" class="list-store__item__link">
             <div class="list-store__item__link__image">
-              <img src="/assets/images/com-van-phong-rio.png" alt="" />
+              <img src="/assets/images/com-ga-tan-hai-nam.png" alt="" />
             </div>
-            <h5 class="list-store__item__link__title">Cơm Văn Phòng Rio</h5>
+            <h5 class="list-store__item__link__title">Cơm Gà Tân Hải Nam</h5>
             <p class="list-store__item__link__type">Cơm</p>
             <div class="list-store__item__link__note">
               <div class="list-store__item__link__note__rating">
                 <i class="material-icons">star_half</i>
                 <section>4.3</section>
               </div>
-              <div class="list-store__item__link__note__distance">3.2 km</div>
+              <div class="list-store__item__link__note__distance">
+                <i class="material-icons">place</i>
+                3.2 km
+              </div>
             </div>
           </a>
         </div>
-      </div>
-    </div>
+      </ng-template>
+      <ng-template carouselSlide>
+        <div class="list-store__item">
+          <a href="" class="list-store__item__link">
+            <div class="list-store__item__link__image">
+              <img src="/assets/images/bun-dau-mam-tom-a-chay.png" alt="" />
+            </div>
+            <h5 class="list-store__item__link__title">Bún Đậu Mắm Tôm</h5>
+            <p class="list-store__item__link__type">Bún Đậu</p>
+            <div class="list-store__item__link__note">
+              <div class="list-store__item__link__note__rating">
+                <i class="material-icons">star_half</i>
+                <section>4.3</section>
+              </div>
+              <div class="list-store__item__link__note__distance">
+                <i class="material-icons">place</i>
+                3.2 km
+              </div>
+            </div>
+          </a>
+        </div>
+      </ng-template>
+      <ng-template carouselSlide>
+        <div class="list-store__item">
+          <a href="" class="list-store__item__link">
+            <div class="list-store__item__link__image">
+              <img src="/assets/images/com-van-phong-hong.png" alt="" />
+            </div>
+            <h5 class="list-store__item__link__title">Cơm Văn Phòng Hồng</h5>
+            <p class="list-store__item__link__type">Cơm</p>
+            <div class="list-store__item__link__note">
+              <div class="list-store__item__link__note__rating">
+                <i class="material-icons">star_half</i>
+                <section>4.3</section>
+              </div>
+              <div class="list-store__item__link__note__distance">
+                <i class="material-icons">place</i>
+                3.2 km
+              </div>
+            </div>
+          </a>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
   </div>
 </div>

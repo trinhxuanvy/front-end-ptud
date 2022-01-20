@@ -32,6 +32,7 @@ import { StoreCertificationComponent } from './components/store-certification/st
 import { SideboardComponent } from './share/sideboard/sideboard.component';
 import { HeaderStoreComponent } from './share/header-store/header-store.component';
 import { ListStoreComponent } from './components/list-store/list-store.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { ListStoreComponent } from './components/list-store/list-store.component
     MatCheckboxModule,
     MatToolbarModule,
     MatRadioModule,
+    CarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent],

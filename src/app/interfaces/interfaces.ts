@@ -10,4 +10,11 @@ declare interface Store {
     doUyTin: number
 }
 
-export { Store }
+declare interface Location {
+    id: string,
+    latitude: number,
+    longtitude: number,
+    objectId: string
+}
+
+export { Store, Location }
