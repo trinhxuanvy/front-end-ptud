@@ -1,41 +1,120 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { CheckoutService } from '../../services/checkout.service';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Location, Shipper } from '../../interfaces/interfaces';
+import { LocationService } from '../../services/location.service';
+import { StoreService } from '../../services/store.service';
+import { ShipperService } from '../../services/shipper.service';
+
 @Component({
   selector: 'app-fortest',
   templateUrl: './fortest.component.html',
   styleUrls: ['./fortest.component.scss'],
 })
 export class FortestComponent implements OnInit {
-  formGroup = this.formBuilder.group({
-    email: new FormControl('test@gmail.com', [Validators.required]),
-    cardNumber: new FormControl('4242424242424242', [Validators.required]),
-    mm: new FormControl('12', [Validators.required]),
-    cvv: new FormControl('123', [Validators.required]),
-    yy: new FormControl('22', [Validators.required]),
-  });
+  radius = 6378; // km
+  limitDistance = 5;
+  storeID = '61e8d9a95166a6fbc8b8df0c';
+  listLocation: Location[] = [];
+  listShipper: Shipper[] = [];
+  filterShipper: Shipper[] = [];
+
+  myLocation!: Location;
+
+  carouselOption: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    margin: 24,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      500: {
+        items: 2,
+        margin: 12,
+      },
+      600: {
+        items: 2,
+        margin: 12,
+      },
+      760: {
+        items: 3,
+      },
+      1000: {
+        items: 4,
+      },
+    },
+    nav: false,
+  };
+
   constructor(
-    private formBuilder: FormBuilder,
-    private checkoutService: CheckoutService
+    private locationService: LocationService,
+    private shipperService: ShipperService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.shipperService.getAllShipper().subscribe((data) => {
+      this.listShipper = data;
+    });
 
-  getCartToken() {
-    (<any>window).Stripe.card.createToken(
-      {
-        number: this.formGroup.value.cardNumber,
-        exp_month: this.formGroup.value.mm,
-        exp_year: this.formGroup.value.yy,
-        cvc: this.formGroup.value.cvv,
-      },
-      (status: number, response: any) => {
-        console.log(response);
-      }
-    );
+    this.getMyLocation();
   }
 
-  doTest(): void {
-    this.checkoutService.goToStrip1e().subscribe(()=>{});
+  getMyLocation() {
+    this.locationService.getLocationOneStore(this.storeID).subscribe((data) => {
+      this.myLocation = data;
+    });
+  }
+
+  getListShipper() {
+    let tempD;
+    let tempObj;
+    this.filterShipper = [];
+
+    this.locationService.getLocationShipper().subscribe((data) => {
+      data.forEach((item) => {
+        tempD = this.getDistance(
+          this.myLocation.latitude,
+          this.myLocation.longtitude,
+          item.latitude,
+          item.longtitude
+        );
+
+        if (tempD <= this.limitDistance) {
+          tempObj = this.listShipper.filter(
+            (shipper) => shipper._id == item.objectId
+          );
+          this.filterShipper.push(tempObj[0]);
+        }
+      });
+    });
+  }
+
+  getDistance(
+    latitudeA: number,
+    longtitudeA: number,
+    latitudeB: number,
+    longtitudeB: number
+  ) {
+    let dLat = this.toRad(latitudeB - latitudeA);
+    let dLon = this.toRad(longtitudeB - longtitudeA);
+    let latA = this.toRad(latitudeA);
+    let latB = this.toRad(latitudeB);
+
+    let a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(latA) * Math.cos(latB);
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    let d = this.radius * c;
+
+    return d;
+  }
+
+  toRad(value: number) {
+    return (Math.PI * value) / 180;
   }
 }

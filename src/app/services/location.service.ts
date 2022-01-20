@@ -4,23 +4,26 @@ import { Observable } from 'rxjs';
 import { Location } from '../interfaces/interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocationService {
+  readonly apiUrl = 'https://localhost:44349/api/location';
 
-  readonly apiUrl = "https://localhost:44349/api/location"
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getLocationStore(): Observable<Location[]> {
-    return this.http.get<Location[]>(this.apiUrl + "/cuahang");
+    return this.http.get<Location[]>(this.apiUrl + '/cuahang');
+  }
+
+  getLocationOneStore(id: string): Observable<Location> {
+    return this.http.get<Location>(this.apiUrl + '/cuahang/' + id);
   }
 
   getLocationCustomer(): Observable<Location[]> {
-    return this.http.get<Location[]>(this.apiUrl + "/khachhang");
+    return this.http.get<Location[]>(this.apiUrl + '/khachhang');
   }
 
   getLocationShipper(): Observable<Location[]> {
-    return this.http.get<Location[]>(this.apiUrl + "/shipper");
+    return this.http.get<Location[]>(this.apiUrl + '/shipper');
   }
 }
