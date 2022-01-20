@@ -28,10 +28,7 @@ export class CheckoutService {
 
   goToStrip1e(): Observable<any> {
     const body = { title: 'GoToStripe' };
-    return this.httpClient.post(
-      `http://localhost:44348/online`,
-      body
-    );
+    return this.httpClient.post(`http://localhost:44348/online`, body);
   }
   clearCart(id: string): Observable<any> {
     const body = { title: 'ClearCart' };

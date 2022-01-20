@@ -1,51 +1,57 @@
-<ul class="list-group mb-3">
-    <li class="list-group-item" *ngFor="let item of this.data">
-        <div>
-            <div class="d-flex justify-content-between align-items-center">
-                <div (click)="clickShow(item.id - 1)" class="data-show">
-                    <div>
-                        <h6 style="font-size: 17px;">Đơn hàng {{item?.invoiceID}} của bạn</h6>
-                        <small class="text-muted" style="font-size: 15px;">Thời gian đặt: {{item?.timeOrder}}</small>
-                        <br>
-                        <small class="text-muted" style="font-size: 15px;">Phương thức thanh toán: {{item?.payment}}</small>
-                        <br>
+<div class="shadow-lg p-3 mb-5 bg-white rounded">
+    <ul class="list-group mb-3">
+        <li class="list-group-item" *ngFor="let item of this.data">
+            <div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div (click)="clickShow(item.id - 1)" class="data-show">
                         <div>
-                            <small *ngIf="item?.oldStatus !=''" class="text-muted" style="font-size: 15px;">Tình trạng:
-                                {{item?.oldStatus}} ->
-                                {{item?.status}}</small>
-                            <small *ngIf="item?.oldStatus ==''" class="text-muted" style="font-size: 15px;">Tình trạng:
-                                {{item?.status}}</small>
-                        </div>
-                        <small class="text-muted" style="font-size: 15px;">Tổng tiền: {{item?.total}} VND</small>
-                        <br>
-                    </div>
-                </div>
-                <div>
-                    <button mat-raised-button color="primary" class="mousehover" id="button" [disabled]="!item?.action"
-                        (click)="CancelInvoice(item?.invoiceID)">Huỷ
-                        đơn
-                        hàng</button>
-                </div>
-            </div>
-            <div [hidden]="this.datashow[item.id - 1]" class="row">
-                <div class="col-10">
-                    <div class="row" *ngFor="let dataInvoice of item?.invoiceDetail">
-                        <div class="col-6">
-                            <small class="text-muted" style="font-size: 13px;">Sản phẩm:
-                                {{dataInvoice?.product}}</small>
+                            <h6 style="font-size: 17px;">Đơn hàng {{item?.invoiceID}} của bạn</h6>
+                            <small class="text-muted" style="font-size: 15px;">Thời gian đặt:
+                                {{item?.timeOrder}}</small>
                             <br>
-                            <small class="text-muted" style="font-size: 13px;">Số lượng:
-                                {{dataInvoice?.numOfElement}}</small>
-                        </div>
-                        <div class="col-6">
-                            <small class="text-muted" style="font-size: 13px;">Đơn giá: {{dataInvoice?.price}}
-                                VND</small>
+                            <small class="text-muted" style="font-size: 15px;">Phương thức thanh toán:
+                                {{item?.payment}}</small>
                             <br>
-                            <small class="text-muted" style="font-size: 13px;">Đơn vị: {{dataInvoice?.unit}}</small>
+                            <div>
+                                <small *ngIf="item?.oldStatus !=''" class="text-muted" style="font-size: 15px;">Tình
+                                    trạng:
+                                    {{item?.oldStatus}} ->
+                                    {{item?.status}}</small>
+                                <small *ngIf="item?.oldStatus ==''" class="text-muted" style="font-size: 15px;">Tình
+                                    trạng:
+                                    {{item?.status}}</small>
+                            </div>
+                            <small class="text-muted" style="font-size: 15px;">Tổng tiền: {{item?.total}} VND</small>
+                            <br>
                         </div>
                     </div>
+                    <div>
+                        <button mat-raised-button color="primary" class="mousehover" id="button"
+                            [disabled]="!item?.action" (click)="CancelInvoice(item?.invoiceID)">Huỷ
+                            đơn
+                            hàng</button>
+                    </div>
+                </div>
+                <div [hidden]="this.datashow[item.id - 1]" class="row">
+                    <div class="col-10">
+                        <div class="row" *ngFor="let dataInvoice of item?.invoiceDetail">
+                            <div class="col-6">
+                                <small class="text-muted" style="font-size: 13px;">Sản phẩm:
+                                    {{dataInvoice?.product}}</small>
+                                <br>
+                                <small class="text-muted" style="font-size: 13px;">Số lượng:
+                                    {{dataInvoice?.numOfElement}}</small>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-muted" style="font-size: 13px;">Đơn giá: {{dataInvoice?.price}}
+                                    VND</small>
+                                <br>
+                                <small class="text-muted" style="font-size: 13px;">Đơn vị: {{dataInvoice?.unit}}</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </li>
-</ul>
+        </li>
+    </ul>
+</div>
