@@ -22,7 +22,8 @@ export class CheckoutService {
     const body = { title: 'GoToStripe' };
     return this.httpClient.post(
       `https://localhost:44349/api/checkout/online`,
-      body
+      body,
+      {responseType: 'text'}
     );
   }
 

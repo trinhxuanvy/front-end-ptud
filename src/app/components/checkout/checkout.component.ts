@@ -72,6 +72,7 @@ export class CheckoutComponent implements OnInit {
       console.log('--------------------------');
       this.checkoutService.goToStripe().subscribe((data) => {
         console.log(data);
+        window.open(data, "_blank");
       });
     } else {
       this.makeResult();
