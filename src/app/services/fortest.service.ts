@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class FortestService {
-  
-  constructor(private httpClient: HttpClient) { }
-  
-  goToStripe(): Observable<any> {
-    const body = { title: 'GoToStripe' };
-    return this.httpClient.post(`http://localhost:44349/online`, body);
+  constructor(private httpClient: HttpClient) {}
+
+  getStoreByOwner(id: string): Observable<any> {
+    return this.httpClient.get(
+      `https://localhost:44349/api/cuahang/owner/${id}`
+    );
   }
 }

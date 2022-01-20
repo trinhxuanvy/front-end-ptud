@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { Store } from '../interfaces/interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StoreService {
   private readonly apiURL = 'https://localhost:44349/api/cuahang';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getStoreById(id: string): Observable<Store> {
     return this.http.get<Store>(this.apiURL + `/${id}`);
@@ -17,5 +17,11 @@ export class StoreService {
 
   getAllStore(): Observable<Store[]> {
     return this.http.get<Store[]>(this.apiURL);
+  }
+
+  getStoreByOwner(id: string): Observable<any> {
+    return this.http.get(
+      `https://localhost:44349/api/cuahang/owner/${id}`
+    );
   }
 }

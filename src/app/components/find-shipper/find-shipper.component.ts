@@ -7,11 +7,11 @@ import { StoreService } from '../../services/store.service';
 import { AuthService } from 'src/app/share/auth/auth.service';
 
 @Component({
-  selector: 'app-fortest',
-  templateUrl: './fortest.component.html',
-  styleUrls: ['./fortest.component.scss'],
+  selector: 'app-find-shipper',
+  templateUrl: './find-shipper.component.html',
+  styleUrls: ['./find-shipper.component.scss'],
 })
-export class FortestComponent implements OnInit {
+export class FindShipperComponent implements OnInit {
   currentUser: any;
   isFinding = false;
   radius = 6378;

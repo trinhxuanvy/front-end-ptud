@@ -52,6 +52,7 @@ import { AuthService } from './share/auth/auth.service';
 import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './share/header/header.component';
 import { FooterComponent } from './share/footer/footer.component';
+import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
 
 export function tokenGetter() {
   return localStorage.getItem("contact-manager-jwt");
@@ -76,7 +77,8 @@ export function tokenGetter() {
     RegisterComponent,
     HeaderComponent,
     FooterComponent,
-    ProfileComponent
+    ProfileComponent,
+    FindShipperComponent
   ],
   imports: [
     AppRoutingModule,
@@ -102,14 +104,14 @@ export function tokenGetter() {
     CarouselModule,
     MatCardModule,
     NgbDropdownModule,
-    MatProgressSpinnerModule
-    // JwtModule.forRoot({
-    //   config: {
-    //     tokenGetter: tokenGetter,
-    //     allowedDomains: ["https://localhost:44349"],
-    //     disallowedRoutes: []
-    //   }
-    // })
+    MatProgressSpinnerModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["https://localhost:44349"],
+        disallowedRoutes: []
+      }
+    })
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],

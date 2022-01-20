@@ -12,7 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 import { ProfileComponent } from './components/profile/profile.component';
-
+import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -27,15 +27,19 @@ const routes: Routes = [
     children: [
       //{ path: "*", component: StoreCertificationComponent },
       { path: 'certificate', component: StoreCertificationComponent },
-      { path: 'analytics', component: StatisticComponent }
+      { path: 'analytics', component: StatisticComponent },
     ],
   },
   {
     path: 'find/store',
-    component: ListStoreComponent
+    component: ListStoreComponent,
+  },
+  {
+    path: 'find/shipper',
+    component: FindShipperComponent,
   },
   //{path:'userinside',component:UserinfoComponent },
-  {path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent}
+  { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
 ];
 
 @NgModule({

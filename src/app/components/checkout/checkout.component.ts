@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CheckoutService } from '../../services/checkout.service';
+import { AuthService } from 'src/app/share/auth/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -12,7 +13,8 @@ import { CheckoutService } from '../../services/checkout.service';
 export class CheckoutComponent implements OnInit {
   submitted = false;
   isAgree = false;
-  customerID = '61b76361241874f48b599885';
+  currentUser: any;
+  customerID = '';
   myData: any;
   paymentType = '';
   handler: any = null;
@@ -44,7 +46,8 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private checkoutService: CheckoutService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {}
 
   ClickCheckbox(): void {
@@ -102,6 +105,8 @@ export class CheckoutComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.currentUser = this.auth.getUser();
+    this.customerID = this.currentUser.id;
     this.checkoutService.getInformation(this.customerID).subscribe((data) => {
       this.myData = data;
       this.formGroup.controls['phoneNumber'].setValue(this.myData.phoneNumber);
