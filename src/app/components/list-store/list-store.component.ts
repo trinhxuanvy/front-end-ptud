@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Store, Location } from '../../interfaces/interfaces';
+import { LocationService } from '../../services/location.service';
+import { StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'app-list-store',
@@ -7,31 +11,86 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListStoreComponent implements OnInit {
   radius = 6378; // km
-  data = [
-    {
-      latitude: 10.8003328,
-      longtitude: 106.6369024,
+  limitDistance = 5;
+  listLocation: Location[] = [];
+  listStore: Store[] = [];
+  filterStore: Store[] = [];
+  myLocation = {
+    latitude: 0,
+    longtitude: 0,
+  };
+  carouselOption: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    margin: 24,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      500: {
+        items: 2,
+        margin: 12,
+      },
+      600: {
+        items: 2,
+        margin: 12,
+      },
+      760: {
+        items: 3,
+      },
+      1000: {
+        items: 4,
+      },
     },
-    {
-      latitude: 53.2734,
-      longtitude: -7.77832031,
-    },
-  ];
+    nav: false,
+  };
+  
 
-  constructor() {}
+  constructor(
+    private locationService: LocationService,
+    private storeSerive: StoreService
+  ) {}
 
   ngOnInit(): void {
-    console.log(
-      this.getDistance(
-        this.data[0].latitude,
-        this.data[0].longtitude,
-        this.data[1].latitude,
-        this.data[1].longtitude
-      )
-    );
+    this.storeSerive.getAllStore().subscribe((data) => {
+      this.listStore = data;
+    });
   }
 
-  getListStore() {}
+  getMyLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((data) => {
+        this.myLocation.latitude = data.coords.latitude;
+        this.myLocation.longtitude = data.coords.longitude;
+      });
+    }
+  }
+
+  getListStore() {
+    let tempD;
+    let tempObj;
+    this.filterStore = [];
+    this.locationService.getLocationStore().subscribe((data) => {
+      data.forEach((item) => {
+        tempD = this.getDistance(
+          this.myLocation.latitude,
+          this.myLocation.longtitude,
+          item.latitude,
+          item.longtitude
+        );
+
+        if (tempD <= this.limitDistance) {
+          tempObj = this.listStore.filter((store) => store.id == item.objectId);
+          this.filterStore.push(tempObj[0]);
+        }
+      });
+    });
+  }
 
   getDistance(
     latitudeA: number,

@@ -39,12 +39,10 @@ import { StoreCertificationComponent } from './components/store-certification/st
 import { SideboardComponent } from './share/sideboard/sideboard.component';
 import { HeaderStoreComponent } from './share/header-store/header-store.component';
 import { ListStoreComponent } from './components/list-store/list-store.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-
-
-// Service
 import { AuthService } from './share/auth/auth.service';
 import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './share/header/header.component';
@@ -95,6 +93,7 @@ export function tokenGetter() {
     MatCheckboxModule,
     MatToolbarModule,
     MatRadioModule,
+    CarouselModule
     MatCardModule,
     NgbDropdownModule,
     JwtModule.forRoot({
