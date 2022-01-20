@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
       this.auth.setToken(token);
       const user = (<any>response).user;
       console.log(user);
-      this.router.navigate(['/store']);
+      this.auth.saveUser(user);
+      this.router.navigate(['find/store']);
     }, err =>
     {
       this.invalidAccount = true;
