@@ -93,16 +93,16 @@ export function tokenGetter() {
     MatCheckboxModule,
     MatToolbarModule,
     MatRadioModule,
-    CarouselModule
+    CarouselModule,
     MatCardModule,
     NgbDropdownModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: ["https://localhost:44349"],
-        disallowedRoutes: []
-      }
-    })
+    // JwtModule.forRoot({
+    //   config: {
+    //     tokenGetter: tokenGetter,
+    //     allowedDomains: ["https://localhost:44349"],
+    //     disallowedRoutes: []
+    //   }
+    // })
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],
