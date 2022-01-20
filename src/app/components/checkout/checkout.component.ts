@@ -1,13 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CheckoutService } from '../../services/checkout.service';
-import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-checkout',
@@ -24,6 +18,8 @@ export class CheckoutComponent implements OnInit {
   handler: any = null;
   postData: any = {};
   postInvoiceDetail: any = {};
+
+  hiddenSuccessPaymentDisplay = true;
 
   formGroup = this.formBuilder.group({
     firstName: new FormControl({ value: '', disabled: true }, [
@@ -60,17 +56,23 @@ export class CheckoutComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-    if (this.formGroup.invalid || !this.isAgree) {
+    if (
+      this.formGroup.invalid ||
+      !this.isAgree ||
+      this.paymentType == '' ||
+      this.paymentType == null
+    ) {
       return;
     }
 
     if (this.paymentType == 'Online') {
-      this.pay(this.myData?.total / 23000);
+      console.log('--------------------------');
+      this.checkoutService.goToStripe().subscribe((data) => {
+        console.log(data);
+      });
     } else {
       this.makeResult();
     }
-    //this.formGroup.reset();
-    //this.isAgree = false;
   }
 
   makeResult(): void {
@@ -100,55 +102,12 @@ export class CheckoutComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.loadStripe();
     this.checkoutService.getInformation(this.customerID).subscribe((data) => {
       this.myData = data;
       this.formGroup.controls['phoneNumber'].setValue(this.myData.phoneNumber);
       this.formGroup.controls['address'].setValue(this.myData.address);
       this.formGroup.controls['firstName'].setValue(this.myData.firstName);
       this.formGroup.controls['lastName'].setValue(this.myData.lastName);
-    });
-  }
-
-  loadStripe() {
-    if (!window.document.getElementById('stripe-script')) {
-      var s = window.document.createElement('script');
-      s.id = 'stripe-script';
-      s.type = 'text/javascript';
-      s.src = 'https://checkout.stripe.com/checkout.js';
-      s.onload = () => {
-        this.handler = (<any>window).StripeCheckout.configure({
-          key: 'pk_test_51KIOLjHfeS4VmIfgULaQTOWsNTY9TXcP0X3oFKdvIB9x6Zpa14sbx8ae6o7UNhvrJ4LZS9AWrJom05KwNJU993Zn000djcF9ll',
-          locale: 'auto',
-          token: function (token: any) {
-            // You can access the token ID with `token.id`.
-            // Get the token ID to your server-side code for use.
-            console.log(token);
-            //this.ClickCheckbox();
-            console.log(1);
-          },
-        });
-      };
-
-      window.document.body.appendChild(s);
-    }
-  }
-  pay(amount: any): any {
-    var handler = (<any>window).StripeCheckout.configure({
-      key: 'pk_test_51KIOLjHfeS4VmIfgULaQTOWsNTY9TXcP0X3oFKdvIB9x6Zpa14sbx8ae6o7UNhvrJ4LZS9AWrJom05KwNJU993Zn000djcF9ll',
-      locale: 'auto',
-      token: function (tokenResult: any) {
-        // You can access the token ID with `token.id`.
-        // Get the token ID to your server-side code for use.
-        console.log(tokenResult);
-        console.log(1);
-      },
-    });
-
-    handler.open({
-      name: 'Thanh toán giỏ hàng',
-      description: '',
-      amount: amount * 100,
     });
   }
 }

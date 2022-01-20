@@ -18,10 +18,26 @@ export class CheckoutService {
       invoicedetails
     );
   }
+  goToStripe(): Observable<any> {
+    const body = { title: 'GoToStripe' };
+    return this.httpClient.post(
+      `https://localhost:44349/api/checkout/online`,
+      body
+    );
+  }
+
+  goToStrip1e(): Observable<any> {
+    const body = { title: 'GoToStripe' };
+    return this.httpClient.post(
+      `http://localhost:44348/online`,
+      body
+    );
+  }
   clearCart(id: string): Observable<any> {
     const body = { title: 'ClearCart' };
     return this.httpClient.put(
-      `https://localhost:44349/api/nguoidung/xoagiohang/${id}`, body
+      `https://localhost:44349/api/nguoidung/xoagiohang/${id}`,
+      body
     );
   }
   doSomeThingWithPaymentByHand() {
