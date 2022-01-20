@@ -37,6 +37,16 @@ export class AuthService {
     return this.getToken() !== null;
   }
 
+  saveUser(user: any): void {
+    localStorage.removeItem("user-jwt");
+    localStorage.setItem("user-jwt", JSON.stringify(user));
+  }
+
+  getUser() {
+    const currentUser: any = localStorage.getItem("user-jwt");
+    return JSON.parse(currentUser);
+  }
+
   logout() {
     localStorage.removeItem(this.storageKey);
     this.router.navigate(['/login']);

@@ -11,6 +11,7 @@ import { ListStoreComponent } from './components/list-store/list-store.component
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'test', component: FortestComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'profile', component: ProfileComponent },
   {
     path: 'store',
     component: StoreComponent,

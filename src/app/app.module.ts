@@ -43,6 +43,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component'
+
+
+// Service
 import { AuthService } from './share/auth/auth.service';
 import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './share/header/header.component';
@@ -71,6 +75,7 @@ export function tokenGetter() {
     RegisterComponent,
     HeaderComponent,
     FooterComponent,
+    ProfileComponent
   ],
   imports: [
     AppRoutingModule,
