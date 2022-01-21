@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
+import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -40,6 +41,7 @@ const routes: Routes = [
   },
   //{path:'userinside',component:UserinfoComponent },
   { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
+  { path: 'invoice-detail/:id', component: InvoiceDetailComponent },
 ];
 
 @NgModule({
