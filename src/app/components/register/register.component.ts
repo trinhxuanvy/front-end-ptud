@@ -22,18 +22,27 @@ export class RegisterComponent implements OnInit {
     const values = form.value;
     const account = {
       "email": values.username,
-      "matkhau": values.password
+      "matKhau": values.password
     }
+    console.log(account);
     this.http.post("https://localhost:44349/api/auth/register", account).subscribe(response =>
     {
       const token = (<any>response).token;
       this.auth.setToken(token);
       console.log(token);
-      this.router.navigate(['/home']);
+      const user = (<any>response).user;
+      console.log(user);
+      this.auth.saveUser(user);
+      this.router.navigate(['find/store']);
     }, err =>
     {
       this.invalidAccount = true;
       console.log(err.error);
     })
+  }
+
+  login()
+  {
+    this.router.navigate(['register']);
   }
 }
