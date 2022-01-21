@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { InvoiceDetailService } from 'src/app/services/invoice-detail.service';
+import { InvoiceService } from 'src/app/services/invoice.service';
+import { AuthService } from 'src/app/share/auth/auth.service';
 
 export interface DetailInvoice {
   product: string;
@@ -15,21 +17,42 @@ export interface DetailInvoice {
   styleUrls: ['./invoice-detail.component.scss']
 })
 export class InvoiceDetailComponent implements OnInit {
+  invoice: any = {};
+  currentUser: any;
   DetailInvoiceData: DetailInvoice[] = [];
   dataSource = this.DetailInvoiceData;
   displayedColumns: string[] = ['product', 'price', 'numOfElement', 'unit'];
-  invoice: string = '';
+  invoiceId: string = '';
   totalPrice: number = 0;
-  constructor(private invoiceDetailService: InvoiceDetailService, private route: ActivatedRoute) { }
+  constructor(private invoiceDetailService: InvoiceDetailService,
+     private route: ActivatedRoute,
+     private auth: AuthService,
+     private invoiceService: InvoiceService
+    ) { }
 
   ngOnInit(): void {
-    this.invoice = this.route.snapshot.params['id'];
-    this.invoiceDetailService.GetInvoiceDetail(this.invoice).subscribe(data => {
-      this.DetailInvoiceData = data;
+    this.currentUser = this.auth.getUser();
+    console.log(this.currentUser);
+
+    this.invoiceId = this.route.snapshot.params['id'];
+    this.invoiceDetailService.GetInvoiceDetail(this.invoiceId).subscribe(data => {
+      this.invoice = data;
+      console.log(this.invoice);
+
+      this.DetailInvoiceData = data.invoiceDetail;
       this.dataSource = this.DetailInvoiceData;
       for(let i = 0; i < this.DetailInvoiceData.length; i++){
         this.totalPrice += this.DetailInvoiceData[i].numOfElement * this.DetailInvoiceData[i].price;
       }
     });
+  }
+
+  daNhanHang(id: any): void{
+    console.log(id);
+    this.invoiceService.ChangeStatusToReceived(id).subscribe(data => {
+      console.log(data);
+      location.reload()
+    });
+    // location.reload();
   }
 }

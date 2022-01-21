@@ -1,3 +1,10 @@
+<h4 id="total">Chi tiết đơn hàng: {{invoice.invoiceID}}</h4>
+<h5 id="total">Phương thức thanh toán: {{invoice.payment}}</h5>
+<h5 id="total">Trạng thái: {{invoice.oldStatus + ' -> ' + invoice.status}}</h5>
+<h5 id="total">Ngày đặt: {{invoice.timeOrder}}</h5>
+<div>
+  <button mat-button color="accent" id="button" *ngIf="invoice.status ==='Đã giao' && currentUser.loaiND === 1" (click)="daNhanHang(invoice.invoiceID)">Đã nhận hàng</button>
+</div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="table">
 
   <!--- Note that these columns can be defined in any order.
