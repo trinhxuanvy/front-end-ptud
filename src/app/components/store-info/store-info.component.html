@@ -1,0 +1,31 @@
+<mat-tab-group mat-align-tabs="center" >
+    <mat-tab label="Tổng quan">
+        <div class="container">
+            <div class="row">
+              <div class="col-sm">
+                <img src={{store.anhDaiDien}}>
+              </div>
+              <div class="col-sm">
+               <p style="font-size:30px">{{ store.tenCuaHang}}</p> 
+              <div *ngIf= "store.trangThai==1">Đang hoạt động</div>
+              <div *ngIf= "store.trangThai==2">Tạm dừng hoạt động</div>
+              <div *ngIf= "store.trangThai==3">Không hoạt động</div>
+              </div>
+              <div class="col-sm">
+                  <div class="row">
+                    <div class="col-xl-4" id="address"><p style="font-size:20px"><strong>Địa chỉ: </strong></p></div>
+                    <div class="col"><p style="color:#FF0000">{{ store.diaChi}} </p></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-4" ><p style="font-size:20px"><strong>Độ uy tín: </strong></p></div>
+                    <div class="col"><p style="color:#FF0000">{{ store.doUyTin}} </p></div>
+                  </div>
+              </div>
+            </div>
+          </div>
+    </mat-tab>
+    <mat-tab label="Sản phẩm"> </mat-tab>
+    <mat-tab label="Đánh giá">  </mat-tab>
+  </mat-tab-group>
+
+

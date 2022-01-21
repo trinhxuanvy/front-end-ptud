@@ -14,6 +14,7 @@ import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-o
 import { ProfileComponent } from './components/profile/profile.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
+import { StoreInfoComponent } from './components/store-info/store-info.component';
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -42,6 +43,9 @@ const routes: Routes = [
   //{path:'userinside',component:UserinfoComponent },
   { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
   { path: 'invoice-detail/:id', component: InvoiceDetailComponent },
+  {
+    path: 'store/:id', component: StoreInfoComponent
+  },
 ];
 
 @NgModule({

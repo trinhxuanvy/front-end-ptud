@@ -29,6 +29,13 @@ import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
 import { ProgressBarModule } from 'angular-progress-bar';
 import { MatIconModule } from '@angular/material/icon';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { IgxButtonModule,
+	IgxIconModule,
+	IgxCardModule,
+	IgxDividerModule
+} from 'igniteui-angular';
 
 //Component
 import { SpinnerComponent } from './share/spinner/spinner.component';
@@ -58,6 +65,7 @@ import { HeaderComponent } from './share/header/header.component';
 import { FooterComponent } from './share/footer/footer.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
+import { StoreInfoComponent } from './components/store-info/store-info.component';
 
 export function tokenGetter() {
   return localStorage.getItem("contact-manager-jwt");
@@ -84,7 +92,8 @@ export function tokenGetter() {
     FooterComponent,
     ProfileComponent,
     FindShipperComponent,
-    InvoiceDetailComponent
+    InvoiceDetailComponent,
+    StoreInfoComponent
   ],
   imports: [
     AppRoutingModule,
@@ -112,6 +121,12 @@ export function tokenGetter() {
     NgbDropdownModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    MatTabsModule,
+    MatGridListModule,
+    IgxButtonModule,
+	  IgxIconModule,
+	  IgxCardModule,
+	  IgxDividerModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
