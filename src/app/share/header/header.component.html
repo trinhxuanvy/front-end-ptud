@@ -23,13 +23,19 @@
     <div class="header-transport">
       <a mat-button routerLink="/">Trung tâm Vận chuyển</a>
     </div>
-  <div class="header-register">
-    <a mat-button routerLink="/register">Đăng Ký </a>
-  </div>
-  <div class="space"></div>
-  <div class="header-login">
-    <a mat-button routerLink="/login">Đăng Nhập</a>
-  </div>
+      <div class="header-register" *ngIf="isUnLoggedIn$ | async as isUnLoggedIn">
+        <a mat-button routerLink="/register">Đăng Ký </a>
+      </div>
+      <div class="header-register" *ngIf="isLoggedIn$ | async as isLoggedIn">
+        <a mat-button routerLink="/invoice">Giỏ Hàng </a>
+      </div>
+      <div class="space"></div>
+      <div class="header-login" *ngIf="isUnLoggedIn$ | async as isUnLoggedIn">
+        <a mat-button routerLink="/login">Đăng Nhập</a>
+      </div>
+      <div *ngIf="isLoggedIn$ | async as isLoggedIn">
+        <button (click)="Logout()" class="cus__button">Đăng Xuất </button>
+      </div>
 </mat-toolbar>
 <div class="space-between">
 

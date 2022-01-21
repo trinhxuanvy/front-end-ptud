@@ -28,6 +28,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
 import { ProgressBarModule } from 'angular-progress-bar';
+import { MatIconModule } from '@angular/material/icon';
 
 //Component
 import { SpinnerComponent } from './share/spinner/spinner.component';
@@ -108,6 +109,7 @@ export function tokenGetter() {
     MatCardModule,
     NgbDropdownModule,
     MatProgressSpinnerModule,
+    MatIconModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
