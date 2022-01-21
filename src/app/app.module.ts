@@ -24,6 +24,10 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
+import { environment } from '../environments/environment';
+import { ProgressBarModule } from 'angular-progress-bar';
 
 //Component
 import { SpinnerComponent } from './share/spinner/spinner.component';
@@ -45,7 +49,6 @@ import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-o
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component'
-
 
 // Service
 import { AuthService } from './share/auth/auth.service';
@@ -111,9 +114,12 @@ export function tokenGetter() {
         allowedDomains: ["https://localhost:44349"],
         disallowedRoutes: []
       }
-    })
+    }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    ProgressBarModule
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, { provide: BUCKET, useValue: 'ptud-94f91.appspot.com' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
