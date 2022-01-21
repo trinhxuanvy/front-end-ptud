@@ -5,6 +5,12 @@
         
     }
 
+    &__header {
+        margin-bottom: 32px;
+        text-align: center;
+        display: block;
+    }
+
     &__image {
         width: 100%;
         margin-bottom: 16px;
@@ -39,6 +45,12 @@
     }
 
     &__button {
+        display: block;
+        margin: 0 auto;
+    }
+
+    &__upload {
+        width: 150px;
         display: block;
         margin: 0 auto;
     }

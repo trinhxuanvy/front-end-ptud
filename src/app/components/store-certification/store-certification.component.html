@@ -2,44 +2,67 @@
   <div class="row">
     <div class="col-6">
       <div class="store-certificate__item">
+        <h4 class="store-certificate__header">Giấy chứng nhận an toàn</h4>
         <div class="store-certificate__image">
-          <div class="store-certificate__cover">
-            <p class="store-certificate__status">Uploading 100%</p>
-          </div>
           <img
-            src="/assets/images/So-dang-ky-kinh-doanh-la-gi-1-748x1024.jpg"
-            alt=""
+            [src]="
+              !store.giayPhepKinhDoanh
+                ? 'assets/images/no-image.jpg'
+                : store.giayPhepKinhDoanh
+            "
+            alt="Giấy chứng nhận an toàn"
           />
         </div>
         <div class="store-certificate__form">
-          <form enctype="multipart/form-data" [formGroup]="formUpload">
-            <input
-              formControlName="file"
-              #input1
-              type="file"
-              hidden="true"
-              accept=".jpg"
-              (change)="getFile($event)"
-            />
-            <button
-              class="store-certificate__button"
-              mat-flat-button
-              color="warn"
-              (click)="input1.click()"
-            >
-              Chọn ảnh khác
-            </button>
-            <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Upload</button>
-          </form>
+          <input
+            #input1
+            type="file"
+            hidden="true"
+            accept=".jpg"
+            (change)="uploadFile1($event)"
+          />
+          <div class="store-certificate__form__info">
+            <progress-bar
+              *ngIf="startUpload1"
+              [color-degraded]="{
+                '0': '#f12711',
+                '10': '#f5af19',
+                '20': '#FDC830',
+                '30': '#FFF200',
+                '40': '#ffff1c',
+                '50': '#a8e063',
+                '60': '#24FE41',
+                '70': '#96c93d',
+                '80': '#00F260',
+                '90': '#56ab2f'
+              }"
+              progress="{{ uploadPercent1 }}"
+              [disable-percentage]="false"
+            ></progress-bar>
+          </div>
+
+          <button
+            class="store-certificate__button"
+            mat-flat-button
+            color="warn"
+            (click)="input1.click()"
+          >
+            Chọn ảnh khác
+          </button>
         </div>
       </div>
     </div>
     <div class="col-6">
       <div class="store-certificate__item">
+        <h4 class="store-certificate__header">Giấy phép kinh doanh</h4>
         <div class="store-certificate__image">
           <img
-            src="/assets/images/So-dang-ky-kinh-doanh-la-gi-1-748x1024.jpg"
-            alt=""
+            [src]="
+              !store.giayPhepKinhDoanh
+                ? 'assets/images/no-image.jpg'
+                : store.giayPhepKinhDoanh
+            "
+            alt="Giấy phép kinh doanh"
           />
         </div>
         <div class="store-certificate__form">
@@ -48,18 +71,52 @@
             type="file"
             hidden="true"
             accept=".jpg"
-            (change)="getFile($event)"
+            (change)="uploadFile2($event)"
           />
-          <button
-            class="store-certificate__button"
-            mat-flat-button
-            color="warn"
-            (click)="input2.click()"
-          >
-            Chọn ảnh khác
-          </button>
+          <div class="store-certificate__form__info">
+            <progress-bar
+              *ngIf="startUpload2"
+              [color-degraded]="{
+                '0': '#f12711',
+                '10': '#f5af19',
+                '20': '#FDC830',
+                '30': '#FFF200',
+                '40': '#ffff1c',
+                '50': '#a8e063',
+                '60': '#24FE41',
+                '70': '#96c93d',
+                '80': '#00F260',
+                '90': '#56ab2f'
+              }"
+              progress="{{ uploadPercent2 }}"
+              [disable-percentage]="false"
+            ></progress-bar>
+            <button
+              class="store-certificate__button"
+              mat-flat-button
+              color="warn"
+              (click)="input2.click()"
+            >
+              Chọn ảnh khác
+            </button>
+          </div>
         </div>
       </div>
     </div>
+    <button
+      [disabled]="!isActive || isRunning"
+      mat-raised-button
+      color="success"
+      class="store-certificate__upload"
+      (click)="uploadData()"
+    >
+      Upload
+      <mat-spinner
+        *ngIf="isUploadSuccess"
+        style="margin-left: 8px"
+        [diameter]="20"
+        color="light"
+      ></mat-spinner>
+    </button>
   </div>
 </div>

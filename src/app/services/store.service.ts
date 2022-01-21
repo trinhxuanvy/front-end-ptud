@@ -24,4 +24,8 @@ export class StoreService {
       `https://localhost:44349/api/cuahang/owner/${id}`
     );
   }
+
+  uploadStore(store: Store): Observable<Store> {
+    return this.http.put<Store>(this.apiURL, store);
+  }
 }
