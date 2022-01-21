@@ -40,7 +40,7 @@ const routes: Routes = [
     component: FindShipperComponent,
   },
   //{path:'userinside',component:UserinfoComponent },
-  { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
+  { path: 'invoice-of-store', component: InvoiceOfStoreComponent },
   { path: 'invoice-detail/:id', component: InvoiceDetailComponent },
 ];
 

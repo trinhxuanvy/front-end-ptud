@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InvoiceService } from 'src/app/services/invoice.service';
+import { StoreService } from 'src/app/services/store.service';
+import { AuthService } from 'src/app/share/auth/auth.service';
 import { Invoice } from '../invoice/invoice.component';
 
 @Component({
@@ -9,11 +11,16 @@ import { Invoice } from '../invoice/invoice.component';
   styleUrls: ['./invoice-of-store.component.scss']
 })
 export class InvoiceOfStoreComponent implements OnInit {
+  currentUser: any;
   data: Array<Invoice> = [];
   datashow: Array<Boolean> = [];
   storeID = '';
 
-  constructor(private invoice: InvoiceService, private route: ActivatedRoute) {}
+  constructor(private invoice: InvoiceService,
+    private route: ActivatedRoute,
+    private auth: AuthService,
+    private storeService: StoreService
+  ) { }
   UpdateInvoice(storeID: string) {
     this.invoice
       .GetInfOfInvoicesByStore(storeID)
@@ -26,8 +33,12 @@ export class InvoiceOfStoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.storeID = this.route.snapshot.params['id'];
-    this.UpdateInvoice(this.storeID);
+    this.currentUser = this.auth.getUser();
+    // this.storeID = this.route.snapshot.params['id'];
+    this.storeService.getStoreByOwner(this.currentUser.id).subscribe(data => {
+      this.storeID = data.id;
+      this.UpdateInvoice(this.storeID);
+    });
   }
   clickShow(id: any) {
     this.datashow[id] = this.datashow[id] ? false : true;

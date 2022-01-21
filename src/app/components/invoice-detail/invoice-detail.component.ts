@@ -33,7 +33,7 @@ export class InvoiceDetailComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.auth.getUser();
     console.log(this.currentUser);
-
+    // get invoice information
     this.invoiceId = this.route.snapshot.params['id'];
     this.invoiceDetailService.GetInvoiceDetail(this.invoiceId).subscribe(data => {
       this.invoice = data;
@@ -53,6 +53,13 @@ export class InvoiceDetailComponent implements OnInit {
       console.log(data);
       location.reload()
     });
-    // location.reload();
+  }
+
+  daChuanBi(id: any): void{
+    console.log(id);
+    this.invoiceService.ChangeStatusToPrepared(id).subscribe(data => {
+      console.log(data);
+      location.reload()
+    });
   }
 }
