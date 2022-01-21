@@ -57,6 +57,7 @@ import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './share/header/header.component';
 import { FooterComponent } from './share/footer/footer.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
+import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 
 export function tokenGetter() {
   return localStorage.getItem("contact-manager-jwt");
@@ -82,7 +83,8 @@ export function tokenGetter() {
     HeaderComponent,
     FooterComponent,
     ProfileComponent,
-    FindShipperComponent
+    FindShipperComponent,
+    InvoiceDetailComponent
   ],
   imports: [
     AppRoutingModule,
