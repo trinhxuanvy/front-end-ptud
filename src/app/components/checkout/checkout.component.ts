@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CheckoutService } from '../../services/checkout.service';
@@ -71,8 +71,8 @@ export class CheckoutComponent implements OnInit {
     if (this.paymentType == 'Online') {
       console.log('--------------------------');
       this.checkoutService.goToStripe().subscribe((data) => {
-        console.log(data);
-        window.open(data, "_blank");
+        window.open(data, '_blank');
+        window.close();
       });
     } else {
       this.makeResult();
@@ -108,6 +108,7 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.auth.getUser();
     this.customerID = this.currentUser.id;
+    console.log(this.customerID);
     this.checkoutService.getInformation(this.customerID).subscribe((data) => {
       this.myData = data;
       this.formGroup.controls['phoneNumber'].setValue(this.myData.phoneNumber);

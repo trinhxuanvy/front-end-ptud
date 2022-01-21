@@ -21,7 +21,7 @@
         <owl-carousel-o [options]="carouselOption">
             <ng-template carouselSlide *ngFor="let item of listNearestShipper">
                 <div class="list-store__item">
-                    <a href="" class="list-store__item__link">
+                    <a class="list-store__item__link" (click)="slideClick(item.shipper)">
                         <div class="list-store__item__link__image">
                             <img src="{{ item.shipper.hinhAnh }}" alt="shipper" />
                         </div>
@@ -45,5 +45,55 @@
                 </div>
             </ng-template>
         </owl-carousel-o>
+    </div>
+</div>
+<div [hidden]="this.shipperDisplay">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{this.shipper?.hinhAnh}}" alt="Card image cap" style="width: 286px;height: 286px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.shipper?.hoTen}}</h5>
+                        <small class="text-muted" style="font-size: 15px;">Giới tính:
+                            {{this.shipper?.gioiTinh}}</small>
+                        <br>
+                        <small class="text-muted" style="font-size: 15px;">Số điện thoại:
+                            {{this.shipper?.sdt}}</small>
+                        <br>
+                        <small class="text-muted" style="font-size: 15px;">Độ uy tín:
+                            {{this.shipper?.doUyTin}}</small>
+                        <br>
+                        <small class="text-muted" style="font-size: 15px;">Trạng thái hoạt động:
+                            {{this.shipper?.trangThaiHoatDong}}</small>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{this.shipper?.phieuXetNghiem?.hinhAnhPhieu}}" alt="Card image cap" style="width: 286px;height: 286px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Phiếu xét nghiệm</h5>
+                        <small class="text-muted" style="font-size: 15px;">Chuẩn đoán:
+                            {{this.shipper?.phieuXetNghiem?.chuanDoan}}</small>
+                        <br>
+                        <small class="text-muted" style="font-size: 15px;">Hạn dùng:
+                           {{ this.shipper?.phieuXetNghiem?.hanDung | date }}</small>
+                        <br>
+                        <small class="text-muted" style="font-size: 15px;">Địa chỉ lấy mẫu:
+                            {{this.shipper?.phieuXetNghiem?.diaChiLayMau}}</small>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{this.shipper?.tiemNgua?.hinhAnhXacMinh}}" alt="Card image cap" style="width: 286px;height: 286px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Tiêm ngừa</h5>
+                        <small class="text-muted" style="font-size: 15px;">Loại vacxin:
+                            {{this.shipper?.tiemNgua?.tenVacxin}}</small>
+                        <br>
+                        <small class="text-muted" style="font-size: 15px;">Thời gian tiêm:
+                            {{ this.shipper?.tiemNgua?.thoiGianTiem | date }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -12,6 +12,8 @@ import { AuthService } from 'src/app/share/auth/auth.service';
   styleUrls: ['./find-shipper.component.scss'],
 })
 export class FindShipperComponent implements OnInit {
+  shipperDisplay = true;
+  shipper!: Shipper;
   currentUser: any;
   isFinding = false;
   radius = 6378;
@@ -73,6 +75,11 @@ export class FindShipperComponent implements OnInit {
         this.getShipper();
         this.getMyLocation();
       });
+  }
+  slideClick(_shipper: Shipper) {
+    this.shipperDisplay = false;
+    this.shipper = _shipper;
+    console.log(this.shipper);
   }
 
   getMyLocation() {

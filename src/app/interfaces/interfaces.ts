@@ -25,8 +25,8 @@ declare interface Shipper {
   email: string;
   diaChi: string;
   ViTri: object;
-  phieuXetNghiem: object;
-  tiemNgua: object;
+  phieuXetNghiem: PhieuXetNghiem;
+  tiemNgua: TiemNgua;
   trangThaiHoatDong: number;
 }
 
@@ -61,6 +61,18 @@ declare interface ProductOfStore {
 declare interface NearestShipper {
   shipper: Shipper;
   distance: number;
+}
+
+declare interface PhieuXetNghiem {
+  hinhAnhPhieu: string;
+  diaChiLayMau: string;
+  chuanDoan: string;
+  hanDung: string;
+}
+declare interface TiemNgua {
+  hinhAnhXacMinh: string;
+  thoiGianTiem: string;
+  tenVacxin: string;
 }
 
 export { Store, Location, Product, ProductOfStore, Shipper, NearestShipper };

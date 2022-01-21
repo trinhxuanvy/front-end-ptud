@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { InvoiceService } from '../../services/invoice.service';
+import { CheckoutService } from '../../services/checkout.service';
+import { AuthService } from 'src/app/share/auth/auth.service';
 
 @Component({
   selector: 'app-fortest',
@@ -9,9 +12,19 @@ import { InvoiceService } from '../../services/invoice.service';
 export class InvoiceComponent implements OnInit {
   data: Array<Invoice> = [];
   datashow: Array<Boolean> = [];
-  customerID = '61b76361241874f48b599885';
+  currentUser: any;
+  customerID = '';
+  myCheckoutData: any;
+  postData: any = {};
+  postInvoiceDetail: any = {};
 
-  constructor(private invoice: InvoiceService) {}
+  constructor(
+    private checkoutService: CheckoutService,
+    private invoice: InvoiceService,
+    private activatedRoute: ActivatedRoute,
+    private auth: AuthService,
+    private router: Router
+  ) {}
   UpdateInvoice(cusID: string) {
     this.invoice
       .GetInfOfInvoicesByCus(cusID)
@@ -24,7 +37,27 @@ export class InvoiceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.UpdateInvoice(this.customerID);
+    this.currentUser = this.auth.getUser();
+    this.customerID = this.currentUser.id;
+
+    this.checkoutService
+      .getInformation(this.customerID)
+      .subscribe((checkoutdata) => {
+        this.myCheckoutData = checkoutdata;
+
+        this.activatedRoute.queryParams.subscribe((testdata: any) => {
+          console.log(testdata?.success);
+          if (testdata?.success == 'true') {
+            this.makeResult(true);
+          } else {
+            if (testdata?.success == 'false') {
+              this.makeResult(false);
+            }
+          }
+          this.UpdateInvoice(this.customerID);
+        });
+        //this.UpdateInvoice(this.customerID);
+      });
   }
   clickShow(id: any) {
     this.datashow[id] = this.datashow[id] ? false : true;
@@ -33,6 +66,38 @@ export class InvoiceComponent implements OnInit {
   CancelInvoice(data: any): void {
     this.invoice.CancelInvoice(data).subscribe(() => {
       this.UpdateInvoice(this.customerID);
+    });
+  }
+  makeResult(option: boolean): void {
+    var now = new Date();
+    if (option) {
+      this.postData.tinhTrang = 'Đóng gói';
+    } else {
+      this.postData.tinhTrang = 'Thanh toán thất bại';
+    }
+    this.postData.thoiGianDat = now;
+    this.postData.nguoiMua = this.customerID;
+    this.postData.phuongThucThanhToan = 'online';
+    this.postData.cuaHang = this.myCheckoutData.store;
+    this.postData.tongTien = this.myCheckoutData.total;
+    this.postData.tinhTrangCu = '';
+
+    this.checkoutService.makeInvoice(this.postData).subscribe((data: any) => {
+      console.log('data');
+      console.log(data);
+      this.myCheckoutData.product.forEach((element: any) => {
+        this.postInvoiceDetail = {
+          sanPham: element.productid,
+          soLuong: element.numOfElement,
+          donHang: data.id,
+        };
+        this.checkoutService
+          .makeInvoiceDetails(this.postInvoiceDetail)
+          .subscribe((result: any) => {});
+      });
+      this.checkoutService.clearCart(this.customerID).subscribe(() => {
+        this.router.navigate(['/invoice']);
+      });
     });
   }
 }
