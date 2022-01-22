@@ -24,15 +24,15 @@ export class InvoiceDetailComponent implements OnInit {
   currentUser: any;
   DetailInvoiceData: DetailInvoice[] = [];
   dataSource = this.DetailInvoiceData;
-  displayedColumns: string[] = ['product', 'price', 'numOfElement', 'unit', 'rating'];
+  displayedColumns: string[] = ['product', 'price', 'numOfElement', 'unit'];
   invoiceId: string = '';
   totalPrice: number = 0;
   constructor(private invoiceDetailService: InvoiceDetailService,
-     private route: ActivatedRoute,
-     private auth: AuthService,
+    private route: ActivatedRoute,
+    private auth: AuthService,
     private invoiceService: InvoiceService,
-     private dialog: MatDialog
-    ) { }
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.currentUser = this.auth.getUser();
@@ -45,13 +45,17 @@ export class InvoiceDetailComponent implements OnInit {
 
       this.DetailInvoiceData = data.invoiceDetail;
       this.dataSource = this.DetailInvoiceData;
-      for(let i = 0; i < this.DetailInvoiceData.length; i++){
+      for (let i = 0; i < this.DetailInvoiceData.length; i++) {
         this.totalPrice += this.DetailInvoiceData[i].numOfElement * this.DetailInvoiceData[i].price;
+      }
+      // choose display column
+      if (this.currentUser.loaiND === 1 && (this.invoice.status === "Đã giao" || this.invoice.status === "Đã nhận hàng")) {
+        this.displayedColumns = ['product', 'price', 'numOfElement', 'unit', 'rating'];
       }
     });
   }
 
-  daNhanHang(id: any): void{
+  daNhanHang(id: any): void {
     console.log(id);
     this.invoiceService.ChangeStatusToReceived(id).subscribe(data => {
       console.log(data);
@@ -59,7 +63,7 @@ export class InvoiceDetailComponent implements OnInit {
     });
   }
 
-  daChuanBi(id: any): void{
+  daChuanBi(id: any): void {
     console.log(id);
     this.invoiceService.ChangeStatusToPrepared(id).subscribe(data => {
       console.log(data);
