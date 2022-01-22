@@ -102,6 +102,7 @@ export class InvoiceComponent implements OnInit {
   }
 }
 export interface InvoiceDetail {
+  idInvoiceDetail: string;
   product: string;
   price: number;
   numOfElement: number;

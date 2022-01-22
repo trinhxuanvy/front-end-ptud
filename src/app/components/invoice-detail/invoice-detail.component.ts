@@ -3,8 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { InvoiceDetailService } from 'src/app/services/invoice-detail.service';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { AuthService } from 'src/app/share/auth/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { RatingComponent } from '../rating/rating.component';
 
 export interface DetailInvoice {
+  idInvoiceDetail: string,
   product: string;
   price: number;
   numOfElement: number;
@@ -21,13 +24,14 @@ export class InvoiceDetailComponent implements OnInit {
   currentUser: any;
   DetailInvoiceData: DetailInvoice[] = [];
   dataSource = this.DetailInvoiceData;
-  displayedColumns: string[] = ['product', 'price', 'numOfElement', 'unit'];
+  displayedColumns: string[] = ['product', 'price', 'numOfElement', 'unit', 'rating'];
   invoiceId: string = '';
   totalPrice: number = 0;
   constructor(private invoiceDetailService: InvoiceDetailService,
      private route: ActivatedRoute,
      private auth: AuthService,
-     private invoiceService: InvoiceService
+    private invoiceService: InvoiceService,
+     private dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
@@ -61,5 +65,14 @@ export class InvoiceDetailComponent implements OnInit {
       console.log(data);
       location.reload()
     });
+  }
+
+  setRating(id: string) {
+    console.log(id);
+    const dialogRef = this.dialog.open(RatingComponent, { data: { id: id } });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+    })
   }
 }
