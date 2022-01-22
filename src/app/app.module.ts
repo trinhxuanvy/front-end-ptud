@@ -24,6 +24,20 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
+import { environment } from '../environments/environment';
+import { ProgressBarModule } from 'angular-progress-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatGridListModule } from '@angular/material/grid-list';
+import {
+  IgxButtonModule,
+  IgxIconModule,
+  IgxCardModule,
+  IgxDividerModule
+} from 'igniteui-angular';
+import { MatDialogModule } from '@angular/material/dialog';
 
 //Component
 import { SpinnerComponent } from './share/spinner/spinner.component';
@@ -45,7 +59,7 @@ import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-o
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component'
-
+import { ProductComponent } from './components/product/product.component';
 
 // Service
 import { AuthService } from './share/auth/auth.service';
@@ -54,6 +68,13 @@ import { HeaderComponent } from './share/header/header.component';
 import { FooterComponent } from './share/footer/footer.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
 import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
+import { UploadProductComponent } from './components/upload-product/upload-product.component';
+
+import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
+import { StoreInfoComponent } from './components/store-info/store-info.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { RatingComponent } from './components/rating/rating.component';
 
 export function tokenGetter() {
   return localStorage.getItem("contact-manager-jwt");
@@ -81,6 +102,13 @@ export function tokenGetter() {
     ProfileComponent,
     FindShipperComponent,
     DeliHistoryComponent
+    ProductComponent,
+    UploadProductComponent,
+    InvoiceDetailComponent,
+    StoreInfoComponent,
+    ProductDetailComponent,
+    CommentsComponent,
+    RatingComponent
   ],
   imports: [
     AppRoutingModule,
@@ -107,15 +135,26 @@ export function tokenGetter() {
     MatCardModule,
     NgbDropdownModule,
     MatProgressSpinnerModule,
+    MatIconModule,
+    MatTabsModule,
+    MatGridListModule,
+    IgxButtonModule,
+    IgxIconModule,
+    IgxCardModule,
+    IgxDividerModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
         allowedDomains: ["https://localhost:44349"],
         disallowedRoutes: []
       }
-    })
+    }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    ProgressBarModule,
+    MatDialogModule
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, { provide: BUCKET, useValue: 'ptud-94f91.appspot.com' }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

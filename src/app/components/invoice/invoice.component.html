@@ -5,7 +5,9 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div (click)="clickShow(item.id - 1)" class="data-show">
                         <div>
-                            <h6 style="font-size: 17px;">Đơn hàng {{item?.invoiceID}} của bạn</h6>
+                            <h6 style="font-size: 17px;">
+                              <a [routerLink]="['/invoice-detail/', item?.invoiceID]">Đơn hàng {{item?.invoiceID}} của bạn</a>
+                            </h6>
                             <small class="text-muted" style="font-size: 15px;">Thời gian đặt:
                                 {{item?.timeOrder}}</small>
                             <br>

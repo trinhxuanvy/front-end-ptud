@@ -1,25 +1,37 @@
-<mat-card class="login-container">
-  <mat-card-header>
-    <mat-card-title>Register</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form #registerForm="ngForm" (ngSubmit)="submit(registerForm)">
-      <p>
-        <mat-form-field style="width: 100%;">
-          <input id="username" name="username" type="text" class="form-control" matInput placeholder="Email Adress" required ngModel>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field style="width: 100%;">
-          <input  id="password" name="password" type="password" class="form-control" matInput placeholder="Password" required ngModel>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field style="width: 100%;">
-          <input  id="confirmpassword" name="confirmpassword" type="password" class="form-control" matInput placeholder="Confirm Password" required ngModel>
-        </mat-form-field>
-      </p>
-      <button mat-button class="mat-raised-button" type="submit">Register</button>
-    </form>
-  </mat-card-content>
-</mat-card>
+<div class="grid">
+  <div class="login__container">
+      <div class="login__left">
+        <form #loginForm="ngForm" (ngSubmit)="submit(loginForm)">
+          <p class="login__title">
+              ĐĂNG KÝ
+          </p>
+          <input type="text" id="username" name="username" class="login__input" placeholder="Email" ngModel>
+          <input type="password" id="password" name="password" class="login__input" placeholder="Password" ngModel>
+          <input type="password" id="confirmpassword" name="confirmpassword" class="login__input" placeholder="ConfirmPassword" ngModel>
+          <div class="login__button">
+              <button type="submit" class="login__button-login button">
+                  Đăng Ký
+              </button>
+          </div>
+        </form>
+      </div>
+      <div class="login__right">
+
+          <img src="../../assets/svg/Logo.svg" alt="" class="login__img">
+
+          <p class="login__slogan--1">
+              GIA NHẬP CÙNG CHÚNG TÔI
+          </p>
+          <p class="login__slogan--2">
+              Nhanh chóng
+          </p>
+          <p class="login__slogan--2">
+              Tiện lợi
+          </p>
+          <p class="login__slogan--2">
+              và An toàn
+          </p>
+      </div>
+  </div>
+</div>
+

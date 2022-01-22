@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .input-icons i {
+      position: absolute;
+    }
+
+    .input-icons {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .icon {
+      padding: 10px;
+      color: green;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+    }
+
+    h2 {
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Tổng quan">
+      <div class="container" id="container1">
+        <div class="row" id="row1">
+          <div class="col-sm-3">
+            <img src={{store.anhDaiDien}} alt="Avatar" class="avatar" id="avatarStore">
+          </div>
+          <div class="col-sm-3">
+            <p style="font-size:30px">{{ store.tenCuaHang}}</p>
+            <div *ngIf="store.trangThai==1">
+              <p style="color:#A9A9A9"> Đang hoạt động</p>
+            </div>
+            <div *ngIf="store.trangThai==2">
+              <p style="color:#A9A9A9">Tạm dừng hoạt động</p>
+            </div>
+            <div *ngIf="store.trangThai==3">
+              <p style="color:#A9A9A9">Không hoạt động</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-xl-4">
+                <p style="font-size:20px"><i class="fa fa-home" style="font-size:24px"></i> <strong> Địa chỉ: </strong>
+                </p>
+              </div>
+              <div class="col-xl">
+                <p style="color:#FF0000">{{ store.diaChi}} </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-4">
+                <p style="font-size:20px"><i class="fa fa-heart" style="font-size:24px"></i><strong> Độ uy tín:
+                  </strong></p>
+              </div>
+              <div class="col">
+                <p style="color:#FF0000">{{ store.doUyTin}} </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Sản phẩm">
+      <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <ul class="list-group mb-3">
+          <li class="list-group-item" *ngFor="let item of this.dataP">
+            <div>
+              <div class="d-flex justify-content-between align-items-center">
+                <h6 style="font-size: 17px;">
+                  <a [routerLink]="['/invoice-detail/']">{{item?.tenSanPham}} </a>
+                  <br>
+                  <small class="text-muted" style="font-size: 15px;">Xuất xứ:
+                    {{item?.xuatXu}}
+                  </small>
+                  <br>
+                  <small class="text-muted" style="font-size: 15px;">Loại hàng: {{item?.tenLoaiHang}}
+                  </small>
+                  <br>
+                  <small class="text-muted" style="font-size: 15px;">Giá: {{item?.giaTien}}
+                  </small>
+                  <br>
+                </h6>
+
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </mat-tab>
+    <mat-tab label="Đánh giá"> </mat-tab>
+  </mat-tab-group>
+</body>
+
+</html>

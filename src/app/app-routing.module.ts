@@ -14,6 +14,10 @@ import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-o
 import { ProfileComponent } from './components/profile/profile.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
 import { DeliHistoryComponent } from "./components/deli-history/deli-history.component"
+import { ProductComponent } from './components/product/product.component';
+import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
+import { StoreInfoComponent } from './components/store-info/store-info.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -23,8 +27,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'deli-history', component: DeliHistoryComponent },
+  { path: 'product', component: ProductComponent },
   {
-    path: 'store',
+    path: 'manage/store',
     component: StoreComponent,
     children: [
       //{ path: "*", component: StoreCertificationComponent },
@@ -41,7 +46,14 @@ const routes: Routes = [
     component: FindShipperComponent,
   },
   //{path:'userinside',component:UserinfoComponent },
-  { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
+  { path: 'invoice-of-store', component: InvoiceOfStoreComponent },
+  { path: 'invoice-detail/:id', component: InvoiceDetailComponent },
+  {
+    path: 'store/:id', component: StoreInfoComponent
+  },
+  {
+    path: 'product/:id', component: ProductDetailComponent
+  }
 ];
 
 @NgModule({

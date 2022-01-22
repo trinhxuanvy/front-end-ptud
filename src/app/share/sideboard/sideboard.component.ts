@@ -11,19 +11,19 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   {
-    path: '/store/certificate',
+    path: '/manage/store/certificate',
     title: 'Chứng nhận',
     icon: 'verified_user',
     class: '',
   },
   {
-    path: '/store/analytics',
+    path: '/manage/store/analytics',
     title: 'Phân tích',
     icon: 'analytics',
     class: '',
   },
   {
-    path: '/store/products',
+    path: '/manage/store/products',
     title: 'Sản phẩm',
     icon: 'store',
     class: '',

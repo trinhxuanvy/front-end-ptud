@@ -8,6 +8,7 @@ declare interface Store {
   tenCuaHang: string;
   trangThai: number;
   doUyTin: number;
+  anhDaiDien: string;
 }
 
 declare interface Shipper {
@@ -49,7 +50,7 @@ declare interface Product {
   thietYeu: boolean;
   tenCuaHang: string;
   tenLoaiHang: string;
-  donviTinh: string;
+  donViTinh: string;
 }
 
 declare interface ProductOfStore {
