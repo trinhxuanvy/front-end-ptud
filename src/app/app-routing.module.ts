@@ -16,6 +16,7 @@ import { FindShipperComponent } from './components/find-shipper/find-shipper.com
 import {ProductComponent} from './components/product/product.component';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { StoreInfoComponent } from './components/store-info/store-info.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -47,6 +48,12 @@ const routes: Routes = [
   { path: 'invoice-detail/:id', component: InvoiceDetailComponent },
   {
     path: 'store/:id', component: StoreInfoComponent
+<<<<<<< Updated upstream
+=======
+  },
+  {
+    path: 'product/:id', component: ProductDetailComponent
+>>>>>>> Stashed changes
   }
 ];
 

@@ -1,0 +1,40 @@
+@import '../../../assets/styles/scss/index.scss';
+
+.product {
+    margin-top: 32px;
+    padding: 32px;
+    @include boxShadow($c-flint, 0.3);
+    border-radius: 10px;
+    &__image {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    &__info {
+        &__name {
+
+        }
+
+        &__price {
+            font-weight: bolder;
+            color: $c-japanese-laurel;
+            font-size: 36px;
+        }
+
+        &__store {
+            color: $c-flint;
+        }
+
+        &__phone {
+            color: $c-flint;
+        }
+
+        &__address {
+            color: $c-flint;
+        }
+
+        &__note {
+            color: $c-flint;
+        }
+    }
+}

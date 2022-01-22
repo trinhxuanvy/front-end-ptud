@@ -1,0 +1,62 @@
+@import '../../../assets/styles/scss/index.scss';
+
+.comment {
+    padding: 32px;
+    @include boxShadow($c-flint, 0.3);
+    margin-top: 32px;
+    margin-bottom: 32px;
+    border-radius: 10px;
+    &__header {
+        &__title {
+            
+        }
+
+        &__rating {
+            &__ratio {
+                span {
+                    font-size: 40px;
+                }
+                &__star {
+                    
+                }
+            }
+            &__amount {
+                color: $c-flint;
+            }
+        }
+    }
+
+    &__body {
+        padding: 16px 0;
+        &__item {
+            &:first-child {
+                border-top: 1px solid rgba($c-flint, 0.3);
+            }
+            padding: 16px 0;
+            border-bottom: 1px solid rgba($c-flint, 0.3);
+            &__star {
+
+            }
+
+            &__author {
+                span {
+                    font-weight: bolder;
+                    color: $c-japanese-laurel;
+                }
+                i {
+                    color: $c-japanese-laurel;
+                }
+            }
+
+            &__review {
+
+            }
+
+
+        }
+    }
+}
+
+.mark-ok {
+    color: $c-saffron;
+}

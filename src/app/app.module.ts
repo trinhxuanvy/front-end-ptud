@@ -36,6 +36,7 @@ import { IgxButtonModule,
 	IgxCardModule,
 	IgxDividerModule
 } from 'igniteui-angular';
+import { MatDialogModule } from '@angular/material/dialog';
 
 //Component
 import { SpinnerComponent } from './share/spinner/spinner.component';
@@ -69,6 +70,9 @@ import { UploadProductComponent } from './components/upload-product/upload-produ
 
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { StoreInfoComponent } from './components/store-info/store-info.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { RatingComponent } from './components/rating/rating.component';
 
 export function tokenGetter() {
   return localStorage.getItem("contact-manager-jwt");
@@ -98,7 +102,10 @@ export function tokenGetter() {
     ProductComponent,
     UploadProductComponent,
     InvoiceDetailComponent,
-    StoreInfoComponent
+    StoreInfoComponent,
+    ProductDetailComponent,
+    CommentsComponent,
+    RatingComponent
   ],
   imports: [
     AppRoutingModule,
@@ -141,7 +148,8 @@ export function tokenGetter() {
     }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
-    ProgressBarModule
+    ProgressBarModule,
+    MatDialogModule
   ],
   providers: [AuthService, AuthGuard, { provide: BUCKET, useValue: 'ptud-94f91.appspot.com' }],
   bootstrap: [AppComponent],
