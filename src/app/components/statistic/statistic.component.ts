@@ -43,7 +43,7 @@ export class StatisticComponent implements OnInit {
   data = {
     data: new Array(),
     label: '',
-    backgroundColor: 'rgba(25,135,84,0.3)',
+    backgroundColor: 'rgba(25,135,84,0.8)',
     borderColor: 'green',
     pointBackgroundColor: 'red',
     pointBorderColor: 'red',

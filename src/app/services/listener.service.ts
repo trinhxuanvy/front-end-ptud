@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ListenerService {
-  titleHeaderSource = new BehaviorSubject<string>("certificate");
+  titleHeaderSource = new BehaviorSubject<string>("Chứng nhận");
   titleHeader = this.titleHeaderSource.asObservable();
 
   constructor() { }

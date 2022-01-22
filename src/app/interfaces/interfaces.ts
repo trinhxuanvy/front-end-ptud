@@ -50,7 +50,7 @@ declare interface Product {
   thietYeu: boolean;
   tenCuaHang: string;
   tenLoaiHang: string;
-  donviTinh: string;
+  donViTinh: string;
 }
 
 declare interface ProductOfStore {

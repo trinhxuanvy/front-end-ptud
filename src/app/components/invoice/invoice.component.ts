@@ -77,7 +77,7 @@ export class InvoiceComponent implements OnInit {
     }
     this.postData.thoiGianDat = now;
     this.postData.nguoiMua = this.customerID;
-    this.postData.phuongThucThanhToan = 'online';
+    this.postData.phuongThucThanhToan = 'Online';
     this.postData.cuaHang = this.myCheckoutData.store;
     this.postData.tongTien = this.myCheckoutData.total;
     this.postData.tinhTrangCu = '';
