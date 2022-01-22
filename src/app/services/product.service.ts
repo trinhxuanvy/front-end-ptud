@@ -18,4 +18,11 @@ export class ProductService {
   getAllProduct(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiURL);
   }
+
+  getProductsByName(name: string): Observable<Product[]>{
+    return this.http.get<Product[]>(this.apiURL+`/find/${name}`);
+  }
+  geEssentialProduct():Observable<Product[]>{
+    return this.http.get<Product[]>(this.apiURL+`/enssential`);
+  }
 }

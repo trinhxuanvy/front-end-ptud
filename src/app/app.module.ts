@@ -45,6 +45,7 @@ import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-o
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component'
+import { ProductComponent } from './components/product/product.component';
 
 
 // Service
@@ -53,6 +54,8 @@ import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './share/header/header.component';
 import { FooterComponent } from './share/footer/footer.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
+import { UploadProductComponent } from './components/upload-product/upload-product.component';
+
 
 export function tokenGetter() {
   return localStorage.getItem("contact-manager-jwt");
@@ -78,7 +81,9 @@ export function tokenGetter() {
     HeaderComponent,
     FooterComponent,
     ProfileComponent,
-    FindShipperComponent
+    FindShipperComponent,
+    ProductComponent,
+    UploadProductComponent
   ],
   imports: [
     AppRoutingModule,
