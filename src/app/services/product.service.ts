@@ -26,7 +26,7 @@ export class ProductService {
     return this.http.get<Product[]>(this.apiURL+`/find/${name}`);
   }
   geEssentialProduct():Observable<Product[]>{
-    return this.http.get<Product[]>(this.apiURL+`/enssential`);
+    return this.http.get<Product[]>(this.apiURL+`/essential`);
 
   }
 }
