@@ -101,7 +101,7 @@ export function tokenGetter() {
     FooterComponent,
     ProfileComponent,
     FindShipperComponent,
-    DeliHistoryComponent
+    DeliHistoryComponent,
     ProductComponent,
     UploadProductComponent,
     InvoiceDetailComponent,
