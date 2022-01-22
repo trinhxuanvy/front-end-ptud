@@ -48,12 +48,9 @@ const routes: Routes = [
   { path: 'invoice-detail/:id', component: InvoiceDetailComponent },
   {
     path: 'store/:id', component: StoreInfoComponent
-<<<<<<< Updated upstream
-=======
   },
   {
     path: 'product/:id', component: ProductDetailComponent
->>>>>>> Stashed changes
   }
 ];
 
