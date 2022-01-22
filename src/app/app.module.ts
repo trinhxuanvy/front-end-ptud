@@ -75,6 +75,7 @@ import { StoreInfoComponent } from './components/store-info/store-info.component
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { EssentialProductComponent } from './components/essential-product/essential-product.component';
 
 export function tokenGetter() {
   return localStorage.getItem("contact-manager-jwt");
@@ -108,7 +109,8 @@ export function tokenGetter() {
     StoreInfoComponent,
     ProductDetailComponent,
     CommentsComponent,
-    RatingComponent
+    RatingComponent,
+    EssentialProductComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -18,6 +18,7 @@ import { ProductComponent } from './components/product/product.component';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { StoreInfoComponent } from './components/store-info/store-info.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { EssentialProductComponent } from './components/essential-product/essential-product.component';
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -53,7 +54,8 @@ const routes: Routes = [
   },
   {
     path: 'product/:id', component: ProductDetailComponent
-  }
+  },
+  { path: 'essential',component: EssentialProductComponent },
 ];
 
 @NgModule({

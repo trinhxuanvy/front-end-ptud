@@ -82,20 +82,25 @@
             <div>
               <div class="d-flex justify-content-between align-items-center">
                 <h6 style="font-size: 17px;">
-                  <a [routerLink]="['/invoice-detail/']">{{item?.tenSanPham}} </a>
+                  <a [routerLink]="['/product/',item?.id]">{{item?.tenSanPham}} </a>
                   <br>
-                  <small class="text-muted" style="font-size: 15px;">Xuất xứ:
-                    {{item?.xuatXu}}
-                  </small>
-                  <br>
-                  <small class="text-muted" style="font-size: 15px;">Loại hàng: {{item?.tenLoaiHang}}
-                  </small>
-                  <br>
-                  <small class="text-muted" style="font-size: 15px;">Giá: {{item?.giaTien}}
-                  </small>
-                  <br>
+                  <div class="row">
+                    <div class="col-xl-4">
+                      <img src={{item?.hinhAnh}}>
+                    </div>
+                    <div class="col-xl-4">
+                      <small class="text-muted" style="font-size: 15px;">Xuất xứ:{{item?.xuatXu}}
+                      </small>
+                      <br>
+                      <small class="text-muted" style="font-size: 15px;">Loại hàng: {{item?.tenLoaiHang}}
+                      </small>
+                      <br>
+                      <small class="text-muted" style="font-size: 15px;">Giá: {{item?.giaTien}}/{{item?.donViTinh}}
+                      </small>
+                      <br>
+                    </div>
+                  </div>
                 </h6>
-
               </div>
             </div>
           </li>
