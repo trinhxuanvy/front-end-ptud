@@ -1,4 +1,4 @@
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CheckoutService } from '../../services/checkout.service';
