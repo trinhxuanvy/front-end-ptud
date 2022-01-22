@@ -53,6 +53,7 @@ import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './share/header/header.component';
 import { FooterComponent } from './share/footer/footer.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
+import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
 
 export function tokenGetter() {
   return localStorage.getItem("contact-manager-jwt");
@@ -78,7 +79,8 @@ export function tokenGetter() {
     HeaderComponent,
     FooterComponent,
     ProfileComponent,
-    FindShipperComponent
+    FindShipperComponent,
+    DeliHistoryComponent
   ],
   imports: [
     AppRoutingModule,
@@ -116,4 +118,4 @@ export function tokenGetter() {
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

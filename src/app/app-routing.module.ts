@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
+import { DeliHistoryComponent } from "./components/deli-history/deli-history.component"
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'deli-history', component: DeliHistoryComponent },
   {
     path: 'store',
     component: StoreComponent,
@@ -46,4 +48,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
