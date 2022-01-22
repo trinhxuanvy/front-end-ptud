@@ -18,6 +18,19 @@ a {
   margin: 0  60px 0 22px;
 
 }
+.cus__button {
+  color: #00AA50;
+  border: none;
+  margin: 0 22px;
+  padding: 0 16px;
+  background: transparent;
+  border-radius: 4px;
+}
+
+.cus__button:hover {
+  background-color: #e9ecef;
+}
+
 .header-register a{
   color: #00AA50;
   margin: 0 22px;

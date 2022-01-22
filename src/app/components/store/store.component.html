@@ -1,15 +1,29 @@
-<app-sideboard></app-sideboard>
-<app-header-store></app-header-store>
-<div class="store-content">
-    <div class="store-content__item">
-        <div [ngSwitch]="activePage">
+<div class="store container">
+  <div class="row">
+    <div class="col-3">
+      <div class="store-sideboard">
+        <app-sideboard></app-sideboard>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="store-content">
+          <div class="store-content__header">
+              <h4>{{ activePage }}</h4>
+          </div>
+        <div class="store-content__item">
+          <div [ngSwitch]="activePage">
             <div *ngSwitchCase="itemPage[0]">
-                <app-store-certification></app-store-certification>
+              <app-store-certification></app-store-certification>
             </div>
             <div *ngSwitchCase="itemPage[1]">
-                <app-statistic></app-statistic>
+              <app-statistic></app-statistic>
             </div>
-            <div *ngSwitchDefault>output2</div>
+            <div *ngSwitchDefault>
+              <app-store-certification></app-store-certification>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

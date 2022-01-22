@@ -8,6 +8,7 @@ declare interface Store {
   tenCuaHang: string;
   trangThai: number;
   doUyTin: number;
+  anhDaiDien: string;
 }
 
 declare interface Shipper {

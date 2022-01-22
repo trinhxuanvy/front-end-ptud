@@ -25,4 +25,18 @@ export class InvoiceService {
       body
     );
   }
+  ChangeStatusToReceived(id: string): Observable<any> {
+    const body = { tinhTrang: 'Đã nhận hàng' };
+    return this.httpClient.put(
+      `https://localhost:44349/api/donhang/doitrangthai/${id}`,
+      body
+    );
+  }
+  ChangeStatusToPrepared(id: string): Observable<any> {
+    const body = { tinhTrang: 'Đã chuẩn bị' };
+    return this.httpClient.put(
+      `https://localhost:44349/api/donhang/doitrangthai/${id}`,
+      body
+    );
+  }
 }

@@ -22,8 +22,9 @@ export class LoginComponent implements OnInit {
     const values = form.value;
     const account = {
       "email": values.username,
-      "matkhau": values.password
+      "matKhau": values.password
     }
+    console.log(account);
     this.http.post("https://localhost:44349/api/auth/login", account).subscribe(response =>
     {
       const token = (<any>response).token;
@@ -31,12 +32,17 @@ export class LoginComponent implements OnInit {
       const user = (<any>response).user;
       console.log(user);
       this.auth.saveUser(user);
-      this.router.navigate(['find/store']);
+      this.router.navigate(['profile']);
     }, err =>
     {
       this.invalidAccount = true;
     }
 
     )
+  }
+
+  register()
+  {
+    this.router.navigate(['register']);
   }
 }
