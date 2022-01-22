@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   {
-    path: 'store',
+    path: 'manage/store',
     component: StoreComponent,
     children: [
       //{ path: "*", component: StoreCertificationComponent },

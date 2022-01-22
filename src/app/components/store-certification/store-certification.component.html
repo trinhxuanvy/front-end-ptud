@@ -6,9 +6,9 @@
         <div class="store-certificate__image">
           <img
             [src]="
-              !store.giayPhepKinhDoanh
+              !store?.giayChungNhanAnToan
                 ? 'assets/images/no-image.jpg'
-                : store.giayPhepKinhDoanh
+                : store?.giayChungNhanAnToan
             "
             alt="Giấy chứng nhận an toàn"
           />
@@ -58,9 +58,9 @@
         <div class="store-certificate__image">
           <img
             [src]="
-              !store.giayPhepKinhDoanh
+              !store?.giayPhepKinhDoanh
                 ? 'assets/images/no-image.jpg'
-                : store.giayPhepKinhDoanh
+                : store?.giayPhepKinhDoanh
             "
             alt="Giấy phép kinh doanh"
           />
@@ -120,3 +120,4 @@
     </button>
   </div>
 </div>
+
