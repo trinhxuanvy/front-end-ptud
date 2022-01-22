@@ -9,17 +9,19 @@ import { ListenerService } from '../../services/listener.service';
 })
 export class StoreComponent implements OnInit {
   itemPage = NAVIGATION;
-  activePage = 'Chứng nhận';
+  activePage = '';
 
   constructor(private listenerService: ListenerService) {}
 
   ngOnInit(): void {
+    this.activePage = 'Chứng nhận';
     this.getPage();
   }
 
   getPage() {
     this.listenerService.titleHeader.subscribe((data) => {
       this.activePage = data;
+      console.log(data);
     });
   }
 }

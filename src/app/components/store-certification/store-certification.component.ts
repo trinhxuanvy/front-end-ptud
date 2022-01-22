@@ -41,63 +41,67 @@ export class StoreCertificationComponent implements OnInit {
   }
 
   uploadFile1(event: any) {
-    const file: File = event.target.files[0];
-    const filePath = '/images/' + file.name;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, file);
-    
-    this.startUpload1 = true;
-    this.uploadPercent1 = 0;
-    this.isRunning = true;
+    if (event.target.files[0]) {
+      const file: File = event.target.files[0];
+      const filePath = '/images/' + file.name;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
 
-    task.percentageChanges().subscribe((percent) => {
-      this.uploadPercent1 = percent!;
+      this.startUpload1 = true;
+      this.uploadPercent1 = 0;
+      this.isRunning = true;
 
-      if (percent == 100) {
-        this.isActive = true;
-        this.isRunning = false;
-      }
-    });
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe((url) => {
-            this.giayChungNhanAnToan = url;
-          });
-        })
-      )
-      .subscribe();
+      task.percentageChanges().subscribe((percent) => {
+        this.uploadPercent1 = percent!;
+
+        if (percent == 100) {
+          this.isActive = true;
+          this.isRunning = false;
+        }
+      });
+      task
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              this.giayChungNhanAnToan = url;
+            });
+          })
+        )
+        .subscribe();
+    }
   }
 
   uploadFile2(event: any) {
-    const file: File = event.target.files[0];
-    const filePath = '/images/' + file.name;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, file);
-    
-    this.startUpload2 = true;
-    this.uploadPercent2 = 0;
-    this.isRunning = true;
+    if (event.target?.files[0]) {
+      const file: File = event.target.files[0];
+      const filePath = '/images/' + file.name;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
 
-    task.percentageChanges().subscribe((percent) => {
-      this.uploadPercent2 = percent!;
+      this.startUpload2 = true;
+      this.uploadPercent2 = 0;
+      this.isRunning = true;
 
-      if (percent == 100) {
-        this.isActive = true;
-        this.isRunning = false;
-      }
-    });
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe((url) => {
-            this.giayPhepKinhDoanh = url;
-          });
-        })
-      )
-      .subscribe();
+      task.percentageChanges().subscribe((percent) => {
+        this.uploadPercent2 = percent!;
+
+        if (percent == 100) {
+          this.isActive = true;
+          this.isRunning = false;
+        }
+      });
+      task
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              this.giayPhepKinhDoanh = url;
+            });
+          })
+        )
+        .subscribe();
+    }
   }
 
   uploadData() {
@@ -108,7 +112,6 @@ export class StoreCertificationComponent implements OnInit {
     let newStore = this.store;
     newStore.giayChungNhanAnToan = this.giayChungNhanAnToan;
     newStore.giayPhepKinhDoanh = this.giayPhepKinhDoanh;
-    
     this.storeService.uploadStore(newStore).subscribe((data) => {
       this.store = data;
       this.isUploadSuccess = false;
