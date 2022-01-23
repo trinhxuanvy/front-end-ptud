@@ -82,6 +82,7 @@ declare interface Detail {
   donHang: string;
   sanPham: string;
   soLuong: string;
+  phanHoi: string
 }
 
 export {
