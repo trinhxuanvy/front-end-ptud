@@ -7,28 +7,28 @@
     </div>
     <div class="col-9">
       <div class="store-content">
-          <div class="store-content__header">
-              <h4>{{ activePage }}</h4>
-          </div>
+        <div class="store-content__header">
+          <h4>{{ activePage }}</h4>
+        </div>
         <div class="store-content__item">
           <div [ngSwitch]="activePage">
-            <div *ngSwitchCase="itemPage[4]">
+            <div *ngSwitchCase="itemPage[3]">
               <app-account-profile></app-account-profile>
             </div>
+            <div *ngSwitchCase="itemPage[4]">
+              <app-account-verify></app-account-verify>
+            </div>
             <div *ngSwitchCase="itemPage[5]">
-              <app-account-verify></app-account-verify>
-            </div>
-            <div *ngSwitchCase="itemPage[6]">
-              <app-account-verify></app-account-verify>
-            </div>
-            <div *ngSwitchCase="itemPage[7]">
               <app-account-store></app-account-store>
             </div>
-            <div *ngSwitchCase="itemPage[8]">
+            <div *ngSwitchCase="itemPage[6]">
               <app-account-payment></app-account-payment>
             </div>
-            <div *ngSwitchCase="itemPage[9]">
+            <div *ngSwitchCase="itemPage[7]">
               <app-account-password></app-account-password>
+            </div>
+            <div *ngSwitchCase="itemPage[8]">
+              <app-account-invoice></app-account-invoice>
             </div>
             <div *ngSwitchDefault>
               <app-account-profile></app-account-profile>

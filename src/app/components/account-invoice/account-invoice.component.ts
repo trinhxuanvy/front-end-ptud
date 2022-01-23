@@ -5,11 +5,11 @@ import { CheckoutService } from '../../services/checkout.service';
 import { AuthService } from 'src/app/share/auth/auth.service';
 
 @Component({
-  selector: 'app-invoice',
-  templateUrl: './invoice.component.html',
-  styleUrls: ['./invoice.component.scss'],
+  selector: 'app-account-invoice',
+  templateUrl: './account-invoice.component.html',
+  styleUrls: ['./account-invoice.component.scss'],
 })
-export class InvoiceComponent implements OnInit {
+export class AccountInvoiceComponent implements OnInit {
   data: Array<Invoice> = [];
   datashow: Array<Boolean> = [];
   currentUser: any;

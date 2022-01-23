@@ -73,7 +73,7 @@ export class FindShipperComponent implements OnInit {
       .getStoreByOwner(this.currentUser.id)
       .subscribe((resultData) => {
         this.storeID = resultData.id;
-        //console.log(this.storeID);
+        console.log(this.storeID);
         this.getShipper();
         this.getMyLocation();
       });

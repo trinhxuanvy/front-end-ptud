@@ -13,7 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 import { AccountProfileComponent } from './components/account-profile/account-profile.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
-import { DeliHistoryComponent } from "./components/deli-history/deli-history.component"
+import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
 import { ProductComponent } from './components/product/product.component';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { StoreInfoComponent } from './components/store-info/store-info.component';
@@ -24,10 +24,10 @@ import { AccountVerifyComponent } from './components/account-verify/account-veri
 import { AccountStoreComponent } from './components/account-store/account-store.component';
 import { AccountPaymentComponent } from './components/account-payment/account-payment.component';
 import { AccountPasswordComponent } from './components/account-password/account-password.component';
+import { AccountInvoiceComponent } from './components/account-invoice/account-invoice.component';
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'invoice', component: InvoiceComponent },
   { path: 'test', component: FortestComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -39,9 +39,10 @@ const routes: Routes = [
       //{ path: "*", component: StoreCertificationComponent },
       { path: 'profile', component: AccountProfileComponent },
       { path: 'verify', component: AccountVerifyComponent },
-      { path: 'managestore', component: AccountStoreComponent },
+      { path: 'store', component: AccountStoreComponent },
       { path: 'payment', component: AccountPaymentComponent },
       { path: 'password', component: AccountPasswordComponent },
+      { path: 'invoice', component: AccountInvoiceComponent },
     ],
   },
   { path: 'product', component: ProductComponent },
@@ -70,13 +71,14 @@ const routes: Routes = [
     component: StoreInfoComponent,
   },
   {
-    path: 'product/:id', component: ProductDetailComponent
+    path: 'product/:id',
+    component: ProductDetailComponent,
   },
-  { path: 'essential',component: EssentialProductComponent },
+  { path: 'essential', component: EssentialProductComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -24,6 +24,12 @@ const ROUTES: RouteInfo[] = [
     class: '',
   },
   {
+    path: '/manage/account/invoice',
+    title: 'Đơn hàng',
+    icon: 'receipt',
+    class: '',
+  },
+  {
     path: '/manage/account/payment',
     title: 'Phương thức thanh toán',
     icon: 'payment',
