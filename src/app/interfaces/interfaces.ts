@@ -76,4 +76,20 @@ declare interface TiemNgua {
   tenVacxin: string;
 }
 
-export { Store, Location, Product, ProductOfStore, Shipper, NearestShipper };
+declare interface Detail {
+  id: string;
+  danhGia: string;
+  donHang: string;
+  sanPham: string;
+  soLuong: string;
+}
+
+export {
+  Store,
+  Location,
+  Product,
+  ProductOfStore,
+  Shipper,
+  NearestShipper,
+  Detail,
+};

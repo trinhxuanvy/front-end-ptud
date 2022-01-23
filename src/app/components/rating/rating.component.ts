@@ -1,5 +1,7 @@
 import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ProductService } from '../../services/product.service';
+import { Product } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-rating',
@@ -7,18 +9,32 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./rating.component.scss'],
 })
 export class RatingComponent implements OnInit {
-  idInvoiceDetail = "";
+  idInvoiceDetail = '';
+  isRating = false;
+  product!: Product;
+  productId = "";
+  image = "";
 
   constructor(
     private dialogRef: MatDialogRef<RatingComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private productService: ProductService
   ) {
     this.idInvoiceDetail = data?.id;
+    this.productId = data?.productId;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.productService.getProductById2(this.productId).subscribe(data => {
+      this.image = data[0].hinhAnh;
+    })
+  }
 
-  rating() {
-    console.log('oke', this.idInvoiceDetail);
+  setRating(value: string) {
+    this.isRating = true;
+    setTimeout(() => {
+      this.dialogRef.close(value);
+      this.isRating = false;
+    }, 5000);
   }
 }
