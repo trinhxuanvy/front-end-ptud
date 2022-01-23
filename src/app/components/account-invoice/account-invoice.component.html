@@ -7,7 +7,7 @@
                         <div>
                             <h6 style="font-size: 17px;">
                                 <a [routerLink]="['/manage/account/invoice-detail/', item?.invoiceID]">Đơn hàng {{item?.invoiceID}} của
-                                    bạn</a>
+                                    {{typeUser === 1 ? ' bạn' : ' cửa hàng'}}</a>
                             </h6>
                             <small class="text-muted" style="font-size: 15px;">Thời gian đặt:
                                 {{item?.timeOrder}}</small>

@@ -126,7 +126,7 @@ export function tokenGetter() {
     AccountPasswordComponent,
     AccountInvoiceComponent,
     PaymentSuccessComponent,
-    PaymentFailedComponent,
+    PaymentFailedComponent
   ],
   imports: [
     AppRoutingModule,
@@ -170,7 +170,7 @@ export function tokenGetter() {
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     ProgressBarModule,
-    MatDialogModule,
+    MatDialogModule
   ],
   providers: [
     AuthService,
