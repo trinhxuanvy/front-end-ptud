@@ -5,7 +5,7 @@
         </div>
             <button class="btn btn-outline-success my-2 my-sm-0 w-5" type="submit">Tìm kiếm</button>
     </form>
-</div>  
+</div>
 
 <div class="products__container">
     <ng-container *ngFor="let product of listProduct">
@@ -17,15 +17,15 @@
                 <div class="product__content">
                     <strong class="product__title">{{ product.tenSanPham }}</strong>
                     <em class="product__price">{{ product.giaTien | currency: 'VND' }}/{{product.donViTinh}}</em>
-                   
+
                 </div>
             </a>
-            <div>
-                <button class="snip1457">mua ngay</button>
-                <button class="snip1457" (click)="onInsertCart(product.id)">Thêm vào giỏ</button>
+            <div id="groupMuaNgayVaThemVaoGio">
+              <button class="snip1457" id="buttonMuaNgay">Mua ngay</button>
+              <button class="snip1457" (click)="onInsertCart(product.id)" id="buttonThemVaoGio">Thêm vào giỏ</button>
             </div>
 
         </section>
     </ng-container>
-    
+
 </div>
