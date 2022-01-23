@@ -46,7 +46,7 @@ export class InvoiceComponent implements OnInit {
         this.myCheckoutData = checkoutdata;
 
         this.activatedRoute.queryParams.subscribe((testdata: any) => {
-          console.log(testdata?.success);
+          //console.log(testdata?.success);
           if (testdata?.success == 'true') {
             this.makeResult(true);
           } else {
