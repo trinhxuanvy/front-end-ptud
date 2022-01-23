@@ -65,7 +65,10 @@ const routes: Routes = [
   },
   //{path:'userinside',component:UserinfoComponent },
   { path: 'invoice-of-store', component: InvoiceOfStoreComponent },
-  { path: 'invoice-detail/:id', component: InvoiceDetailComponent },
+  {
+    path: 'manage/account/invoice-detail/:id',
+    component: InvoiceDetailComponent,
+  },
   {
     path: 'store/:id',
     component: StoreInfoComponent,
