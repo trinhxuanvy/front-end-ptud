@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { NAVIGATION } from '../../constants/variables.contants';
 import { ListenerService } from '../../services/listener.service';
-import { ROUTES } from './store.constant';
+import { ROUTES } from './account.constant';
 
 @Component({
-  selector: 'app-store',
-  templateUrl: './store.component.html',
-  styleUrls: ['./store.component.scss'],
+  selector: 'app-account',
+  templateUrl: './account.component.html',
+  styleUrls: ['./account.component.scss'],
 })
-export class StoreComponent implements OnInit {
+export class AccountComponent implements OnInit {
   itemPage = NAVIGATION;
   routes = ROUTES;
-  sideboardName = "Quản lý cửa hàng";
+  sideboardName = "Quản lý tài khoản"
   activePage = '';
 
   constructor(private listenerService: ListenerService) {}
 
   ngOnInit(): void {
-    this.activePage = 'Chứng nhận';
+    this.activePage = 'Thông tin cá nhân';
     this.getPage();
   }
 

@@ -58,8 +58,13 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ProfileComponent } from './components/profile/profile.component'
+import { AccountProfileComponent } from './components/account-profile/account-profile.component'
 import { ProductComponent } from './components/product/product.component';
+import { AccountComponent } from './components/account/account.component';
+import { AccountVerifyComponent } from './components/account-verify/account-verify.component';
+import { AccountStoreComponent } from './components/account-store/account-store.component';
+import { AccountPaymentComponent } from './components/account-payment/account-payment.component';
+import { AccountPasswordComponent } from './components/account-password/account-password.component';
 
 // Service
 import { AuthService } from './share/auth/auth.service';
@@ -100,7 +105,7 @@ export function tokenGetter() {
     RegisterComponent,
     HeaderComponent,
     FooterComponent,
-    ProfileComponent,
+    AccountProfileComponent,
     FindShipperComponent,
     DeliHistoryComponent,
     ProductComponent,
@@ -111,6 +116,11 @@ export function tokenGetter() {
     CommentsComponent,
     RatingComponent,
     EssentialProductComponent,
+    AccountComponent,
+    AccountVerifyComponent,
+    AccountStoreComponent,
+    AccountPaymentComponent,
+    AccountPasswordComponent
   ],
   imports: [
     AppRoutingModule,

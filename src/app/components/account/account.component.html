@@ -1,0 +1,41 @@
+<div class="store container">
+  <div class="row">
+    <div class="col-3">
+      <div class="store-sideboard">
+        <app-sideboard [routes]="routes" [sideboardName]="sideboardName"></app-sideboard>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="store-content">
+          <div class="store-content__header">
+              <h4>{{ activePage }}</h4>
+          </div>
+        <div class="store-content__item">
+          <div [ngSwitch]="activePage">
+            <div *ngSwitchCase="itemPage[4]">
+              <app-account-profile></app-account-profile>
+            </div>
+            <div *ngSwitchCase="itemPage[5]">
+              <app-account-verify></app-account-verify>
+            </div>
+            <div *ngSwitchCase="itemPage[6]">
+              <app-account-verify></app-account-verify>
+            </div>
+            <div *ngSwitchCase="itemPage[7]">
+              <app-account-store></app-account-store>
+            </div>
+            <div *ngSwitchCase="itemPage[8]">
+              <app-account-payment></app-account-payment>
+            </div>
+            <div *ngSwitchCase="itemPage[9]">
+              <app-account-password></app-account-password>
+            </div>
+            <div *ngSwitchDefault>
+              <app-account-profile></app-account-profile>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
