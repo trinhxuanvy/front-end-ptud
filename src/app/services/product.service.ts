@@ -19,14 +19,17 @@ export class ProductService {
     return this.http.get<Product[]>(this.apiURL);
   }
 
-  getProductByStoreID(id:string): Observable<Product[]>{
-    return this.http.get<Product[]>(this.apiURL+`/store/`+`${id}`)
+  getProductByStoreID(id: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiURL + `/store/` + `${id}`);
   }
-  getProductsByName(name: string): Observable<Product[]>{
-    return this.http.get<Product[]>(this.apiURL+`/find/${name}`);
+  getProductsByName(name: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiURL + `/find/${name}`);
   }
-  geEssentialProduct():Observable<Product[]>{
-    return this.http.get<Product[]>(this.apiURL+`/essential`);
+  geEssentialProduct(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiURL + `/essential`);
+  }
 
+  getProductById2(id: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiURL + `/${id}`);
   }
 }
