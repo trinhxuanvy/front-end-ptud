@@ -8,6 +8,8 @@ import {
 import { StoreService } from '../../services/store.service';
 import { ProductService } from '../../services/product.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CustomerService } from 'src/app/services/customer.service';
+import { AuthService } from 'src/app/share/auth/auth.service';
 
 @Component({
   selector: 'app-product',
@@ -15,6 +17,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+  customerID='';
+  currentUser: any;
   isFinding = false;
   searchForm: FormGroup= new FormGroup({
     name:new FormControl(),
@@ -55,9 +59,13 @@ export class ProductComponent implements OnInit {
   };
   constructor(
     private storeSerive: StoreService,
-    private productService: ProductService
+    private productService: ProductService,
+    private auth: AuthService,
+    private customerService:CustomerService
   ) { }
   ngOnInit(): void {
+    this.currentUser = this.auth.getUser();
+    this.customerID = this.currentUser.id;
     this.getListProduct();
     this.getListStore();
   }
@@ -80,6 +88,13 @@ export class ProductComponent implements OnInit {
       this.productService.geEssentialProduct().subscribe((data)=>{
         this.listProduct=data;
       })
+  }
+  onInsertCart(proid:String){
+    if(this.currentUser!=null)
+    this.customerService.insertProductToCart(proid,this.customerID).subscribe((data)=>{
+      console.log("đã thêm vào giỏ hàng");
+    })
+
   }
   
 }

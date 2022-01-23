@@ -13,12 +13,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
-<<<<<<< HEAD
 import {ProductComponent} from './components/product/product.component';
-=======
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { StoreInfoComponent } from './components/store-info/store-info.component';
->>>>>>> 7aa01db67a9e3650c15c2311269c328804dd6aad
+import { UploadProductComponent } from './components/upload-product/upload-product.component';
+import { CartComponent } from './components/cart/cart.component';
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -28,6 +27,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'product', component: ProductComponent },
+  { path: 'uploadproduct', component: UploadProductComponent },
+  { path: 'cart', component: CartComponent },
   {
     path: 'manage/store',
     component: StoreComponent,
@@ -46,16 +47,14 @@ const routes: Routes = [
     component: FindShipperComponent,
   },
   //{path:'userinside',component:UserinfoComponent },
-<<<<<<< HEAD
   { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
  
-=======
+
   { path: 'invoice-of-store', component: InvoiceOfStoreComponent },
   { path: 'invoice-detail/:id', component: InvoiceDetailComponent },
   {
     path: 'store/:id', component: StoreInfoComponent
   },
->>>>>>> 7aa01db67a9e3650c15c2311269c328804dd6aad
 ];
 
 @NgModule({

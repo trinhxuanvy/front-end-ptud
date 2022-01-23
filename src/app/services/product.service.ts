@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Product } from '../interfaces/interfaces';
 
@@ -28,5 +29,13 @@ export class ProductService {
   geEssentialProduct():Observable<Product[]>{
     return this.http.get<Product[]>(this.apiURL+`/enssential`);
 
+  }
+  upLoadProductsByExcel(form:FormData,id:String):Observable<Product[]>{
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+
+    const httpOptions = { headers: headers };
+    return this.http.post<Product[]>(this.apiURL+`/uploadexcel/${id}`,form,httpOptions);
   }
 }

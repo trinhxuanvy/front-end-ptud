@@ -65,13 +65,10 @@ import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './share/header/header.component';
 import { FooterComponent } from './share/footer/footer.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
-<<<<<<< HEAD
 import { UploadProductComponent } from './components/upload-product/upload-product.component';
-
-=======
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { StoreInfoComponent } from './components/store-info/store-info.component';
->>>>>>> 7aa01db67a9e3650c15c2311269c328804dd6aad
+import { CartComponent } from './components/cart/cart.component';
 
 export function tokenGetter() {
   return localStorage.getItem("contact-manager-jwt");
@@ -98,13 +95,11 @@ export function tokenGetter() {
     FooterComponent,
     ProfileComponent,
     FindShipperComponent,
-<<<<<<< HEAD
     ProductComponent,
-    UploadProductComponent
-=======
+    UploadProductComponent,
     InvoiceDetailComponent,
-    StoreInfoComponent
->>>>>>> 7aa01db67a9e3650c15c2311269c328804dd6aad
+    StoreInfoComponent,
+    CartComponent
   ],
   imports: [
     AppRoutingModule,
