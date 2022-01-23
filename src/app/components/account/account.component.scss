@@ -1,0 +1,23 @@
+@import '../../../assets/styles/scss/index.scss';
+
+.store {
+    padding-top: 32px;
+    padding-bottom: 32px;
+    &-content {
+        &__header {
+            @include boxShadow($c-flint, 0.3);
+            border-radius: 10px;
+            margin-bottom: 32px;
+            h4 {
+                padding: 16px;
+                color: $c-japanese-laurel;
+            }
+        }
+
+        &__item {
+            padding: 16px;
+            @include boxShadow($c-flint, 0.3);
+            border-radius: 10px;
+        }
+    }
+}
