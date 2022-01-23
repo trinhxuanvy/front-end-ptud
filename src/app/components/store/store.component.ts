@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NAVIGATION } from '../../constants/variables.contants';
 import { ListenerService } from '../../services/listener.service';
+import { ROUTES } from './store.constant';
 
 @Component({
   selector: 'app-store',
@@ -9,6 +10,8 @@ import { ListenerService } from '../../services/listener.service';
 })
 export class StoreComponent implements OnInit {
   itemPage = NAVIGATION;
+  routes = ROUTES;
+  sideboardName = "Quản lý cửa hàng";
   activePage = '';
 
   constructor(private listenerService: ListenerService) {}

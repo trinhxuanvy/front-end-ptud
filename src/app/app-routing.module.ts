@@ -11,21 +11,48 @@ import { ListStoreComponent } from './components/list-store/list-store.component
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { AccountProfileComponent } from './components/account-profile/account-profile.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
+<<<<<<< HEAD
 import {ProductComponent} from './components/product/product.component';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { StoreInfoComponent } from './components/store-info/store-info.component';
 import { UploadProductComponent } from './components/upload-product/upload-product.component';
 import { CartComponent } from './components/cart/cart.component';
+=======
+import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
+import { ProductComponent } from './components/product/product.component';
+import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
+import { StoreInfoComponent } from './components/store-info/store-info.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { EssentialProductComponent } from './components/essential-product/essential-product.component';
+import { AccountComponent } from './components/account/account.component';
+import { AccountVerifyComponent } from './components/account-verify/account-verify.component';
+import { AccountStoreComponent } from './components/account-store/account-store.component';
+import { AccountPaymentComponent } from './components/account-payment/account-payment.component';
+import { AccountPasswordComponent } from './components/account-password/account-password.component';
+import { AccountInvoiceComponent } from './components/account-invoice/account-invoice.component';
+>>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'invoice', component: InvoiceComponent },
   { path: 'test', component: FortestComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'deli-history', component: DeliHistoryComponent },
+  {
+    path: 'manage/account',
+    component: AccountComponent,
+    children: [
+      //{ path: "*", component: StoreCertificationComponent },
+      { path: 'profile', component: AccountProfileComponent },
+      { path: 'verify', component: AccountVerifyComponent },
+      { path: 'store', component: AccountStoreComponent },
+      { path: 'payment', component: AccountPaymentComponent },
+      { path: 'password', component: AccountPasswordComponent },
+      { path: 'invoice', component: AccountInvoiceComponent },
+    ],
+  },
   { path: 'product', component: ProductComponent },
   { path: 'uploadproduct', component: UploadProductComponent },
   { path: 'cart', component: CartComponent },
@@ -47,14 +74,29 @@ const routes: Routes = [
     component: FindShipperComponent,
   },
   //{path:'userinside',component:UserinfoComponent },
+<<<<<<< HEAD
   { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
  
 
+=======
+>>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
   { path: 'invoice-of-store', component: InvoiceOfStoreComponent },
-  { path: 'invoice-detail/:id', component: InvoiceDetailComponent },
   {
-    path: 'store/:id', component: StoreInfoComponent
+    path: 'manage/account/invoice-detail/:id',
+    component: InvoiceDetailComponent,
   },
+  {
+    path: 'store/:id',
+    component: StoreInfoComponent,
+  },
+  {
+    path: 'product/:id',
+    component: ProductDetailComponent,
+  },
+<<<<<<< HEAD
+=======
+  { path: 'essential', component: EssentialProductComponent },
+>>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
 ];
 
 @NgModule({

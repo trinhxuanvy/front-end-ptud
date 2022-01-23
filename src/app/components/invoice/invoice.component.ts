@@ -5,7 +5,7 @@ import { CheckoutService } from '../../services/checkout.service';
 import { AuthService } from 'src/app/share/auth/auth.service';
 
 @Component({
-  selector: 'app-fortest',
+  selector: 'app-invoice',
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.scss'],
 })
@@ -46,7 +46,7 @@ export class InvoiceComponent implements OnInit {
         this.myCheckoutData = checkoutdata;
 
         this.activatedRoute.queryParams.subscribe((testdata: any) => {
-          console.log(testdata?.success);
+          //console.log(testdata?.success);
           if (testdata?.success == 'true') {
             this.makeResult(true);
           } else {
@@ -102,6 +102,7 @@ export class InvoiceComponent implements OnInit {
   }
 }
 export interface InvoiceDetail {
+  idInvoiceDetail: string;
   product: string;
   price: number;
   numOfElement: number;

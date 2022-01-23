@@ -12,6 +12,7 @@
 
 # profiling files
 chrome-profiler-events*.json
+package-lock.json
 
 # IDEs and editors
 /.idea
@@ -44,5 +45,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
-.package-lock.json

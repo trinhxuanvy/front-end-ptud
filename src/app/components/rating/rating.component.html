@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Đánh Giá Sản Phẩm</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="dialog">
+    <div class="dialog__image">
+      <img
+        [src]="image ? image : 'assets/images/no-image.jpg'"
+        alt=""
+      />
+    </div>
+  </div>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Đánh giá của bạn</mat-label>
+    <input matInput #message value="" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    mat-raised-button
+    color="success"
+    (click)="setRating(message.value)"
+    [disabled]="message.value.length == 0"
+  >
+    Gửi đánh giá
+    <mat-spinner
+      *ngIf="isRating"
+      style="margin-left: 8px"
+      [diameter]="20"
+      color="light"
+    ></mat-spinner>
+  </button>
+  <button mat-button cdkFocusInitial [mat-dialog-close]="false">Hủy</button>
+</mat-dialog-actions>

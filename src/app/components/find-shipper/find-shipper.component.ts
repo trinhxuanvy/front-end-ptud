@@ -5,6 +5,7 @@ import { LocationService } from '../../services/location.service';
 import { ShipperService } from '../../services/shipper.service';
 import { StoreService } from '../../services/store.service';
 import { AuthService } from 'src/app/share/auth/auth.service';
+import { Long, serialize, deserialize } from 'bson';
 
 @Component({
   selector: 'app-find-shipper',
@@ -18,7 +19,7 @@ export class FindShipperComponent implements OnInit {
   isFinding = false;
   radius = 6378;
   limitDistance = 20;
-  storeID = '61cbfc689097f5200ba0cdd7';
+  storeID = '';
   listLocation: Location[] = [];
   listShipper: Shipper[] = [];
   filterShipper: Shipper[] = [];
@@ -72,6 +73,7 @@ export class FindShipperComponent implements OnInit {
       .getStoreByOwner(this.currentUser.id)
       .subscribe((resultData) => {
         this.storeID = resultData.id;
+        console.log(this.storeID);
         this.getShipper();
         this.getMyLocation();
       });

@@ -15,15 +15,27 @@ export class LocationService {
     return this.http.get<Location[]>(this.apiUrl + '/cuahang');
   }
 
-  getLocationOneStore(id: string): Observable<Location> {
-    return this.http.get<Location>(this.apiUrl + '/cuahang/' + id);
-  }
+  //------------------------------------THINH----------------------------------------------
+  // //C#
+  // getLocationOneStore(id: string): Observable<Location> {
+  //   return this.http.get<Location>(
+  //     `https://localhost:44349/api/location/cuahang/${id}`
+  //   );
+  // }
 
+  // getLocationShipper(): Observable<Location[]> {
+  //   return this.http.get<Location[]>(this.apiUrl + '/shipper');
+  // }
+  //Java
+  getLocationOneStore(id: string): Observable<Location> {
+    return this.http.get<Location>(`http://localhost:8080/api/location/cuahang/${id}`);
+  }
+  
+  getLocationShipper(): Observable<Location[]> {
+    return this.http.get<Location[]>('http://localhost:8080/api/location/shipper');
+  }
+  //----------------------------------------------------------------------------------
   getLocationCustomer(): Observable<Location[]> {
     return this.http.get<Location[]>(this.apiUrl + '/khachhang');
-  }
-
-  getLocationShipper(): Observable<Location[]> {
-    return this.http.get<Location[]>(this.apiUrl + '/shipper');
   }
 }

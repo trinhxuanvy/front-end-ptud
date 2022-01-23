@@ -20,15 +20,18 @@ export class ProductService {
     return this.http.get<Product[]>(this.apiURL);
   }
 
-  getProductByStoreID(id:string): Observable<Product[]>{
-    return this.http.get<Product[]>(this.apiURL+`/store/`+`${id}`)
+  getProductByStoreID(id: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiURL + `/store/` + `${id}`);
   }
-  getProductsByName(name: string): Observable<Product[]>{
-    return this.http.get<Product[]>(this.apiURL+`/find/${name}`);
+  getProductsByName(name: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiURL + `/find/${name}`);
   }
-  geEssentialProduct():Observable<Product[]>{
-    return this.http.get<Product[]>(this.apiURL+`/enssential`);
+  geEssentialProduct(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiURL + `/essential`);
+  }
 
+  getProductById2(id: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiURL + `/${id}`);
   }
   upLoadProductsByExcel(form:FormData,id:String):Observable<Product[]>{
     let headers = new HttpHeaders();

@@ -29,13 +29,15 @@ import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
 import { ProgressBarModule } from 'angular-progress-bar';
 import { MatIconModule } from '@angular/material/icon';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatGridListModule} from '@angular/material/grid-list';
-import { IgxButtonModule,
-	IgxIconModule,
-	IgxCardModule,
-	IgxDividerModule
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatGridListModule } from '@angular/material/grid-list';
+import {
+  IgxButtonModule,
+  IgxIconModule,
+  IgxCardModule,
+  IgxDividerModule,
 } from 'igniteui-angular';
+import { MatDialogModule } from '@angular/material/dialog';
 
 //Component
 import { SpinnerComponent } from './share/spinner/spinner.component';
@@ -56,22 +58,39 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ProfileComponent } from './components/profile/profile.component'
+import { AccountProfileComponent } from './components/account-profile/account-profile.component';
 import { ProductComponent } from './components/product/product.component';
-
+import { AccountComponent } from './components/account/account.component';
+import { AccountVerifyComponent } from './components/account-verify/account-verify.component';
+import { AccountStoreComponent } from './components/account-store/account-store.component';
+import { AccountPaymentComponent } from './components/account-payment/account-payment.component';
+import { AccountPasswordComponent } from './components/account-password/account-password.component';
+import { AccountInvoiceComponent } from './components/account-invoice/account-invoice.component';
 // Service
 import { AuthService } from './share/auth/auth.service';
 import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './share/header/header.component';
 import { FooterComponent } from './share/footer/footer.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
+<<<<<<< HEAD
 import { UploadProductComponent } from './components/upload-product/upload-product.component';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { StoreInfoComponent } from './components/store-info/store-info.component';
 import { CartComponent } from './components/cart/cart.component';
+=======
+import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
+import { UploadProductComponent } from './components/upload-product/upload-product.component';
+
+import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
+import { StoreInfoComponent } from './components/store-info/store-info.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { RatingComponent } from './components/rating/rating.component';
+import { EssentialProductComponent } from './components/essential-product/essential-product.component';
+>>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
 
 export function tokenGetter() {
-  return localStorage.getItem("contact-manager-jwt");
+  return localStorage.getItem('contact-manager-jwt');
 }
 @NgModule({
   declarations: [
@@ -93,13 +112,30 @@ export function tokenGetter() {
     RegisterComponent,
     HeaderComponent,
     FooterComponent,
-    ProfileComponent,
+    AccountProfileComponent,
     FindShipperComponent,
+<<<<<<< HEAD
+=======
+    DeliHistoryComponent,
+>>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
     ProductComponent,
     UploadProductComponent,
     InvoiceDetailComponent,
     StoreInfoComponent,
+<<<<<<< HEAD
     CartComponent
+=======
+    ProductDetailComponent,
+    CommentsComponent,
+    RatingComponent,
+    EssentialProductComponent,
+    AccountComponent,
+    AccountVerifyComponent,
+    AccountStoreComponent,
+    AccountPaymentComponent,
+    AccountPasswordComponent,
+    AccountInvoiceComponent,
+>>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
   ],
   imports: [
     AppRoutingModule,
@@ -130,21 +166,26 @@ export function tokenGetter() {
     MatTabsModule,
     MatGridListModule,
     IgxButtonModule,
-	  IgxIconModule,
-	  IgxCardModule,
-	  IgxDividerModule,
+    IgxIconModule,
+    IgxCardModule,
+    IgxDividerModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["https://localhost:44349"],
-        disallowedRoutes: []
-      }
+        allowedDomains: ['https://localhost:44349'],
+        disallowedRoutes: [],
+      },
     }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
-    ProgressBarModule
+    ProgressBarModule,
+    MatDialogModule,
   ],
-  providers: [AuthService, AuthGuard, { provide: BUCKET, useValue: 'ptud-94f91.appspot.com' }],
+  providers: [
+    AuthService,
+    AuthGuard,
+    { provide: BUCKET, useValue: 'ptud-94f91.appspot.com' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
