@@ -13,7 +13,6 @@ import { StoreService } from '../../services/store.service';
 import { InvoiceService } from '../../services/invoice.service';
 import { FindShipperService } from '../../services/find-shipper.service';
 import { AuthService } from 'src/app/share/auth/auth.service';
-import { Long, serialize, deserialize } from 'bson';
 
 @Component({
   selector: 'app-find-shipper',
@@ -89,7 +88,6 @@ export class FindShipperComponent implements OnInit {
         .getStoreByOwner(this.currentUser.id)
         .subscribe((resultData) => {
           this.storeID = resultData.id;
-          console.log(this.storeID);
           this.getShipper();
           this.getMyLocation();
         });
