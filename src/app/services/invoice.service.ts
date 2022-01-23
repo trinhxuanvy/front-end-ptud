@@ -22,6 +22,7 @@ export class InvoiceService {
       body
     );
   }
+
   // //Java
   // GetInfOfInvoicesByCus(id: string): Observable<any> {
   //   return this.httpClient.get(
@@ -36,6 +37,10 @@ export class InvoiceService {
   //   );
   // }
 
+  //C#
+  GetInfOfInvoicesById(id: string): Observable<any> {
+    return this.httpClient.get(`https://localhost:44349/api/donhang/${id}`);
+  }
   //----------------------------------------------------------------------------------
 
   GetInfOfInvoicesByStore(id: string): Observable<any> {

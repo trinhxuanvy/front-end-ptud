@@ -32,7 +32,12 @@ import { AccountStoreComponent } from './components/account-store/account-store.
 import { AccountPaymentComponent } from './components/account-payment/account-payment.component';
 import { AccountPasswordComponent } from './components/account-password/account-password.component';
 import { AccountInvoiceComponent } from './components/account-invoice/account-invoice.component';
+<<<<<<< Updated upstream
 >>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
+=======
+import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
+>>>>>>> Stashed changes
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -70,6 +75,10 @@ const routes: Routes = [
     component: ListStoreComponent,
   },
   {
+    path: 'find/shipper/:id',
+    component: FindShipperComponent,
+  },
+  {
     path: 'find/shipper',
     component: FindShipperComponent,
   },
@@ -96,7 +105,12 @@ const routes: Routes = [
 <<<<<<< HEAD
 =======
   { path: 'essential', component: EssentialProductComponent },
+<<<<<<< Updated upstream
 >>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
+=======
+  { path: 'payment/success', component: PaymentSuccessComponent },
+  { path: 'payment/failed', component: PaymentFailedComponent },
+>>>>>>> Stashed changes
 ];
 
 @NgModule({

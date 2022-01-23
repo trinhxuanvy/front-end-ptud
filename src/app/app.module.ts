@@ -87,7 +87,12 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { CommentsComponent } from './components/comments/comments.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { EssentialProductComponent } from './components/essential-product/essential-product.component';
+<<<<<<< Updated upstream
 >>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
+=======
+import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
+>>>>>>> Stashed changes
 
 export function tokenGetter() {
   return localStorage.getItem('contact-manager-jwt');
@@ -135,7 +140,12 @@ export function tokenGetter() {
     AccountPaymentComponent,
     AccountPasswordComponent,
     AccountInvoiceComponent,
+<<<<<<< Updated upstream
 >>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
+=======
+    PaymentSuccessComponent,
+    PaymentFailedComponent,
+>>>>>>> Stashed changes
   ],
   imports: [
     AppRoutingModule,
