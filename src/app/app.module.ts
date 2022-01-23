@@ -72,12 +72,9 @@ import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './share/header/header.component';
 import { FooterComponent } from './share/footer/footer.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
-<<<<<<< HEAD
-import { UploadProductComponent } from './components/upload-product/upload-product.component';
-import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
-import { StoreInfoComponent } from './components/store-info/store-info.component';
+
 import { CartComponent } from './components/cart/cart.component';
-=======
+
 import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
 import { UploadProductComponent } from './components/upload-product/upload-product.component';
 
@@ -87,7 +84,6 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { CommentsComponent } from './components/comments/comments.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { EssentialProductComponent } from './components/essential-product/essential-product.component';
->>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
 
 export function tokenGetter() {
   return localStorage.getItem('contact-manager-jwt');
@@ -114,17 +110,13 @@ export function tokenGetter() {
     FooterComponent,
     AccountProfileComponent,
     FindShipperComponent,
-<<<<<<< HEAD
-=======
     DeliHistoryComponent,
->>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
+
     ProductComponent,
     UploadProductComponent,
     InvoiceDetailComponent,
     StoreInfoComponent,
-<<<<<<< HEAD
-    CartComponent
-=======
+    CartComponent,
     ProductDetailComponent,
     CommentsComponent,
     RatingComponent,
@@ -135,7 +127,6 @@ export function tokenGetter() {
     AccountPaymentComponent,
     AccountPasswordComponent,
     AccountInvoiceComponent,
->>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
   ],
   imports: [
     AppRoutingModule,

@@ -13,13 +13,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 import { AccountProfileComponent } from './components/account-profile/account-profile.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
-<<<<<<< HEAD
-import {ProductComponent} from './components/product/product.component';
-import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
-import { StoreInfoComponent } from './components/store-info/store-info.component';
+
 import { UploadProductComponent } from './components/upload-product/upload-product.component';
 import { CartComponent } from './components/cart/cart.component';
-=======
+
 import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
 import { ProductComponent } from './components/product/product.component';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
@@ -32,7 +29,7 @@ import { AccountStoreComponent } from './components/account-store/account-store.
 import { AccountPaymentComponent } from './components/account-payment/account-payment.component';
 import { AccountPasswordComponent } from './components/account-password/account-password.component';
 import { AccountInvoiceComponent } from './components/account-invoice/account-invoice.component';
->>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
+
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -74,12 +71,9 @@ const routes: Routes = [
     component: FindShipperComponent,
   },
   //{path:'userinside',component:UserinfoComponent },
-<<<<<<< HEAD
   { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
  
 
-=======
->>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
   { path: 'invoice-of-store', component: InvoiceOfStoreComponent },
   {
     path: 'manage/account/invoice-detail/:id',
@@ -93,10 +87,7 @@ const routes: Routes = [
     path: 'product/:id',
     component: ProductDetailComponent,
   },
-<<<<<<< HEAD
-=======
   { path: 'essential', component: EssentialProductComponent },
->>>>>>> f16ce5c9f23dd6e751cf214b2eb00cbd6d6d77e0
 ];
 
 @NgModule({
