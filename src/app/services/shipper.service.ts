@@ -16,14 +16,14 @@ export class ShipperService {
   }
 
   //------------------------------------THINH----------------------------------------------
-  //C#
-  getAllShipper(): Observable<Shipper[]> {
-    return this.http.get<Shipper[]>('https://localhost:44349/api/shipper');
-  }
-
-  // //Java
+  // //C#
   // getAllShipper(): Observable<Shipper[]> {
-  //   return this.http.get<Shipper[]>('http://localhost:8080/api/shipper');
+  //   return this.http.get<Shipper[]>('https://localhost:44349/api/shipper');
   // }
+
+  //Java
+  getAllShipper(): Observable<Shipper[]> {
+    return this.http.get<Shipper[]>('http://localhost:8080/api/shipper');
+  }
   //----------------------------------------------------------------------------------
 }
