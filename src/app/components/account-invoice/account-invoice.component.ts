@@ -18,28 +18,34 @@ export class AccountInvoiceComponent implements OnInit {
   postInvoiceDetail: any = {};
   typeUser: number = 0;
   storeID: string = '';
+  isLoading = true;
 
-  constructor(private invoice: InvoiceService, private auth: AuthService, private storeService: StoreService) {}
+  constructor(
+    private invoice: InvoiceService,
+    private auth: AuthService,
+    private storeService: StoreService
+  ) {}
   UpdateInvoice(cusID: string, storeID: string) {
-    if(this.typeUser === 1){
-    this.invoice
-      .GetInfOfInvoicesByCus(cusID)
-      .subscribe((originalData: Array<Invoice>) => {
-        this.data = originalData;
-        for (var i = 0; i < this.data.length; i++) {
-          this.datashow.push(true);
-        }
-      });
-    }
-    else if (this.typeUser === 2) {
+    if (this.typeUser === 1) {
       this.invoice
-      .GetInfOfInvoicesByStore(storeID)
-      .subscribe((originalData: Array<Invoice>) => {
-        this.data = originalData;
-        for (var i = 0; i < this.data.length; i++) {
-          this.datashow.push(true);
-        }
-      });
+        .GetInfOfInvoicesByCus(cusID)
+        .subscribe((originalData: Array<Invoice>) => {
+          this.data = originalData;
+          for (var i = 0; i < this.data.length; i++) {
+            this.datashow.push(true);
+          }
+          this.isLoading = false;
+        });
+    } else if (this.typeUser === 2) {
+      this.invoice
+        .GetInfOfInvoicesByStore(storeID)
+        .subscribe((originalData: Array<Invoice>) => {
+          this.data = originalData;
+          for (var i = 0; i < this.data.length; i++) {
+            this.datashow.push(true);
+          }
+          this.isLoading = false;
+        });
     }
   }
 
@@ -47,13 +53,15 @@ export class AccountInvoiceComponent implements OnInit {
     this.currentUser = this.auth.getUser();
     this.typeUser = this.currentUser.loaiND;
     this.customerID = this.currentUser.id;
-    if(this.typeUser === 1)
-    this.UpdateInvoice(this.customerID, '');
-    else if(this.typeUser === 2) {
-    this.storeService.getStoreByOwner(this.currentUser.id).subscribe(data => {
-      this.storeID = data.id;
-      this.UpdateInvoice('', this.storeID);
-    });
+    if (this.typeUser === 1) this.UpdateInvoice(this.customerID, '');
+    else if (this.typeUser === 2) {
+      this.storeService
+        .getStoreByOwner(this.currentUser.id)
+        .subscribe((data) => {
+          this.storeID = data.id;
+          this.isLoading = false;
+          this.UpdateInvoice('', this.storeID);
+        });
     }
   }
   clickShow(id: any) {

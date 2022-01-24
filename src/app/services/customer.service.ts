@@ -7,7 +7,7 @@ import { Product } from '../interfaces/interfaces';
   providedIn: 'root'
 })
 export class CustomerService {
-  private readonly apiURL = 'https://localhost:44349/api/nguoidung';
+  private readonly apiURL = 'https://localhost:44349/api/nguoidung/cart';
   constructor(private httpClient: HttpClient) { }
   getCartById(id:String):Observable<any>{
     return this.httpClient.get(this.apiURL+`/${id}`);
