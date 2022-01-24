@@ -32,6 +32,10 @@ export class LoginComponent implements OnInit {
       const user = (<any>response).user;
       console.log(user);
       this.auth.saveUser(user);
+      if(user.loaiND === 0){
+        this.router.navigate(['admin']);
+      }
+      else
       this.router.navigate(['manage/account/profile']);
     }, err =>
     {

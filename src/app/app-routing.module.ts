@@ -33,6 +33,7 @@ import { PaymentFailedComponent } from './components/payment-failed/payment-fail
 
 import { DiseaseStoreComponent } from './components/disease-store/disease-store.component';
 import { ResponseComponent } from './components/response/response.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 const routes: Routes = [
@@ -62,11 +63,12 @@ const routes: Routes = [
     path: 'manage/store/:id',
     component: StoreComponent,
     children: [
-      { path: "*", component: StoreCertificationComponent},
+      { path: "*", component: StoreCertificationComponent },
       { path: 'certificate', component: StoreCertificationComponent },
       { path: 'analytics', component: StatisticComponent },
-      { path: 'response', component: ResponseComponent
-     }
+      {
+        path: 'response', component: ResponseComponent
+      }
     ],
   },
   {
@@ -83,7 +85,7 @@ const routes: Routes = [
   },
   //{path:'userinside',component:UserinfoComponent },
   { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
- 
+
 
   { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
   { path: 'invoice-of-store', component: InvoiceOfStoreComponent },
@@ -103,11 +105,11 @@ const routes: Routes = [
   { path: 'payment/success', component: PaymentSuccessComponent },
   { path: 'payment/failed', component: PaymentFailedComponent },
   { path: 'disease-store', component: DiseaseStoreComponent },
-
+  { path: 'admin', component: AdminComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
