@@ -3,14 +3,22 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CheckoutService } from '../../services/checkout.service';
 import { AuthService } from 'src/app/share/auth/auth.service';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-account-password',
   templateUrl: './account-password.component.html',
   styleUrls: ['./account-password.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  providers: [MatSnackBar]
 })
 export class AccountPasswordComponent implements OnInit {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   submitted = false;
   isAgree = false;
   currentUser: any;
@@ -20,34 +28,30 @@ export class AccountPasswordComponent implements OnInit {
   handler: any = null;
   postData: any = {};
   postInvoiceDetail: any = {};
+  postPw: any;
+  postRetypePw: any;
 
   hiddenSuccessPaymentDisplay = true;
 
   formGroup = this.formBuilder.group({
-    firstName: new FormControl({ value: '', disabled: true }, [
+    newpassword: new FormControl({ value: '', disabled: false }, [
       Validators.required,
       Validators.maxLength(50),
     ]),
-    lastName: new FormControl({ value: '', disabled: true }, [
+    retypepass: new FormControl({ value: '', disabled: false}, [
       Validators.required,
       Validators.minLength(1),
       Validators.maxLength(50),
     ]),
-    phoneNumber: new FormControl({ value: '', disabled: true }, [
-      Validators.required,
-      Validators.pattern('^[0-9]{10}$'),
-    ]),
-    address: new FormControl({ value: '', disabled: true }, [
-      Validators.required,
-      Validators.minLength(1),
-    ]),
+
   });
 
   constructor(
     private checkoutService: CheckoutService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ClickCheckbox(): void {
@@ -58,27 +62,25 @@ export class AccountPasswordComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.submitted = true;
-    if (
-      this.formGroup.invalid ||
-      !this.isAgree ||
-      this.paymentType == '' ||
-      this.paymentType == null
-    ) {
-      return;
-    }
-
-    if (this.paymentType == 'Online') {
-      console.log('--------------------------');
-      this.checkoutService.goToStripe().subscribe((data) => {
-        window.open(data, '_blank');
-        window.close();
-      });
-    } else {
-      this.makeResult();
-    }
+    this.postPw=this.formGroup.get('newpassword');
+    this.postRetypePw=this.formGroup.get('retypepass');
+    if(this.postPw.value !== this.postRetypePw.value){
+    this._snackBar.open(
+      'Mật khẩu không trùng khớp!',
+      'Đóng',
+      {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      }
+    )
+    } else if(this.postPw.value === this.postRetypePw.value)
+      this.auth.changePassword(this.customerID, this.postPw.value).subscribe((data)=>{
+    });
+    //console.log(this.customerID);
   }
-
+  CheckRetype(): void {
+    this.postPw.value = this.formGroup.get('retypepass')?.value ? false : true;
+  }
   makeResult(): void {
     var now = new Date();
     this.postData.tinhTrang = 'Đóng gói';
@@ -106,15 +108,16 @@ export class AccountPasswordComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.postPw=this.formGroup.get('newpassword');
     this.currentUser = this.auth.getUser();
     this.customerID = this.currentUser.id;
     console.log(this.customerID);
     this.checkoutService.getInformation(this.customerID).subscribe((data) => {
       this.myData = data;
-      this.formGroup.controls['phoneNumber'].setValue(this.myData.phoneNumber);
-      this.formGroup.controls['address'].setValue(this.myData.address);
-      this.formGroup.controls['firstName'].setValue(this.myData.firstName);
-      this.formGroup.controls['lastName'].setValue(this.myData.lastName);
+      // this.formGroup.controls['phoneNumber'].setValue(this.myData.phoneNumber);
+      // this.formGroup.controls['address'].setValue(this.myData.address);
+      // this.formGroup.controls['firstName'].setValue(this.myData.firstName);
+      // this.formGroup.controls['lastName'].setValue(this.myData.lastName);
     });
   }
 }

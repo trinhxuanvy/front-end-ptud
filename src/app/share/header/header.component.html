@@ -20,7 +20,13 @@
     </div>
     </div>
     <div class="header-transport">
-      <a mat-button routerLink="/product">Sản Phẩm</a>
+      <div class="d-inline-block" ngbDropdown #myDrop2="ngbDropdown">
+        <button class="btn  mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop2.open()">Sản phẩm</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownManual">
+          <button ngbDropdownItem> <a mat-button routerLink="/product">Sản Phẩm</a> </button>
+          <button ngbDropdownItem><a mat-button routerLink="/essential">Sản Phẩm Thiết Yếu</a> </button>
+        </div>
+      </div>
     </div>
     <div class="header-transport">
       <a mat-button routerLink="/">Trung tâm Vận chuyển</a>
