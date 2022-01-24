@@ -90,6 +90,7 @@ import { PaymentFailedComponent } from './components/payment-failed/payment-fail
 import { DiseaseStoreComponent } from './components/disease-store/disease-store.component';
 import { ResponseComponent } from './components/response/response.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { PolicyDiaglog } from './components/contract/contract.component';
 
 export function tokenGetter() {
   return localStorage.getItem('contact-manager-jwt');
@@ -138,7 +139,7 @@ export function tokenGetter() {
     DiseaseStoreComponent,
     ResponseComponent,
     AdminComponent,
-
+    PolicyDiaglog
   ],
   imports: [
     AppRoutingModule,

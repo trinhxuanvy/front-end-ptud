@@ -6,6 +6,8 @@ import { Store } from 'src/app/interfaces/interfaces';
 import { StoreService } from 'src/app/services/store.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { PolicyDiaglog } from '../contract/contract.component';
 
 @Component({
   selector: 'app-account-store',
@@ -58,11 +60,20 @@ export class AccountStoreComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private storeService: StoreService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    public dialog: MatDialog
   ) {}
 
   ClickCheckbox(): void {
     this.isAgree = this.isAgree ? false : true;
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(PolicyDiaglog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   ngOnInit(): void {

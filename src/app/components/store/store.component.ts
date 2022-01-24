@@ -43,11 +43,11 @@ export class StoreComponent implements OnInit {
       case this.finalRoutes[1].path:
         this.activePage = this.routes[1].title;
         break;
-      case this.finalRoutes[2].path:
-        this.activePage = this.routes[2].title;
-        break;
       case this.finalRoutes[3].path:
         this.activePage = this.routes[3].title;
+        break;
+      case this.finalRoutes[2].path:
+        this.activePage = this.routes[2].title;
         break;
       default:
         this.activePage = this.routes[0].title;

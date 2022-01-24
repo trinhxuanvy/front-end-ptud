@@ -13,7 +13,6 @@ import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-o
 import { AccountProfileComponent } from './components/account-profile/account-profile.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
 
-
 import { UploadProductComponent } from './components/upload-product/upload-product.component';
 import { CartComponent } from './components/cart/cart.component';
 import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
@@ -34,7 +33,6 @@ import { PaymentFailedComponent } from './components/payment-failed/payment-fail
 import { DiseaseStoreComponent } from './components/disease-store/disease-store.component';
 import { ResponseComponent } from './components/response/response.component';
 import { AdminComponent } from './components/admin/admin.component';
-
 
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
@@ -57,18 +55,16 @@ const routes: Routes = [
     ],
   },
   { path: 'product', component: ProductComponent },
-  { path: 'uploadproduct', component: UploadProductComponent },
   { path: 'cart', component: CartComponent },
   {
     path: 'manage/store/:id',
     component: StoreComponent,
     children: [
-      { path: "*", component: StoreCertificationComponent },
+      { path: '*', component: StoreCertificationComponent },
       { path: 'certificate', component: StoreCertificationComponent },
       { path: 'analytics', component: StatisticComponent },
-      {
-        path: 'response', component: ResponseComponent
-      }
+      { path: 'response', component: ResponseComponent },
+      { path: 'uploadproducts', component: UploadProductComponent },
     ],
   },
   {
@@ -83,12 +79,6 @@ const routes: Routes = [
     path: 'find/shipper',
     component: FindShipperComponent,
   },
-  //{path:'userinside',component:UserinfoComponent },
-  { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
-
-
-  { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
-  { path: 'invoice-of-store', component: InvoiceOfStoreComponent },
   {
     path: 'manage/account/invoice-detail/:id',
     component: InvoiceDetailComponent,
