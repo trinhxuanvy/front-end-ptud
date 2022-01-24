@@ -20,15 +20,15 @@ export class StoreService {
   }
 
   //------------------------------------THINH----------------------------------------------
-  // //C#
-  // getStoreByOwner(id: string): Observable<any> {
-  //   return this.http.get(`https://localhost:44349/api/cuahang/owner/${id}`);
-  // }
-
-  //Java
+  //C#
   getStoreByOwner(id: string): Observable<any> {
-    return this.http.get(`http://localhost:8080/api/cuahang/owner/${id}`);
+    return this.http.get(`https://localhost:44349/api/cuahang/owner/${id}`);
   }
+
+  // //Java
+  // getStoreByOwner(id: string): Observable<any> {
+  //   return this.http.get(`http://localhost:8080/api/cuahang/owner/${id}`);
+  // }
   //----------------------------------------------------------------------------------
   uploadStore(store: Store): Observable<Store> {
     return this.http.put<Store>(this.apiURL, store);

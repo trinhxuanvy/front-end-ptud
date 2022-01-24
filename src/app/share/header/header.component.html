@@ -29,7 +29,7 @@
         <a mat-button routerLink="/register">Đăng Ký </a>
       </div>
       <div class="header-register" *ngIf="isLoggedIn$ | async as isLoggedIn">
-        <a mat-button routerLink="/invoice">Giỏ Hàng </a>
+        <a mat-button routerLink="/cart">Giỏ Hàng </a>
       </div>
       <div class="space"></div>
       <div class="header-login" *ngIf="isUnLoggedIn$ | async as isUnLoggedIn">

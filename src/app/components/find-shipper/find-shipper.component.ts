@@ -13,7 +13,6 @@ import { StoreService } from '../../services/store.service';
 import { InvoiceService } from '../../services/invoice.service';
 import { FindShipperService } from '../../services/find-shipper.service';
 import { AuthService } from 'src/app/share/auth/auth.service';
-import { Long, serialize, deserialize } from 'bson';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -88,8 +87,7 @@ export class FindShipperComponent implements OnInit {
     private auth: AuthService,
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.invoiceId = this.route.snapshot.params['id']; //invoiceID
@@ -135,10 +133,14 @@ export class FindShipperComponent implements OnInit {
     let tempObj: Shipper[];
 
     this.locationService.getLocationShipper().subscribe((data) => {
-      this._snackBar.open('Yêu cầu vận chuyển của bạn đã được gửi đi!', 'Đóng', {
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
+      this._snackBar.open(
+        'Yêu cầu vận chuyển của bạn đã được gửi đi!',
+        'Đóng',
+        {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        }
+      );
       if (data.length > 0) {
         this.filterShipper = [];
 
