@@ -3,6 +3,7 @@ import { StoreService } from '../../services/store.service';
 import { Store } from '../../interfaces/interfaces';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-store-certification',
@@ -20,19 +21,22 @@ export class StoreCertificationComponent implements OnInit {
   isActive = false;
   isUploadSuccess = false;
   isRunning = false;
+  storeId = "";
 
   constructor(
     private storeService: StoreService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.getStore();
+    this.storeId = this.activatedRoute.snapshot.params['id'];
+    this.getStore(this.storeId);
   }
 
-  getStore() {
+  getStore(id: string) {
     this.storeService
-      .getStoreById('61cbfc689097f5200ba0cdd7')
+      .getStoreById(id)
       .subscribe((data) => {
         this.store = data;
         this.giayChungNhanAnToan = data.giayChungNhanAnToan;

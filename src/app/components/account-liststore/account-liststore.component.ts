@@ -33,6 +33,6 @@ export class AccountListStoreComponent implements OnInit {
   }
 
   ManageStore(id: string){
-    this.router.navigate(['manage/store/'+ id+'/'+ this.currentUser.id]);
+    this.router.navigate(['manage/store/'+ id]);
   }
 }

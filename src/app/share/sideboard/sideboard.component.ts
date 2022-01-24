@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ListenerService } from '../../services/listener.service';
+import { RouteInfo } from '../../components/store/store.constant';
 
 declare const $: any;
 
@@ -10,13 +11,31 @@ declare const $: any;
   styleUrls: ['./sideboard.component.scss'],
 })
 export class SideboardComponent implements OnInit {
-  menuItems!: any[];
   @Input() routes: any;
   @Input() sideboardName: any;
-  constructor(private router: Router, private listenerService: ListenerService) {}
+
+  menuItems!: any[];
+  finalRoutes: RouteInfo[] = [];
+  storeId = "";
+
+  constructor(
+    private router: Router,
+    private listenerService: ListenerService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.menuItems = this.routes.filter((menuItem:any) => menuItem);
+    this.storeId = this.activatedRoute.snapshot.params['id'];
+    this.menuItems = this.routes.filter((menuItem: any) => menuItem);
+    this.menuItems.forEach((item) => {
+      this.finalRoutes.push({
+        path: item.path + this.storeId + item.endPath,
+        class: item.class,
+        endPath: item.endPath,
+        icon: item.icon,
+        title: item.title,
+      });
+    });
   }
 
   isMobileMenu() {

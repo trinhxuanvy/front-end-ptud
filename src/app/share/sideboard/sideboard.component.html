@@ -1,16 +1,20 @@
 <div class="sidebar-wrapper">
   <div class="sidebar-wrapper__logo">
     <a href="" class="sidebar-wrapper__simple-text">
-      {{sideboardName}}
+      {{ sideboardName }}
     </a>
   </div>
   <ul class="sidebar-wrapper__nav">
     <li
       routerLinkActive="active"
-      *ngFor="let menuItem of menuItems"
+      *ngFor="let menuItem of finalRoutes"
       class="{{ menuItem.class }} sidebar-wrapper__nav-item"
     >
-      <a routerLink="{{ menuItem.path }}" (click)="getRouter(menuItem.title)" class="sidebar-wrapper__nav-link">
+      <a
+        routerLink="{{ menuItem.path }}"
+        (click)="getRouter(menuItem.title)"
+        class="sidebar-wrapper__nav-link"
+      >
         <i class="material-icons">{{ menuItem.icon }}</i>
         <div>{{ menuItem.title }}</div>
       </a>
