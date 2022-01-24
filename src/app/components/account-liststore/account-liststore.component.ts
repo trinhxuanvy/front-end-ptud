@@ -28,7 +28,6 @@ export class AccountListStoreComponent implements OnInit {
 
   getListStore() {
     this.storeService.getStoresByOwner(this.customerID).subscribe((data) => {
-      console.log(data);
       this.listStore = data;
     });
   }
