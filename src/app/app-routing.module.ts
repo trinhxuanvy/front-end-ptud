@@ -28,6 +28,7 @@ import { AccountPasswordComponent } from './components/account-password/account-
 import { AccountInvoiceComponent } from './components/account-invoice/account-invoice.component';
 import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
 import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
+import { DiseaseStoreComponent } from './components/disease-store/disease-store.component';
 import { ResponseComponent } from './components/response/response.component';
 
 const routes: Routes = [
@@ -92,6 +93,7 @@ const routes: Routes = [
   { path: 'essential', component: EssentialProductComponent },
   { path: 'payment/success', component: PaymentSuccessComponent },
   { path: 'payment/failed', component: PaymentFailedComponent },
+  { path: 'disease-store', component: DiseaseStoreComponent },
 ];
 
 @NgModule({

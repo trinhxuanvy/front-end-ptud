@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Location } from '../interfaces/interfaces';
+import { Location,Store } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -37,5 +37,14 @@ export class LocationService {
   //----------------------------------------------------------------------------------
   getLocationCustomer(): Observable<Location[]> {
     return this.http.get<Location[]>(this.apiUrl + '/khachhang');
+  }
+  getStoresRedZone(): Observable<Store[]>{
+    return this.http.get<Store[]>(this.apiUrl+'/disease_store/3');
+  }
+  getStoresBlueZone(): Observable<Store[]>{
+    return this.http.get<Store[]>(this.apiUrl+'/disease_store/1');
+  }
+  getStoresYellowZone(): Observable<Store[]>{
+    return this.http.get<Store[]>(this.apiUrl+'/disease_store/2');
   }
 }

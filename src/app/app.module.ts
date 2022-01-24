@@ -85,6 +85,7 @@ import { RatingComponent } from './components/rating/rating.component';
 import { EssentialProductComponent } from './components/essential-product/essential-product.component';
 import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
 import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
+import { DiseaseStoreComponent } from './components/disease-store/disease-store.component';
 import { ResponseComponent } from './components/response/response.component';
 
 export function tokenGetter() {
@@ -130,6 +131,7 @@ export function tokenGetter() {
     AccountInvoiceComponent,
     PaymentSuccessComponent,
     PaymentFailedComponent,
+    DiseaseStoreComponent,
     ResponseComponent,
   ],
   imports: [
