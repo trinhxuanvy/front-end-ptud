@@ -1,136 +1,165 @@
 <div class="container shadow-lg p-3 mb-5 bg-white rounded">
-    <div class="py-5 text-center">
-      <h2>Xác thực người dùng</h2>
-    </div>
-    <div class="row">
-      <div class="col-md-12 order-md-1">
-        <form [formGroup]="userVerify">
-          <div class="card">
-            <div class="card-body">
-              <div class="store-certificate">
-                <div class="row">
-                  <div class="col-6">
-                    <div class="store-certificate__item">
-                      <h4 class="store-certificate__header">
-                        Hình ảnh CMND mặt trước
-                      </h4>
-                      <div class="store-certificate__image">
-                        <img
-                          src="assets/images/no-image.jpg"
-                          alt="Hình ảnh CMND mặt trước"
-                        />
+  <div class="py-5 text-center">
+    <h2>Thông tin tài khoản</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 order-md-1">
+      <form [formGroup]="verifyUser">
+        <div class="card">
+          <h5 class="card-header">Xác thực thông tin cá nhân</h5>
+          <div class="card-body">
+            <div class="store-certificate">
+              <div class="row">
+                <div class="col-6">
+                  <div class="store-certificate__item">
+                    <h4 class="store-certificate__header">
+                      Chứng minh nhân dân mặt trước
+                    </h4>
+                    <div class="store-certificate__image">
+                      <img
+                        [src]="
+                          !currentUser?.hinhAnhCMNDMatTruoc
+                            ? 'assets/images/no-image.jpg'
+                            : currentUser?.hinhAnhCMNDMatTruoc
+                        "
+                        alt="Giấy chứng nhận an toàn"
+                      />
+                    </div>
+                    <div class="store-certificate__form">
+                      <input
+                        #input1
+                        type="file"
+                        hidden="true"
+                        accept=".jpg"
+                        (change)="uploadFile1($event)"
+                      />
+                      <div class="store-certificate__form__info">
+                        <progress-bar
+                          *ngIf="startUpload1"
+                          [color-degraded]="{
+                            '0': '#f12711',
+                            '10': '#f5af19',
+                            '20': '#FDC830',
+                            '30': '#FFF200',
+                            '40': '#ffff1c',
+                            '50': '#a8e063',
+                            '60': '#24FE41',
+                            '70': '#96c93d',
+                            '80': '#00F260',
+                            '90': '#56ab2f'
+                          }"
+                          progress="{{ uploadPercent1 }}"
+                          [disable-percentage]="false"
+                        ></progress-bar>
                       </div>
-                      <div class="store-certificate__form">
-                        <input
-                          #input1
-                          type="file"
-                          hidden="true"
-                          accept=".jpg"
-                          (change)="uploadFile1($event)"
-                        />
-                        <div class="store-certificate__form__info">
-                          <progress-bar
-                            *ngIf="startUpload1"
-                            [color-degraded]="{
-                              '0': '#f12711',
-                              '10': '#f5af19',
-                              '20': '#FDC830',
-                              '30': '#FFF200',
-                              '40': '#ffff1c',
-                              '50': '#a8e063',
-                              '60': '#24FE41',
-                              '70': '#96c93d',
-                              '80': '#00F260',
-                              '90': '#56ab2f'
-                            }"
-                            progress="{{ uploadPercent1 }}"
-                            [disable-percentage]="false"
-                          ></progress-bar>
-                        </div>
-  
+
+                      <button
+                        class="store-certificate__button"
+                        mat-flat-button
+                        color="warn"
+                        (click)="input1.click()"
+                      >
+                        Chọn ảnh khác
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="store-certificate__item">
+                    <h4 class="store-certificate__header">
+                      Chứng minh nhân dân mặt sau
+                    </h4>
+                    <div class="store-certificate__image">
+                      <img
+                        [src]="
+                          !currentUser?.hinhAnhCMNDMatSau
+                            ? 'assets/images/no-image.jpg'
+                            : currentUser?.hinhAnhCMNDMatSau
+                        "
+                        alt="Giấy phép kinh doanh"
+                      />
+                    </div>
+                    <div class="store-certificate__form">
+                      <input
+                        #input2
+                        type="file"
+                        hidden="true"
+                        accept=".jpg"
+                        (change)="uploadFile2($event)"
+                      />
+                      <div class="store-certificate__form__info">
+                        <progress-bar
+                          *ngIf="startUpload2"
+                          [color-degraded]="{
+                            '0': '#f12711',
+                            '10': '#f5af19',
+                            '20': '#FDC830',
+                            '30': '#FFF200',
+                            '40': '#ffff1c',
+                            '50': '#a8e063',
+                            '60': '#24FE41',
+                            '70': '#96c93d',
+                            '80': '#00F260',
+                            '90': '#56ab2f'
+                          }"
+                          progress="{{ uploadPercent2 }}"
+                          [disable-percentage]="false"
+                        ></progress-bar>
                         <button
                           class="store-certificate__button"
                           mat-flat-button
                           color="warn"
-                          (click)="input1.click()"
+                          (click)="input2.click()"
                         >
-                          Chọn ảnh
+                          Chọn ảnh khác
                         </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="store-certificate__item">
-                      <h4 class="store-certificate__header">
-                        Hình ảnh CMND mặt sau
-                      </h4>
-                      <div class="store-certificate__image">
-                        <img
-                          src="assets/images/no-image.jpg"
-                          alt="Hình ảnh CMND mặt sau"
-                        />
-                      </div>
-                      <div class="store-certificate__form">
-                        <input
-                          #input2
-                          type="file"
-                          hidden="true"
-                          accept=".jpg"
-                          (change)="uploadFile2($event)"
-                        />
-                        <div class="store-certificate__form__info">
-                          <progress-bar
-                            *ngIf="startUpload2"
-                            [color-degraded]="{
-                              '0': '#f12711',
-                              '10': '#f5af19',
-                              '20': '#FDC830',
-                              '30': '#FFF200',
-                              '40': '#ffff1c',
-                              '50': '#a8e063',
-                              '60': '#24FE41',
-                              '70': '#96c93d',
-                              '80': '#00F260',
-                              '90': '#56ab2f'
-                            }"
-                            progress="{{ uploadPercent2 }}"
-                            [disable-percentage]="false"
-                          ></progress-bar>
-                          <button
-                            class="store-certificate__button"
-                            mat-flat-button
-                            color="warn"
-                            (click)="input2.click()"
-                          >
-                            Chọn ảnh
-                          </button>
-                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              
-  
-              <button
-                [disabled]="!isActive || isRunning"
-                mat-raised-button
-                color="success"
-                class="store-certificate__upload"
-                (click)="uploadData()"
-              >
-                Thêm
-                <mat-spinner
-                  *ngIf="isUploadSuccess"
-                  style="margin-left: 8px"
-                  [diameter]="20"
-                  color="light"
-                ></mat-spinner>
-              </button>
             </div>
+            <div class="form-group col-12">
+              <div style="display: flex">
+                <label for="MST">Số chứng minh nhân dân</label>
+              </div>
+              <input
+                type="text"
+                formControlName="cmnd"
+                class="form-control mt-1"
+                style="width: 100%"
+              />
+            </div>
+            <div class="mt-3">
+              <mat-checkbox
+                class="checkbox"
+                color="primary"
+                (change)="ClickCheckbox()"
+                [checked]="isAgree"
+                style="text-align: left; display: block"
+                >Đồng ý chịu trách nhiệm với những thông tin đã cung
+                cấp</mat-checkbox
+              >
+            </div>
+            <button
+              [disabled]="!isActive || isRunning"
+              mat-raised-button
+              color="success"
+              class="store-certificate__upload"
+              (click)="uploadData()"
+            >
+              Cập nhập
+              <mat-spinner
+                *ngIf="isUploadSuccess"
+                style="margin-left: 8px"
+                [diameter]="20"
+                color="light"
+              ></mat-spinner>
+            </button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
-  
+</div>

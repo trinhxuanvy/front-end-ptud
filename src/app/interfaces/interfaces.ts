@@ -11,6 +11,23 @@ declare interface Store {
   anhDaiDien: string;
 }
 
+declare interface NguoiDung {
+  _id: string;
+  cmnd: string;
+  gioiTinh: string;
+  hinhAnh: string;
+  hinhAnhCMNDMatSau: string;
+  hinhAnhCMNDMatTruoc: string;
+  hoTen: string;
+  matKhau: string;
+  LoaiND: number;
+  ngaySinh: string;
+  sdt: string;
+  doUyTin: number;
+  email: string;
+  diaChi: string;
+}
+
 declare interface Shipper {
   _id: string;
   cmnd: string;
@@ -109,5 +126,6 @@ export {
   NearestShipper,
   Detail,
   ShipperVanDon,
-  Response
+  Response,
+  NguoiDung
 };

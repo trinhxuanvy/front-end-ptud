@@ -9,12 +9,13 @@
   margin-left: 16px;
 }
 
-.user-verify {
+.store-certificate {
   margin-bottom: 10px;
 
   &__header {
       margin-bottom: 32px;
       text-align: center;
+      font-size: large;
       display: block;
   }
 
@@ -58,4 +59,9 @@
       display: block;
       margin: 0 auto;
   }
+}
+
+.dialog-policy {
+  color:#f44336;
+  font-weight: 900;
 }
