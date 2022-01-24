@@ -23,7 +23,7 @@ const ROUTES: RouteInfo[] = [
     icon: 'store',
     class: '',
   },
-  { path: '/maps', title: 'Maps', icon: 'location_on', class: '' },
+  { path: '/manage/store/response', title: 'Phản hồi', icon: 'send', class: '' },
   {
     path: '/notifications',
     title: 'Notifications',

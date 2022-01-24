@@ -38,6 +38,10 @@ img {
   stroke: $c-white;
 }
 
+.mat-progress-spinner.mat-success circle {
+  stroke: $c-japanese-laurel;
+}
+
 .mat-button-wrapper {
   display: flex;
   align-items: center;

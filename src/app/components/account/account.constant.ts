@@ -31,7 +31,7 @@ const ROUTES: RouteInfo[] = [
   },
   {
     path: '/manage/account/payment',
-    title: 'Phương thức thanh toán',
+    title: 'Quản lý cửa hàng',
     icon: 'payment',
     class: '',
   },

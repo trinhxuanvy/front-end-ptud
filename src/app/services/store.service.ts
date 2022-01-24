@@ -33,4 +33,8 @@ export class StoreService {
   uploadStore(store: Store): Observable<Store> {
     return this.http.put<Store>(this.apiURL, store);
   }
+
+  createStore(store: Store): Observable<Store> {
+    return this.http.post<Store>(this.apiURL, store);
+  }
 }
