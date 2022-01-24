@@ -80,7 +80,7 @@ export class CheckoutComponent implements OnInit {
 
   makeResult(): void {
     var now = new Date();
-    this.postData.tinhTrang = 'Đóng gói';
+    this.postData.tinhTrang = 'Mới tạo';
     this.postData.thoiGianDat = now;
     this.postData.nguoiMua = this.customerID;
     this.postData.phuongThucThanhToan = this.paymentType;
