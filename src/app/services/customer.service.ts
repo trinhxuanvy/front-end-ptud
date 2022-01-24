@@ -18,4 +18,8 @@ export class CustomerService {
   updateNumProductInCart(cusid:String,proid:String,num:number):Observable<any>{
     return this.httpClient.get(this.apiURL+`/${cusid}/${proid}/${num}`);
   }
+
+  uploadCus(cus: any): Observable<any> {
+    return this.httpClient.put<any>('https://localhost:44349/api/nguoidung', cus);
+  }
 }

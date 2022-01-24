@@ -1,11 +1,10 @@
 import { Router} from '@angular/router';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/share/auth/auth.service';
-import { Store, } from 'src/app/interfaces/interfaces';
-import { StoreService } from 'src/app/services/store.service';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-account-verify',
@@ -23,7 +22,6 @@ export class AccountVerifyComponent implements OnInit {
   handler: any = null;
   postData: any = {};
   postInvoiceDetail: any = {};
-
   uploadPercent1 = 0;
   uploadPercent2 = 0;
   hinhAnhCMNDMatTruoc = '';
@@ -33,20 +31,19 @@ export class AccountVerifyComponent implements OnInit {
   isActive = false;
   isUploadSuccess = false;
   isRunning = false;
+  cmnd ='';
 
   hiddenSuccessPaymentDisplay = true;
 
-  userVerify: FormGroup= new FormGroup({
-    storeName: new FormControl(),
-    MST: new FormControl(),
-    address: new FormControl(),
+  verifyUser: FormGroup= new FormGroup({
+    cmnd: new FormControl(),
   });
 
   constructor(
     private router: Router,
     private auth: AuthService,
-    private storeService: StoreService,
-    private storage: AngularFireStorage
+    private cusService: CustomerService,
+    private storage: AngularFireStorage,
   ) {}
 
   ClickCheckbox(): void {
@@ -56,7 +53,8 @@ export class AccountVerifyComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.auth.getUser();
     this.customerID = this.currentUser.id;
-    // console.log(this.customerID);
+    this.cmnd = this.currentUser.cmnd;
+    this.verifyUser.controls['cmnd'].setValue(this.cmnd);
   }
 
   uploadFile1(event: any) {
@@ -124,7 +122,18 @@ export class AccountVerifyComponent implements OnInit {
   }
 
   uploadData() {
-    this.auth.verifyUser(this.customerID, this.hinhAnhCMNDMatTruoc,this.hinhAnhCMNDMatSau).subscribe((data)=>{
+    this.isActive = false;
+    this.isUploadSuccess = true;
+    this.startUpload1 = false;
+    this.startUpload2 = false;
+    let newUser = this.currentUser;
+    this.currentUser.cmnd = this.verifyUser.value.cmnd;
+    this.currentUser.hinhAnhCMNDMatTruoc = this.hinhAnhCMNDMatTruoc;
+    this.currentUser.hinhAnhCMNDMatSau = this.hinhAnhCMNDMatSau;
+    console.log(newUser);
+    this.cusService.uploadCus(newUser).subscribe((data) => {
+      this.isUploadSuccess = false;
+      this.auth.saveUser(data);
     });
   }
 }
