@@ -1,7 +1,7 @@
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 interface User {
   _id: string,
   email: string,
@@ -15,7 +15,7 @@ export class AuthService {
   userKey: string = 'user-jwt';
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getToken() !== null);
   private unLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getToken() == null);
-  constructor(private router: Router) { }
+  constructor(private router: Router,private httpClient: HttpClient) { }
 
   setToken(token: string) {
     localStorage.setItem(this.storageKey, token);
@@ -64,4 +64,22 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  changePassword(id: string, pass:string): Observable<any>{
+    
+    console.log(123);
+    console.log(this.getUser());
+    const body = { matKhau:pass };
+    console.log(body);
+    return this.httpClient.put(
+      `https://localhost:44349/api/nguoidung/password/${id}`,body)
+      // .subscribe(response =>
+      //   {
+      //     const token = (<any>response).token;
+      //     this.setToken(token);
+      //     const user = (<any>response).user;
+      //     console.log(user);
+      //     this.saveUser(user);
+      //   });
+  }  
+  
 }
