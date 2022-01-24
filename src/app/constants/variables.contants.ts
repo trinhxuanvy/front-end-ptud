@@ -22,7 +22,7 @@ const NAVIGATION = [
   'Thông tin cá nhân',
   'Xác thực người dùng',
   'Cửa hàng',
-  'Phương thức thanh toán',
+  'Quản lý cửa hàng',
   'Thay đổi mật khẩu',
   'Đơn hàng',
 ];
