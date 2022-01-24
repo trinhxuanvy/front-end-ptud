@@ -74,10 +74,12 @@ import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './share/header/header.component';
 import { FooterComponent } from './share/footer/footer.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
+
 import { UploadProductComponent } from './components/upload-product/upload-product.component';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { StoreInfoComponent } from './components/store-info/store-info.component';
 import { CartComponent } from './components/cart/cart.component';
+
 import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { CommentsComponent } from './components/comments/comments.component';
@@ -129,10 +131,12 @@ export function tokenGetter() {
     AccountListStoreComponent,
     AccountPasswordComponent,
     AccountInvoiceComponent,
+
     PaymentSuccessComponent,
     PaymentFailedComponent,
     DiseaseStoreComponent,
     ResponseComponent,
+
   ],
   imports: [
     AppRoutingModule,

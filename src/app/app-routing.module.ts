@@ -12,6 +12,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 import { AccountProfileComponent } from './components/account-profile/account-profile.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
+
 import { UploadProductComponent } from './components/upload-product/upload-product.component';
 import { CartComponent } from './components/cart/cart.component';
 import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
@@ -28,6 +29,7 @@ import { AccountPasswordComponent } from './components/account-password/account-
 import { AccountInvoiceComponent } from './components/account-invoice/account-invoice.component';
 import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
 import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
+
 import { DiseaseStoreComponent } from './components/disease-store/disease-store.component';
 import { ResponseComponent } from './components/response/response.component';
 
@@ -52,17 +54,16 @@ const routes: Routes = [
     ],
   },
   { path: 'product', component: ProductComponent },
-  { path: 'uploadproduct', component: UploadProductComponent },
   { path: 'cart', component: CartComponent },
   {
     path: 'manage/store/:id',
     component: StoreComponent,
     children: [
-      { path: "*", component: StoreCertificationComponent},
+      { path: '*', component: StoreCertificationComponent },
       { path: 'certificate', component: StoreCertificationComponent },
       { path: 'analytics', component: StatisticComponent },
-      { path: 'response', component: ResponseComponent
-     }
+      { path: 'response', component: ResponseComponent },
+      { path: 'uploadproducts', component: UploadProductComponent },
     ],
   },
   {
@@ -77,6 +78,9 @@ const routes: Routes = [
     path: 'find/shipper',
     component: FindShipperComponent,
   },
+  //{path:'userinside',component:UserinfoComponent },
+  { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
+
   { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
   { path: 'invoice-of-store', component: InvoiceOfStoreComponent },
   {

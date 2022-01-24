@@ -69,7 +69,6 @@ export class CheckoutComponent implements OnInit {
     }
 
     if (this.paymentType == 'Online') {
-      console.log('--------------------------');
       this.checkoutService.goToStripe().subscribe((data) => {
         window.open(data, '_blank');
         window.close();
@@ -81,7 +80,7 @@ export class CheckoutComponent implements OnInit {
 
   makeResult(): void {
     var now = new Date();
-    this.postData.tinhTrang = 'Đóng gói';
+    this.postData.tinhTrang = 'Mới tạo';
     this.postData.thoiGianDat = now;
     this.postData.nguoiMua = this.customerID;
     this.postData.phuongThucThanhToan = this.paymentType;
@@ -89,6 +88,7 @@ export class CheckoutComponent implements OnInit {
     this.postData.tongTien = this.myData.total;
     this.postData.tinhTrangCu = '';
 
+    console.log(this.postData);
     this.checkoutService.makeInvoice(this.postData).subscribe((data: any) => {
       this.myData.product.forEach((element: any) => {
         this.postInvoiceDetail = {
@@ -108,7 +108,6 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.auth.getUser();
     this.customerID = this.currentUser.id;
-    console.log(this.customerID);
     this.checkoutService.getInformation(this.customerID).subscribe((data) => {
       this.myData = data;
       this.formGroup.controls['phoneNumber'].setValue(this.myData.phoneNumber);

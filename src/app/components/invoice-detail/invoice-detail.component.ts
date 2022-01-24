@@ -66,7 +66,7 @@ export class InvoiceDetailComponent implements OnInit {
         if (
           this.currentUser.loaiND === 1 &&
           (this.invoice.status === 'Đã giao' ||
-            this.invoice.status === 'Đã nhận hàng')
+            this.invoice.status === 'Giao thành công')
         ) {
           this.displayedColumns = [
             'product',

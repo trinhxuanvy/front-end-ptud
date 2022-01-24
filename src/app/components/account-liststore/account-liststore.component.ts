@@ -27,7 +27,7 @@ export class AccountListStoreComponent implements OnInit {
   }
 
   getListStore() {
-    this.storeService.getAllStore().subscribe((data) => {
+    this.storeService.getStoresByOwner(this.customerID).subscribe((data) => {
       this.listStore = data;
     });
   }

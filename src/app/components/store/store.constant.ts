@@ -25,7 +25,7 @@ const ROUTES: RouteInfo[] = [
     title: 'Sản phẩm',
     icon: 'store',
     class: '',
-    endPath: '/products',
+    endPath: '/uploadproducts',
   },
   {
     path: '/manage/store/',

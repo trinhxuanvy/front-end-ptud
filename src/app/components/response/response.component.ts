@@ -10,17 +10,21 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './response.component.html',
   styleUrls: ['./response.component.scss'],
 })
+  
 export class ResponseComponent implements OnInit {
   currentUser: any;
   listResponse: Response[] = [];
   listDisplay: Response[] = [];
-  posLoading = '';
+  posLoading: Array<boolean> = [];
   pageSize = 8;
   length = 100;
   pageSizeOptions = [10, 20, 30];
   pageEvent!: PageEvent;
   isLoading = true;
   storeId = "";
+  responseTemp: Response[] = [];
+  error: Array<boolean> = [];
+  saveRes: Array<string> = [];
 
   constructor(
     private invoiceDetailService: InvoiceDetailService,
@@ -38,6 +42,11 @@ export class ResponseComponent implements OnInit {
         this.listDisplay = this.listResponse.slice(0, 8);
         this.length = this.listResponse.length;
         this.isLoading = false;
+        data.forEach(item => {
+          this.posLoading.push(false);
+          this.error.push(false);
+          this.saveRes.push(item.phanHoi);
+        });
       });
 
     console.log(this.pageEvent);
@@ -49,8 +58,24 @@ export class ResponseComponent implements OnInit {
     this.listResponse[index].phanHoi = event.target.value;
   }
 
-  feedBack(id: string) {
-    this.posLoading = id;
+  feedBack(index: number, response: Response) {
+    this.posLoading[index] = true;
+
+    let detail: Detail = {
+      id: response.id,
+      danhGia: "",
+      donHang: "",
+      sanPham: "",
+      soLuong: 0,
+      phanHoi: response.phanHoi
+    }
+    this.invoiceDetailService.updateResponse(detail).subscribe(data => {
+      if (!data) {
+        this.error[index] = true;
+        this.listResponse[index].phanHoi = this.saveRes[index];
+      }
+      this.posLoading[index] = false;
+    })
   }
 
   getPage(page: PageEvent) {

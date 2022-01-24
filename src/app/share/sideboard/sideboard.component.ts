@@ -16,7 +16,7 @@ export class SideboardComponent implements OnInit {
 
   menuItems!: any[];
   finalRoutes: RouteInfo[] = [];
-  storeId = "";
+  storeId = '';
 
   constructor(
     private router: Router,
@@ -27,15 +27,19 @@ export class SideboardComponent implements OnInit {
   ngOnInit(): void {
     this.storeId = this.activatedRoute.snapshot.params['id'];
     this.menuItems = this.routes.filter((menuItem: any) => menuItem);
-    this.menuItems.forEach((item) => {
-      this.finalRoutes.push({
-        path: item.path + this.storeId + item.endPath,
-        class: item.class,
-        endPath: item.endPath,
-        icon: item.icon,
-        title: item.title,
+    if (this.router.url.indexOf('/manage/account') < 0) {
+      this.menuItems.forEach((item) => {
+        this.finalRoutes.push({
+          path: item.path + this.storeId + item.endPath,
+          class: item.class,
+          endPath: item.endPath,
+          icon: item.icon,
+          title: item.title,
+        });
       });
-    });
+    } else {
+      this.finalRoutes = this.menuItems;
+    }
   }
 
   isMobileMenu() {

@@ -25,6 +25,10 @@ export class StoreService {
     return this.http.get(`https://localhost:44349/api/cuahang/owner/${id}`);
   }
 
+  getStoresByOwner(id: string): Observable<any> {
+    return this.http.get(`https://localhost:44349/api/cuahang/owner/stores/${id}`);
+  }
+
   // //Java
   // getStoreByOwner(id: string): Observable<any> {
   //   return this.http.get(`http://localhost:8080/api/cuahang/owner/${id}`);

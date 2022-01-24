@@ -9,33 +9,18 @@
   </h5>
   <h5 id="total">Ngày đặt: {{ invoice.timeOrder }}</h5>
   <div>
-    <button
-      mat-button
-      color="accent"
-      id="button"
-      *ngIf="invoice.status === 'Đã giao' && currentUser.loaiND === 1"
-      (click)="daNhanHang(invoice.invoiceID)"
-    >
+    <button mat-button color="accent" id="button"
+      *ngIf="invoice.status === 'Đang giao hàng' && currentUser.loaiND === 1" (click)="daNhanHang(invoice.invoiceID)">
       Đã nhận hàng
     </button>
   </div>
   <div>
-    <button
-      mat-button
-      color="accent"
-      id="button"
-      *ngIf="invoice.status === 'Mới tạo' && currentUser.loaiND === 2"
-      (click)="daChuanBi(invoice.invoiceID)"
-    >
+    <button mat-button color="accent" id="button" *ngIf="invoice.status === 'Mới tạo' && currentUser.loaiND === 2"
+      (click)="daChuanBi(invoice.invoiceID)">
       Đã chuẩn bị
     </button>
   </div>
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    class="mat-elevation-z8"
-    id="table"
-  >
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="table">
     <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
@@ -67,12 +52,8 @@
     <ng-container matColumnDef="rating">
       <th mat-header-cell *matHeaderCellDef>Đánh giá</th>
       <td mat-cell *matCellDef="let element; let i = index">
-        <button
-          *ngIf="detail[i]?.danhGia?.length == 0"
-          mat-raised-button
-          color="success"
-          (click)="setRating(element.idInvoiceDetail, detail[i].sanPham)"
-        >
+        <button *ngIf="detail[i]?.danhGia?.length == 0 || detail[i]?.danhGia == null" mat-raised-button color="success"
+          (click)="setRating(element.idInvoiceDetail, detail[i].sanPham)">
           Đánh giá
         </button>
       </td>
