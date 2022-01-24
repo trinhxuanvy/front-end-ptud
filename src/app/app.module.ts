@@ -21,7 +21,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { JwtModule } from '@auth0/angular-jwt';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -38,6 +38,8 @@ import {
   IgxDividerModule,
 } from 'igniteui-angular';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 //Component
 import { SpinnerComponent } from './share/spinner/spinner.component';
@@ -63,7 +65,7 @@ import { ProductComponent } from './components/product/product.component';
 import { AccountComponent } from './components/account/account.component';
 import { AccountVerifyComponent } from './components/account-verify/account-verify.component';
 import { AccountStoreComponent } from './components/account-store/account-store.component';
-import { AccountPaymentComponent } from './components/account-payment/account-payment.component';
+import { AccountListStoreComponent } from './components/account-liststore/account-liststore.component';
 import { AccountPasswordComponent } from './components/account-password/account-password.component';
 import { AccountInvoiceComponent } from './components/account-invoice/account-invoice.component';
 // Service
@@ -73,19 +75,20 @@ import { HeaderComponent } from './share/header/header.component';
 import { FooterComponent } from './share/footer/footer.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
 
+import { UploadProductComponent } from './components/upload-product/upload-product.component';
+import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
+import { StoreInfoComponent } from './components/store-info/store-info.component';
 import { CartComponent } from './components/cart/cart.component';
 
 import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
-import { UploadProductComponent } from './components/upload-product/upload-product.component';
-
-import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
-import { StoreInfoComponent } from './components/store-info/store-info.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { EssentialProductComponent } from './components/essential-product/essential-product.component';
 import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
 import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
+import { DiseaseStoreComponent } from './components/disease-store/disease-store.component';
+import { ResponseComponent } from './components/response/response.component';
 
 export function tokenGetter() {
   return localStorage.getItem('contact-manager-jwt');
@@ -113,7 +116,6 @@ export function tokenGetter() {
     AccountProfileComponent,
     FindShipperComponent,
     DeliHistoryComponent,
-
     ProductComponent,
     UploadProductComponent,
     InvoiceDetailComponent,
@@ -126,9 +128,15 @@ export function tokenGetter() {
     AccountComponent,
     AccountVerifyComponent,
     AccountStoreComponent,
-    AccountPaymentComponent,
+    AccountListStoreComponent,
     AccountPasswordComponent,
     AccountInvoiceComponent,
+
+    PaymentSuccessComponent,
+    PaymentFailedComponent,
+    DiseaseStoreComponent,
+    ResponseComponent,
+
   ],
   imports: [
     AppRoutingModule,
@@ -173,6 +181,9 @@ export function tokenGetter() {
     AngularFireStorageModule,
     ProgressBarModule,
     MatDialogModule,
+    NgbModule,
+    MatExpansionModule,
+    MatPaginatorModule
   ],
   providers: [
     AuthService,

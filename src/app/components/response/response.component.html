@@ -1,0 +1,33 @@
+<mat-spinner style="margin: 0 auto;" [diameter]="40" color="success" *ngIf="isLoading"></mat-spinner>
+<div class="response" *ngIf="!isLoading">
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel hideToggle *ngFor="let item of listDisplay">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>account_circle</mat-icon>
+          <div style="margin-left: 8px">{{ item.tenKhachHang }}</div>
+        </mat-panel-title>
+        <mat-panel-description>{{ item.danhGia }}</mat-panel-description>
+        <i *ngIf="item.phanHoi?.length != 0" class="material-icons c-success">check_circle</i>
+        <i *ngIf="item.phanHoi?.length == 0" class="material-icons c-warning">feedback</i>
+      </mat-expansion-panel-header>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Phản hồi của bạn</mat-label>
+        <input matInput (input)="changeInput($event, item.id)" [value]="item.phanHoi" />
+      </mat-form-field>
+
+      <mat-action-row>
+        <button mat-raised-button color="success" (click)="feedBack(item.id)" [disabled]="item.phanHoi?.length == 0">
+          Cập nhật
+          <mat-spinner style="margin-left: 8px" [diameter]="20" color="light" *ngIf="posLoading == item.id">
+          </mat-spinner>
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="getPage($event)"
+    aria-label="Select page">
+  </mat-paginator>
+</div>

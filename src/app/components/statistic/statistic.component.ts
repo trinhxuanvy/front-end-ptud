@@ -11,6 +11,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { StatisticService } from '../../services/statistic.service';
 import zoomPlugin from 'chartjs-plugin-zoom';
+import { ActivatedRoute } from '@angular/router';
 
 Chart.register(zoomPlugin);
 
@@ -50,19 +51,21 @@ export class StatisticComponent implements OnInit {
     pointHoverBackgroundColor: '#fff',
     fill: 'origin',
   };
+  storeId = "";
 
   lineChartData: ChartConfiguration['data'] = {
     datasets: [],
     labels: [],
   };
 
-  constructor(private statisticService: StatisticService) {}
+  constructor(
+    private statisticService: StatisticService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     //this.getData();
-    this.statisticService
-      .getDataWithDay('61cbfc689097f5200ba0cdd7', '11-1-2021', '11-11-2021')
-      .subscribe((data) => console.log(data));
+    this.storeId = this.activatedRoute.snapshot.params['id'];
   }
 
   resetData(): void {
@@ -73,7 +76,7 @@ export class StatisticComponent implements OnInit {
   getDataWithDay(type: string, startDate: string, endDate: string): void {
     this.resetData();
     this.statisticService
-      .getDataWithDay('61cbfc689097f5200ba0cdd7', startDate, endDate)
+      .getDataWithDay(this.storeId, startDate, endDate)
       .subscribe((data) => {
         for (let i = 0; i < data?.data.length; i++) {
           this.data.data.push(data.data[i].units);
@@ -100,7 +103,7 @@ export class StatisticComponent implements OnInit {
     this.resetData();
     this.statisticService
       .getDataWithMonth(
-        '61cbfc689097f5200ba0cdd7',
+        this.storeId,
         startMonth,
         startYear,
         endMonth,
@@ -125,7 +128,7 @@ export class StatisticComponent implements OnInit {
   getDataWithYear(type: string, startYear: string, endYear: string): void {
     this.resetData();
     this.statisticService
-      .getDataWithYear('61cbfc689097f5200ba0cdd7', startYear, endYear)
+      .getDataWithYear(this.storeId, startYear, endYear)
       .subscribe((data) => {
         for (let i = 0; i < data?.data.length; i++) {
           this.data.data.push(data.data[i].units);
@@ -147,21 +150,17 @@ export class StatisticComponent implements OnInit {
   }
 
   stopPropagation(event: any) {
-    console.log(event);
   }
 
   getEndDate(event: any) {
-    console.log(event.value);
     this.endDate = event.value;
   }
 
   getStartDate(event: any) {
-    console.log(event.value);
     this.endDate = event.value;
   }
 
   getPickItem(event: any): void {
-    console.log(event.option._value);
   }
 
   displayFn(user: any): string {
@@ -223,11 +222,9 @@ export class StatisticComponent implements OnInit {
   };
 
   chartClicked({ event, active }: { event?: ChartEvent; active?: {}[] }): void {
-    console.log(event, active);
   }
 
   chartHovered({ event, active }: { event?: ChartEvent; active?: {}[] }): void {
-    console.log(event, active);
   }
 
   hideOne(): void {

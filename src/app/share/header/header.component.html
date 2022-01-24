@@ -1,11 +1,11 @@
 <mat-toolbar class="header-homepage">
   <div class="header-logo">
-    <a href="/homepage">
+    <a routerLink="/product">
       <img src="../../assets/svg/Logo.svg" alt="Logo" />
     </a>
   </div>
   <span>
-    <a routerLink="/homepage"></a>
+    <a routerLink="/product"></a>
   </span>
   <span class="spacer"></span>
 
@@ -29,7 +29,11 @@
         <a mat-button routerLink="/register">Đăng Ký </a>
       </div>
       <div class="header-register" *ngIf="isLoggedIn$ | async as isLoggedIn">
-        <a mat-button routerLink="/invoice">Giỏ Hàng </a>
+        <a mat-button routerLink="/cart">Giỏ Hàng </a>
+      </div>
+      <div class="space"></div>
+      <div class="header-register" *ngIf="isLoggedIn$ | async as isLoggedIn">
+        <a mat-button routerLink="/manage/account">Quản lý </a>
       </div>
       <div class="space"></div>
       <div class="header-login" *ngIf="isUnLoggedIn$ | async as isUnLoggedIn">

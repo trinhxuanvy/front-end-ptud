@@ -4,7 +4,7 @@
   </div>
 
   <div class="row">
-      <!-- <div class="col-md-4 order-md-2 mb-4">
+      <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
               <span class="text-muted">Giỏ hàng</span>
               <span class="badge badge-secondary badge-pill">3</span>
@@ -45,7 +45,7 @@
                       [disabled]="this.myData?.product.length > 0 ? false : true">Thanh toán</button>
               </div>
           </div>
-      </div> -->
+      </div>
 
       <div class="col-md-8 order-md-1">
           <form [formGroup]="formGroup">
@@ -55,7 +55,7 @@
                       <div class="row" style="width: 100%;">
                           <div class="form-group col-6">
                               <div style="display: flex;">
-                                  <label for="firstName">Tên </label>
+                                  <label for="firstName">Họ Và Tên </label>
                                   <div *ngIf="(!formGroup.get('firstName')?.valid && submitted) || formGroup.get('firstName')?.errors"
                                       style="color: red;"> *</div>
                               </div>

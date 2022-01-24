@@ -21,7 +21,7 @@ export class ShipperService {
     return this.http.get<Shipper[]>('https://localhost:44349/api/shipper');
   }
 
-  // //Java
+  // // Java
   // getAllShipper(): Observable<Shipper[]> {
   //   return this.http.get<Shipper[]>('http://localhost:8080/api/shipper');
   // }

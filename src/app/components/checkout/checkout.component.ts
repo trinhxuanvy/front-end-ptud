@@ -89,6 +89,7 @@ export class CheckoutComponent implements OnInit {
     this.postData.tongTien = this.myData.total;
     this.postData.tinhTrangCu = '';
 
+    console.log(this.postData);
     this.checkoutService.makeInvoice(this.postData).subscribe((data: any) => {
       this.myData.product.forEach((element: any) => {
         this.postInvoiceDetail = {
@@ -101,7 +102,7 @@ export class CheckoutComponent implements OnInit {
           .subscribe((result: any) => {});
       });
       this.checkoutService.clearCart(this.customerID).subscribe(() => {
-        this.router.navigate(['/invoice']);
+        this.router.navigate(['/manage/account/invoice']);
       });
     });
   }

@@ -3,33 +3,37 @@ declare interface RouteInfo {
   title: string;
   icon: string;
   class: string;
+  endPath: string;
 }
 const ROUTES: RouteInfo[] = [
   {
-    path: '/manage/store/certificate',
+    path: '/manage/store/',
     title: 'Chứng nhận',
     icon: 'verified_user',
     class: '',
+    endPath: '/certificate',
   },
   {
-    path: '/manage/store/analytics',
+    path: '/manage/store/',
     title: 'Phân tích',
     icon: 'analytics',
     class: '',
+    endPath: '/analytics',
   },
   {
-    path: '/manage/store/products',
+    path: '/manage/store/',
     title: 'Sản phẩm',
     icon: 'store',
     class: '',
+    endPath: '/products',
   },
-  { path: '/maps', title: 'Maps', icon: 'location_on', class: '' },
   {
-    path: '/notifications',
-    title: 'Notifications',
-    icon: 'notifications',
+    path: '/manage/store/',
+    title: 'Phản hồi',
+    icon: 'send',
     class: '',
+    endPath: '/response',
   },
 ];
 
-export { ROUTES };
+export { ROUTES, RouteInfo };

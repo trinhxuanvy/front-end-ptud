@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InvoiceService } from '../../services/invoice.service';
 import { AuthService } from 'src/app/share/auth/auth.service';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-account-invoice',
@@ -15,23 +16,53 @@ export class AccountInvoiceComponent implements OnInit {
   myCheckoutData: any;
   postData: any = {};
   postInvoiceDetail: any = {};
+  typeUser: number = 0;
+  storeID: string = '';
+  isLoading = true;
 
-  constructor(private invoice: InvoiceService, private auth: AuthService) {}
-  UpdateInvoice(cusID: string) {
-    this.invoice
-      .GetInfOfInvoicesByCus(cusID)
-      .subscribe((originalData: Array<Invoice>) => {
-        this.data = originalData;
-        for (var i = 0; i < this.data.length; i++) {
-          this.datashow.push(true);
-        }
-      });
+  constructor(
+    private invoice: InvoiceService,
+    private auth: AuthService,
+    private storeService: StoreService
+  ) {}
+  UpdateInvoice(cusID: string, storeID: string) {
+    if (this.typeUser === 1) {
+      this.invoice
+        .GetInfOfInvoicesByCus(cusID)
+        .subscribe((originalData: Array<Invoice>) => {
+          this.data = originalData;
+          for (var i = 0; i < this.data.length; i++) {
+            this.datashow.push(true);
+          }
+          this.isLoading = false;
+        });
+    } else if (this.typeUser === 2) {
+      this.invoice
+        .GetInfOfInvoicesByStore(storeID)
+        .subscribe((originalData: Array<Invoice>) => {
+          this.data = originalData;
+          for (var i = 0; i < this.data.length; i++) {
+            this.datashow.push(true);
+          }
+          this.isLoading = false;
+        });
+    }
   }
 
   ngOnInit(): void {
     this.currentUser = this.auth.getUser();
+    this.typeUser = this.currentUser.loaiND;
     this.customerID = this.currentUser.id;
-    this.UpdateInvoice(this.customerID);
+    if (this.typeUser === 1) this.UpdateInvoice(this.customerID, '');
+    else if (this.typeUser === 2) {
+      this.storeService
+        .getStoreByOwner(this.currentUser.id)
+        .subscribe((data) => {
+          this.storeID = data.id;
+          this.isLoading = false;
+          this.UpdateInvoice('', this.storeID);
+        });
+    }
   }
   clickShow(id: any) {
     this.datashow[id] = this.datashow[id] ? false : true;
@@ -39,7 +70,7 @@ export class AccountInvoiceComponent implements OnInit {
 
   CancelInvoice(data: any): void {
     this.invoice.CancelInvoice(data).subscribe(() => {
-      this.UpdateInvoice(this.customerID);
+      this.UpdateInvoice(this.customerID, '');
     });
   }
 }

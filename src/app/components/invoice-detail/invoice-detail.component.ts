@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InvoiceDetailService } from 'src/app/services/invoice-detail.service';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { AuthService } from 'src/app/share/auth/auth.service';
@@ -29,8 +29,7 @@ export class InvoiceDetailComponent implements OnInit {
     'product',
     'price',
     'numOfElement',
-    'unit',
-    'rating',
+    'unit'
   ];
   invoiceId: string = '';
   totalPrice: number = 0;
@@ -41,7 +40,8 @@ export class InvoiceDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private auth: AuthService,
     private invoiceService: InvoiceService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -89,7 +89,6 @@ export class InvoiceDetailComponent implements OnInit {
     console.log(id);
     this.invoiceService.ChangeStatusToReceived(id).subscribe((data) => {
       console.log(data);
-      location.reload();
     });
   }
 
@@ -97,7 +96,15 @@ export class InvoiceDetailComponent implements OnInit {
     console.log(id);
     this.invoiceService.ChangeStatusToPrepared(id).subscribe((data) => {
       console.log(data);
-      location.reload();
+      let routeUrl = `${'/find/shipper/'}/${id}`;
+
+      this.router.navigateByUrl(routeUrl).then(e => {
+        if (e) {
+          console.log("Navigation is successful!");
+        } else {
+          console.log("Navigation has failed!");
+        }
+      });
     });
   }
 

@@ -30,7 +30,7 @@ export class ProductService {
     return this.http.get<Product[]>(this.apiURL + `/essential`);
   }
 
-  getProductById2(id: string): Observable<Product[]> {
+  getProductById2(id: any): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiURL + `/${id}`);
   }
   upLoadProductsByExcel(form:FormData,id:String):Observable<Product[]>{

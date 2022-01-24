@@ -9,19 +9,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import '../node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.theme.default.scss';
 @import './assets/styles/scss/index.scss';
 
-a {
-    text-decoration: none;
-}
-
-li {
-    list-style: none;
-}
-
-img {
-    width: 100%;
-    height: 100%;
-}
-
 .mat-raised-button.mat-success,
 .mat-flat-button.mat-success,
 .mat-fab.mat-success,
@@ -38,8 +25,25 @@ img {
   stroke: $c-white;
 }
 
+.mat-progress-spinner.mat-success circle {
+  stroke: $c-japanese-laurel;
+}
+
 .mat-button-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
 }

@@ -1,4 +1,5 @@
-<div class="shadow-lg p-3 mb-5 bg-white rounded">
+<mat-spinner style="margin: 0 auto;" [diameter]="40" color="success" *ngIf="isLoading"></mat-spinner>
+<div class="shadow-lg p-3 mb-5 bg-white rounded" *ngIf="!isLoading">
     <ul class="list-group mb-3">
         <li class="list-group-item" *ngFor="let item of this.data">
             <div>
@@ -7,7 +8,7 @@
                         <div>
                             <h6 style="font-size: 17px;">
                                 <a [routerLink]="['/manage/account/invoice-detail/', item?.invoiceID]">Đơn hàng {{item?.invoiceID}} của
-                                    bạn</a>
+                                    {{typeUser === 1 ? ' bạn' : ' cửa hàng'}}</a>
                             </h6>
                             <small class="text-muted" style="font-size: 15px;">Thời gian đặt:
                                 {{item?.timeOrder}}</small>

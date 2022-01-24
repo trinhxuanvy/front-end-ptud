@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -13,14 +13,21 @@ import { StoreService } from '../../services/store.service';
 import { InvoiceService } from '../../services/invoice.service';
 import { FindShipperService } from '../../services/find-shipper.service';
 import { AuthService } from 'src/app/share/auth/auth.service';
-import { Long, serialize, deserialize } from 'bson';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-find-shipper',
   templateUrl: './find-shipper.component.html',
   styleUrls: ['./find-shipper.component.scss'],
+  providers: [MatSnackBar],
 })
 export class FindShipperComponent implements OnInit {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   invoiceId: string = '';
 
   postData!: ShipperVanDon;
@@ -78,7 +85,8 @@ export class FindShipperComponent implements OnInit {
     private invoiceService: InvoiceService,
     private findShipperService: FindShipperService,
     private auth: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -89,7 +97,6 @@ export class FindShipperComponent implements OnInit {
         .getStoreByOwner(this.currentUser.id)
         .subscribe((resultData) => {
           this.storeID = resultData.id;
-          console.log(this.storeID);
           this.getShipper();
           this.getMyLocation();
         });
@@ -126,6 +133,14 @@ export class FindShipperComponent implements OnInit {
     let tempObj: Shipper[];
 
     this.locationService.getLocationShipper().subscribe((data) => {
+      this._snackBar.open(
+        'Yêu cầu vận chuyển của bạn đã được gửi đi!',
+        'Đóng',
+        {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        }
+      );
       if (data.length > 0) {
         this.filterShipper = [];
 
