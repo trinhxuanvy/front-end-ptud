@@ -84,6 +84,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { CommentsComponent } from './components/comments/comments.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { EssentialProductComponent } from './components/essential-product/essential-product.component';
+import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
 
 export function tokenGetter() {
   return localStorage.getItem('contact-manager-jwt');

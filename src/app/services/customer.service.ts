@@ -15,4 +15,7 @@ export class CustomerService {
   insertProductToCart(proid:String,cusid:string):Observable<any>{
     return this.httpClient.get(this.apiURL+`/${cusid}/${proid}`);
   }
+  updateNumProductInCart(cusid:String,proid:String,num:number):Observable<any>{
+    return this.httpClient.get(this.apiURL+`/${cusid}/${proid}/${num}`);
+  }
 }

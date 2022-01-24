@@ -29,6 +29,8 @@ import { AccountStoreComponent } from './components/account-store/account-store.
 import { AccountPaymentComponent } from './components/account-payment/account-payment.component';
 import { AccountPasswordComponent } from './components/account-password/account-password.component';
 import { AccountInvoiceComponent } from './components/account-invoice/account-invoice.component';
+import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
 
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
@@ -67,6 +69,10 @@ const routes: Routes = [
     component: ListStoreComponent,
   },
   {
+    path: 'find/shipper/:id',
+    component: FindShipperComponent,
+  },
+  {
     path: 'find/shipper',
     component: FindShipperComponent,
   },
@@ -88,6 +94,8 @@ const routes: Routes = [
     component: ProductDetailComponent,
   },
   { path: 'essential', component: EssentialProductComponent },
+  { path: 'payment/success', component: PaymentSuccessComponent },
+  { path: 'payment/failed', component: PaymentFailedComponent },
 ];
 
 @NgModule({
