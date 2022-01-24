@@ -34,6 +34,7 @@ export class InvoiceDetailComponent implements OnInit {
   invoiceId: string = '';
   totalPrice: number = 0;
   detail: Detail[] = [];
+  tienHoaHong: number = 0;
 
   constructor(
     private invoiceDetailService: InvoiceDetailService,
@@ -62,6 +63,7 @@ export class InvoiceDetailComponent implements OnInit {
             this.DetailInvoiceData[i].numOfElement *
             this.DetailInvoiceData[i].price;
         }
+        this.tienHoaHong = this.totalPrice * 0.01;
         // choose display column
         if (
           this.currentUser.loaiND === 1 &&
