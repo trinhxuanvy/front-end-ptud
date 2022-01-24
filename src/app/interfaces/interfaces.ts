@@ -87,7 +87,7 @@ declare interface Detail {
   danhGia: string;
   donHang: string;
   sanPham: string;
-  soLuong: string;
+  soLuong: number;
   phanHoi: string;
 }
 
@@ -98,6 +98,7 @@ declare interface Response {
   tenKhachHang: string;
   maKhachHang: string;
 }
+
 
 export {
   Store,
