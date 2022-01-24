@@ -63,7 +63,7 @@ import { ProductComponent } from './components/product/product.component';
 import { AccountComponent } from './components/account/account.component';
 import { AccountVerifyComponent } from './components/account-verify/account-verify.component';
 import { AccountStoreComponent } from './components/account-store/account-store.component';
-import { AccountPaymentComponent } from './components/account-payment/account-payment.component';
+import { AccountListStoreComponent } from './components/account-liststore/account-liststore.component';
 import { AccountPasswordComponent } from './components/account-password/account-password.component';
 import { AccountInvoiceComponent } from './components/account-invoice/account-invoice.component';
 // Service
@@ -122,7 +122,7 @@ export function tokenGetter() {
     AccountComponent,
     AccountVerifyComponent,
     AccountStoreComponent,
-    AccountPaymentComponent,
+    AccountListStoreComponent,
     AccountPasswordComponent,
     AccountInvoiceComponent,
     PaymentSuccessComponent,

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InvoiceComponent } from './components/invoice/invoice.component';
 import { OrderComponent } from './components/order/order.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FortestComponent } from './components/fortest/fortest.component';
@@ -24,7 +23,7 @@ import { EssentialProductComponent } from './components/essential-product/essent
 import { AccountComponent } from './components/account/account.component';
 import { AccountVerifyComponent } from './components/account-verify/account-verify.component';
 import { AccountStoreComponent } from './components/account-store/account-store.component';
-import { AccountPaymentComponent } from './components/account-payment/account-payment.component';
+import { AccountListStoreComponent } from './components/account-liststore/account-liststore.component';
 import { AccountPasswordComponent } from './components/account-password/account-password.component';
 import { AccountInvoiceComponent } from './components/account-invoice/account-invoice.component';
 import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
@@ -44,7 +43,7 @@ const routes: Routes = [
       { path: 'profile', component: AccountProfileComponent },
       { path: 'verify', component: AccountVerifyComponent },
       { path: 'store', component: AccountStoreComponent },
-      { path: 'payment', component: AccountPaymentComponent },
+      { path: 'payment', component: AccountListStoreComponent },
       { path: 'password', component: AccountPasswordComponent },
       { path: 'invoice', component: AccountInvoiceComponent },
     ],
@@ -56,7 +55,6 @@ const routes: Routes = [
     path: 'manage/store',
     component: StoreComponent,
     children: [
-      //{ path: "*", component: StoreCertificationComponent },
       { path: 'certificate', component: StoreCertificationComponent },
       { path: 'analytics', component: StatisticComponent },
     ],
@@ -73,7 +71,6 @@ const routes: Routes = [
     path: 'find/shipper',
     component: FindShipperComponent,
   },
-  //{path:'userinside',component:UserinfoComponent },
   { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
   { path: 'invoice-of-store', component: InvoiceOfStoreComponent },
   {

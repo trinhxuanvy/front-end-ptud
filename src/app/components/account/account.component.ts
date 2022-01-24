@@ -24,7 +24,6 @@ export class AccountComponent implements OnInit {
   getPage() {
     this.listenerService.titleHeader.subscribe((data) => {
       this.activePage = data;
-      console.log(data);
     });
   }
 }
