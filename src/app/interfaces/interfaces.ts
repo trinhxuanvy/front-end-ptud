@@ -91,6 +91,14 @@ declare interface Detail {
   phanHoi: string;
 }
 
+declare interface Response {
+  id: string;
+  danhGia: string;
+  phanHoi: string;
+  tenKhachHang: string;
+  maKhachHang: string;
+}
+
 export {
   Store,
   Location,
@@ -100,4 +108,5 @@ export {
   NearestShipper,
   Detail,
   ShipperVanDon,
+  Response
 };

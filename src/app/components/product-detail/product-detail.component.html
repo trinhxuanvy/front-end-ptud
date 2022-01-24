@@ -3,18 +3,16 @@
     <div class="col-4">
       <div class="product__image">
         <img
-          src="https://firebasestorage.googleapis.com/v0/b/ptud-94f91.appspot.com/o/images%2Fbao-ngu-4814.jpg?alt=media&token=6946a57f-c33d-4942-9b21-a87d949b3aa2"
+          [src]="product?.hinhAnh"
           alt=""
         />
       </div>
     </div>
     <div class="col-5">
         <div class="product__info">
-            <h4 class="product__info__name">Bào Ngư Tươi Sống</h4>
-            <p class="product__info__price">Giá: {{ '150000' | currency: 'VND': 'symbol' }} / Kg</p>
-            <p class="product__info__store">Cửa hàng: Hải Sản Anh Vỹ</p>
-            <p class="product__info__phone">Điện thoại: 0706434429</p>
-            <p class="product__info__address">Địa chỉ: 965 Âu Cơ, Phường Tân Sơn Nhì, Quận Tân Phú</p>
+            <h4 class="product__info__name">{{ product?.tenSanPham }}</h4>
+            <p class="product__info__price">Giá: {{ product?.giaTien | currency: 'VND': 'symbol' }} / Kg</p>
+            <p class="product__info__store">Cửa hàng: {{ product?.tenCuaHang }}</p>
             <p class="product__info__note">Ghi chú: Bạn có thể gọi trước của hàng để được tư vấn. Xin cảm ơn</p>
             <button mat-raised-button color="success">Thêm vào giỏ hàng</button>
         </div>

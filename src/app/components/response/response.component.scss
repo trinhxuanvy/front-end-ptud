@@ -1,0 +1,29 @@
+@import "../../../assets/styles/scss/index.scss";
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-right: 8px;
+}
+
+.response {
+  .c-success {
+    color: $c-japanese-laurel;
+  }
+
+  .c-fail {
+    color: $c-red;
+  }
+
+  .c-warning {
+      color: $c-saffron;
+  }
+}
