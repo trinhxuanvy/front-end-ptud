@@ -148,15 +148,16 @@
               />
             </div>
 
-            <div class="mt-3">
+            <div class="mt-3 row">
               <mat-checkbox
                 class="checkbox"
                 color="primary"
                 (change)="ClickCheckbox()"
                 [checked]="isAgree"
                 style="text-align: left; display: block"
-                >Điều khoản và hợp đồng.
+                ><label class="dialog-policy" (click)="openDialog()">Điều khoản và hợp đồng.</label>
               </mat-checkbox>
+
             </div>
 
             <button
