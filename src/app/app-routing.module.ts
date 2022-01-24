@@ -55,9 +55,10 @@ const routes: Routes = [
   { path: 'uploadproduct', component: UploadProductComponent },
   { path: 'cart', component: CartComponent },
   {
-    path: 'manage/store',
+    path: 'manage/store/:id',
     component: StoreComponent,
     children: [
+      { path: "*", component: StoreCertificationComponent},
       { path: 'certificate', component: StoreCertificationComponent },
       { path: 'analytics', component: StatisticComponent },
       { path: 'response', component: ResponseComponent
