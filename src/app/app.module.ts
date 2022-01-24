@@ -21,7 +21,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { JwtModule } from '@auth0/angular-jwt';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -38,6 +38,8 @@ import {
   IgxDividerModule,
 } from 'igniteui-angular';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 //Component
 import { SpinnerComponent } from './share/spinner/spinner.component';
@@ -83,6 +85,7 @@ import { RatingComponent } from './components/rating/rating.component';
 import { EssentialProductComponent } from './components/essential-product/essential-product.component';
 import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
 import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
+import { ResponseComponent } from './components/response/response.component';
 
 export function tokenGetter() {
   return localStorage.getItem('contact-manager-jwt');
@@ -126,7 +129,8 @@ export function tokenGetter() {
     AccountPasswordComponent,
     AccountInvoiceComponent,
     PaymentSuccessComponent,
-    PaymentFailedComponent
+    PaymentFailedComponent,
+    ResponseComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -170,7 +174,10 @@ export function tokenGetter() {
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     ProgressBarModule,
-    MatDialogModule
+    MatDialogModule,
+    NgbModule,
+    MatExpansionModule,
+    MatPaginatorModule
   ],
   providers: [
     AuthService,

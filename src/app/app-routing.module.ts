@@ -28,6 +28,8 @@ import { AccountPasswordComponent } from './components/account-password/account-
 import { AccountInvoiceComponent } from './components/account-invoice/account-invoice.component';
 import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
 import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
+import { ResponseComponent } from './components/response/response.component';
+
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -57,6 +59,8 @@ const routes: Routes = [
     children: [
       { path: 'certificate', component: StoreCertificationComponent },
       { path: 'analytics', component: StatisticComponent },
+      { path: 'response', component: ResponseComponent
+     }
     ],
   },
   {

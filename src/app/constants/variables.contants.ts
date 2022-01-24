@@ -25,6 +25,7 @@ const NAVIGATION = [
   'Quản lý cửa hàng',
   'Thay đổi mật khẩu',
   'Đơn hàng',
+  'Phản hồi'
 ];
 
 export { MONTH, QUARTER, NAVIGATION };
