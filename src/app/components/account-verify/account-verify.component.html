@@ -1,191 +1,136 @@
 <div class="container shadow-lg p-3 mb-5 bg-white rounded">
-  <div class="py-5 text-center">
-      <h2>Thông tin tài khoản</h2>
-  </div>
-
-  <div class="row">
-      <div class="col-md-8 order-md-1">
-          <form [formGroup]="formGroup">
-              <div class="card">
-                  <h5 class="card-header">Thông tin xác thực</h5>
-                  <div class="card-body">
-                      <div class="row" style="width: 100%;">
-                          <div class="form-group col-6">
-                              <div style="display: flex;">
-                                  <label for="firstName">Tên </label>
-                                  <div *ngIf="(!formGroup.get('firstName')?.valid && submitted) || formGroup.get('firstName')?.errors"
-                                      style="color: red;"> *</div>
-                              </div>
-                              <input type="text" formControlName="firstName" class="form-control mt-1"
-                                  placeholder="Hưng Thịnh" style="width: 100%;" />
-                              <div *ngIf="formGroup.get('firstName')?.invalid && (formGroup.get('firstName')?.dirty || formGroup.get('firstName')?.touched)"
-                                  class="alert alert-danger mt-2" style="margin-bottom: 0px !important;">
-                                  <div
-                                      *ngIf="formGroup.get('firstName')?.errors?.['required'] || formGroup.get('firstName')?.errors">
-                                      Tên là thông tin bắt buộc.
-                                  </div>
-                                  <div
-                                      *ngIf="!formGroup.get('firstName')?.errors?.['required'] && (formGroup.get('firstName')?.invalid && (formGroup.get('firstName')?.dirty || formGroup.get('firstName')?.touched))">
-                                      Thông tin chưa chính xác.
-                                  </div>
-                              </div>
-                          </div>
-
-                          <div class="form-group col-6">
-                              <div style="display: flex;">
-                                  <label for="lastName">Họ </label>
-                                  <div *ngIf="(!formGroup.get('lastName')?.valid && submitted) || formGroup.get('lastName')?.errors"
-                                      style="color: red;"> *</div>
-                              </div>
-                              <input type="text" formControlName="lastName" class="form-control mt-1"
-                                  placeholder="Nguyễn Phúc" style="width: 100%;" [disabled]="true" />
-                              <div *ngIf="formGroup.get('lastName')?.invalid && (formGroup.get('lastName')?.dirty || formGroup.get('lastName')?.touched)"
-                                  class="alert alert-danger mt-2" style="margin-bottom: 0px !important;">
-                                  <div *ngIf="formGroup.get('lastName')?.errors?.['required']">
-                                      Họ là thông tin bắt buộc.
-                                  </div>
-                                  <div
-                                      *ngIf="!formGroup.get('lastName')?.errors?.['required'] && (formGroup.get('lastName')?.invalid && (formGroup.get('lastName')?.dirty || formGroup.get('lastName')?.touched))">
-                                      Thông tin bị lỗi.
-                                  </div>
-                              </div>
-                          </div>
+    <div class="py-5 text-center">
+      <h2>Xác thực người dùng</h2>
+    </div>
+    <div class="row">
+      <div class="col-md-12 order-md-1">
+        <form [formGroup]="userVerify">
+          <div class="card">
+            <div class="card-body">
+              <div class="store-certificate">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="store-certificate__item">
+                      <h4 class="store-certificate__header">
+                        Hình ảnh CMND mặt trước
+                      </h4>
+                      <div class="store-certificate__image">
+                        <img
+                          src="assets/images/no-image.jpg"
+                          alt="Hình ảnh CMND mặt trước"
+                        />
                       </div>
-                      <div class="row" style="width: 100%;">
-                        <div class="form-group col-6">
-                            <div style="display: flex;">
-                                <label for="firstName">Tên </label>
-                                <div *ngIf="(!formGroup.get('firstName')?.valid && submitted) || formGroup.get('firstName')?.errors"
-                                    style="color: red;"> *</div>
-                            </div>
-                            <input type="text" formControlName="firstName" class="form-control mt-1"
-                                placeholder="Hưng Thịnh" style="width: 100%;" />
-                            <div *ngIf="formGroup.get('firstName')?.invalid && (formGroup.get('firstName')?.dirty || formGroup.get('firstName')?.touched)"
-                                class="alert alert-danger mt-2" style="margin-bottom: 0px !important;">
-                                <div
-                                    *ngIf="formGroup.get('firstName')?.errors?.['required'] || formGroup.get('firstName')?.errors">
-                                    Tên là thông tin bắt buộc.
-                                </div>
-                                <div
-                                    *ngIf="!formGroup.get('firstName')?.errors?.['required'] && (formGroup.get('firstName')?.invalid && (formGroup.get('firstName')?.dirty || formGroup.get('firstName')?.touched))">
-                                    Thông tin chưa chính xác.
-                                </div>
-                            </div>
+                      <div class="store-certificate__form">
+                        <input
+                          #input1
+                          type="file"
+                          hidden="true"
+                          accept=".jpg"
+                          (change)="uploadFile1($event)"
+                        />
+                        <div class="store-certificate__form__info">
+                          <progress-bar
+                            *ngIf="startUpload1"
+                            [color-degraded]="{
+                              '0': '#f12711',
+                              '10': '#f5af19',
+                              '20': '#FDC830',
+                              '30': '#FFF200',
+                              '40': '#ffff1c',
+                              '50': '#a8e063',
+                              '60': '#24FE41',
+                              '70': '#96c93d',
+                              '80': '#00F260',
+                              '90': '#56ab2f'
+                            }"
+                            progress="{{ uploadPercent1 }}"
+                            [disable-percentage]="false"
+                          ></progress-bar>
                         </div>
-
-                        <div class="form-group col-6">
-                            <div style="display: flex;">
-                                <label for="lastName">Họ </label>
-                                <div *ngIf="(!formGroup.get('lastName')?.valid && submitted) || formGroup.get('lastName')?.errors"
-                                    style="color: red;"> *</div>
-                            </div>
-                            <input type="text" formControlName="lastName" class="form-control mt-1"
-                                placeholder="Nguyễn Phúc" style="width: 100%;" [disabled]="true" />
-                            <div *ngIf="formGroup.get('lastName')?.invalid && (formGroup.get('lastName')?.dirty || formGroup.get('lastName')?.touched)"
-                                class="alert alert-danger mt-2" style="margin-bottom: 0px !important;">
-                                <div *ngIf="formGroup.get('lastName')?.errors?.['required']">
-                                    Họ là thông tin bắt buộc.
-                                </div>
-                                <div
-                                    *ngIf="!formGroup.get('lastName')?.errors?.['required'] && (formGroup.get('lastName')?.invalid && (formGroup.get('lastName')?.dirty || formGroup.get('lastName')?.touched))">
-                                    Thông tin bị lỗi.
-                                </div>
-                            </div>
-                        </div>
+  
+                        <button
+                          class="store-certificate__button"
+                          mat-flat-button
+                          color="warn"
+                          (click)="input1.click()"
+                        >
+                          Chọn ảnh
+                        </button>
+                      </div>
                     </div>
-                    <div class="row" style="width: 100%;">
-                      <div class="form-group col-6">
-                          <div style="display: flex;">
-                              <label for="firstName">Tên </label>
-                              <div *ngIf="(!formGroup.get('firstName')?.valid && submitted) || formGroup.get('firstName')?.errors"
-                                  style="color: red;"> *</div>
-                          </div>
-                          <input type="text" formControlName="firstName" class="form-control mt-1"
-                              placeholder="Hưng Thịnh" style="width: 100%;" />
-                          <div *ngIf="formGroup.get('firstName')?.invalid && (formGroup.get('firstName')?.dirty || formGroup.get('firstName')?.touched)"
-                              class="alert alert-danger mt-2" style="margin-bottom: 0px !important;">
-                              <div
-                                  *ngIf="formGroup.get('firstName')?.errors?.['required'] || formGroup.get('firstName')?.errors">
-                                  Tên là thông tin bắt buộc.
-                              </div>
-                              <div
-                                  *ngIf="!formGroup.get('firstName')?.errors?.['required'] && (formGroup.get('firstName')?.invalid && (formGroup.get('firstName')?.dirty || formGroup.get('firstName')?.touched))">
-                                  Thông tin chưa chính xác.
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="form-group col-6">
-                          <div style="display: flex;">
-                              <label for="lastName">Họ </label>
-                              <div *ngIf="(!formGroup.get('lastName')?.valid && submitted) || formGroup.get('lastName')?.errors"
-                                  style="color: red;"> *</div>
-                          </div>
-                          <input type="text" formControlName="lastName" class="form-control mt-1"
-                              placeholder="Nguyễn Phúc" style="width: 100%;" [disabled]="true" />
-                          <div *ngIf="formGroup.get('lastName')?.invalid && (formGroup.get('lastName')?.dirty || formGroup.get('lastName')?.touched)"
-                              class="alert alert-danger mt-2" style="margin-bottom: 0px !important;">
-                              <div *ngIf="formGroup.get('lastName')?.errors?.['required']">
-                                  Họ là thông tin bắt buộc.
-                              </div>
-                              <div
-                                  *ngIf="!formGroup.get('lastName')?.errors?.['required'] && (formGroup.get('lastName')?.invalid && (formGroup.get('lastName')?.dirty || formGroup.get('lastName')?.touched))">
-                                  Thông tin bị lỗi.
-                              </div>
-                          </div>
-                      </div>
                   </div>
-                      <div class="form-group mt-2">
-                          <div style="display: flex;">
-                              <label for="phoneNumber">Số điện thoại </label>
-                              <div *ngIf="(!formGroup.get('phoneNumber')?.valid && submitted) || formGroup.get('phoneNumber')?.errors"
-                                  style="color: red;"> *</div>
-                          </div>
-                          <input type="text" formControlName="phoneNumber" class="form-control mt-1"
-                              placeholder="0829060806" style="width: 100%;" />
-                          <div *ngIf="formGroup.get('phoneNumber')?.invalid && (formGroup.get('phoneNumber')?.dirty || formGroup.get('phoneNumber')?.touched)"
-                              class="alert alert-danger mt-2" style="margin-bottom: 0px !important;">
-                              <div *ngIf="formGroup.get('phoneNumber')?.errors?.['required']">
-                                  Số điện thoại là thông tin bắt buộc.
-                              </div>
-                              <div
-                                  *ngIf="!formGroup.get('phoneNumber')?.errors?.['required'] && (formGroup.get('phoneNumber')?.invalid && (formGroup.get('phoneNumber')?.dirty || formGroup.get('phoneNumber')?.touched))">
-                                  Thông tin chưa chính xác.
-                              </div>
-                          </div>
+                  <div class="col-6">
+                    <div class="store-certificate__item">
+                      <h4 class="store-certificate__header">
+                        Hình ảnh CMND mặt sau
+                      </h4>
+                      <div class="store-certificate__image">
+                        <img
+                          src="assets/images/no-image.jpg"
+                          alt="Hình ảnh CMND mặt sau"
+                        />
                       </div>
-                      <div class="form-group mt-2">
-                          <div style="display: flex;">
-                              <label for="address">Địa chỉ nhận hàng </label>
-                              <div *ngIf="(!formGroup.get('address')?.valid && submitted) || formGroup.get('address')?.errors"
-                                  style="color: red;"> *</div>
-                          </div>
-                          <input type="text" formControlName="address" class="form-control mt-1"
-                              placeholder="69, Rạch Mây, Tuyên Bình, Vĩnh Hưng, Long An" style="width: 100%;" />
-                          <div *ngIf="formGroup.get('address')?.invalid && (formGroup.get('address')?.dirty || formGroup.get('address')?.touched)"
-                              class="alert alert-danger mt-2" style="margin-bottom: 0px !important;">
-                              <div *ngIf="formGroup.get('address')?.errors?.['required']">
-                                  Địa chỉ là thông tin bắt buộc.
-                              </div>
-                              <div
-                                  *ngIf="!formGroup.get('address')?.errors?.['required'] && (formGroup.get('address')?.invalid && (formGroup.get('address')?.dirty || formGroup.get('address')?.touched))">
-                                  Thông tin chưa chính xác.
-                              </div>
-                          </div>
+                      <div class="store-certificate__form">
+                        <input
+                          #input2
+                          type="file"
+                          hidden="true"
+                          accept=".jpg"
+                          (change)="uploadFile2($event)"
+                        />
+                        <div class="store-certificate__form__info">
+                          <progress-bar
+                            *ngIf="startUpload2"
+                            [color-degraded]="{
+                              '0': '#f12711',
+                              '10': '#f5af19',
+                              '20': '#FDC830',
+                              '30': '#FFF200',
+                              '40': '#ffff1c',
+                              '50': '#a8e063',
+                              '60': '#24FE41',
+                              '70': '#96c93d',
+                              '80': '#00F260',
+                              '90': '#56ab2f'
+                            }"
+                            progress="{{ uploadPercent2 }}"
+                            [disable-percentage]="false"
+                          ></progress-bar>
+                          <button
+                            class="store-certificate__button"
+                            mat-flat-button
+                            color="warn"
+                            (click)="input2.click()"
+                          >
+                            Chọn ảnh
+                          </button>
+                        </div>
                       </div>
-
-                      <div class="mt-3">
-                          <mat-checkbox class="checkbox" color='primary' (change)="ClickCheckbox()"
-                              [checked]="isAgree" style="text-align: left; display: block; ">Khi bạn
-                              chọn vào đây bạn đã đồng ý
-                              rằng những thông tin bạn cung cấp cho chúng tôi đều là chính xác, chúng tôi có thể tìm
-                              thấy
-                              bạn để giao hàng và bạn đã đồng ý với các điều khoản của chúng tôi. </mat-checkbox>
-                      </div>
+                    </div>
                   </div>
+                </div>
               </div>
-          </form>
+              
+  
+              <button
+                [disabled]="!isActive || isRunning"
+                mat-raised-button
+                color="success"
+                class="store-certificate__upload"
+                (click)="uploadData()"
+              >
+                Thêm
+                <mat-spinner
+                  *ngIf="isUploadSuccess"
+                  style="margin-left: 8px"
+                  [diameter]="20"
+                  color="light"
+                ></mat-spinner>
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-
+    </div>
   </div>
-</div>
+  
