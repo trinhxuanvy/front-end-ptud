@@ -69,7 +69,6 @@ export class CheckoutComponent implements OnInit {
     }
 
     if (this.paymentType == 'Online') {
-      console.log('--------------------------');
       this.checkoutService.goToStripe().subscribe((data) => {
         window.open(data, '_blank');
         window.close();
@@ -109,7 +108,6 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.auth.getUser();
     this.customerID = this.currentUser.id;
-    console.log(this.customerID);
     this.checkoutService.getInformation(this.customerID).subscribe((data) => {
       this.myData = data;
       this.formGroup.controls['phoneNumber'].setValue(this.myData.phoneNumber);
