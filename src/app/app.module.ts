@@ -83,6 +83,7 @@ import { RatingComponent } from './components/rating/rating.component';
 import { EssentialProductComponent } from './components/essential-product/essential-product.component';
 import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
 import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
+import { DiseaseStoreComponent } from './components/disease-store/disease-store.component';
 
 export function tokenGetter() {
   return localStorage.getItem('contact-manager-jwt');
@@ -126,7 +127,8 @@ export function tokenGetter() {
     AccountPasswordComponent,
     AccountInvoiceComponent,
     PaymentSuccessComponent,
-    PaymentFailedComponent
+    PaymentFailedComponent,
+    DiseaseStoreComponent
   ],
   imports: [
     AppRoutingModule,
