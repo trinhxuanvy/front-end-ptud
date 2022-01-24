@@ -65,21 +65,13 @@ export class AuthService {
   }
 
   changePassword(id: string, pass:string): Observable<any>{
-    
-    console.log(123);
-    console.log(this.getUser());
     const body = { matKhau:pass };
-    console.log(body);
     return this.httpClient.put(
       `https://localhost:44349/api/nguoidung/password/${id}`,body)
-      // .subscribe(response =>
-      //   {
-      //     const token = (<any>response).token;
-      //     this.setToken(token);
-      //     const user = (<any>response).user;
-      //     console.log(user);
-      //     this.saveUser(user);
-      //   });
   }  
-  
+  verifyUser(id: string, CMND_T:string, CMND_S:string): Observable<any>{
+    const body = { hinhAnhCMNDMatTruoc:CMND_T,hinhAnhCMNDMatSau:CMND_S };
+    return this.httpClient.put(
+      `https://localhost:44349/api/nguoidung/verify/${id}`,body)
+  }
 }

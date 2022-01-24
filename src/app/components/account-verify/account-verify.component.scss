@@ -1,3 +1,5 @@
+@import "../../../assets/styles/scss/index.scss";
+
 .mat-checkbox-layout {
   display: block !important;
   white-space: normal !important;
@@ -5,4 +7,55 @@
 
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
+}
+
+.user-verify {
+  margin-bottom: 10px;
+
+  &__header {
+      margin-bottom: 32px;
+      text-align: center;
+      display: block;
+  }
+
+  &__image {
+      width: 100%;
+      margin-bottom: 16px;
+      position: relative;
+      border: 10px solid rgba($c-flint, 0.5);
+      border-radius: 10px;
+      img {
+          position: relative;
+          z-index: 999;
+      }
+  }
+
+  &__cover {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba($c-flint, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  &__status {
+      color: $c-white;
+      font-weight: bolder;
+  }
+
+  &__button {
+      display: block;
+      margin: 0 auto;
+  }
+
+  &__upload {
+      width: 150px;
+      display: block;
+      margin: 0 auto;
+  }
 }

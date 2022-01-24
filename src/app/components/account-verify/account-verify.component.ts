@@ -1,8 +1,11 @@
 import { Router} from '@angular/router';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { CheckoutService } from '../../services/checkout.service';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/share/auth/auth.service';
+import { Store, } from 'src/app/interfaces/interfaces';
+import { StoreService } from 'src/app/services/store.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-account-verify',
@@ -21,100 +24,107 @@ export class AccountVerifyComponent implements OnInit {
   postData: any = {};
   postInvoiceDetail: any = {};
 
+  uploadPercent1 = 0;
+  uploadPercent2 = 0;
+  hinhAnhCMNDMatTruoc = '';
+  hinhAnhCMNDMatSau = '';
+  startUpload1 = false;
+  startUpload2 = false;
+  isActive = false;
+  isUploadSuccess = false;
+  isRunning = false;
+
   hiddenSuccessPaymentDisplay = true;
 
-  formGroup = this.formBuilder.group({
-    firstName: new FormControl({ value: '', disabled: true }, [
-      Validators.required,
-      Validators.maxLength(50),
-    ]),
-    lastName: new FormControl({ value: '', disabled: true }, [
-      Validators.required,
-      Validators.minLength(1),
-      Validators.maxLength(50),
-    ]),
-    phoneNumber: new FormControl({ value: '', disabled: true }, [
-      Validators.required,
-      Validators.pattern('^[0-9]{10}$'),
-    ]),
-    address: new FormControl({ value: '', disabled: true }, [
-      Validators.required,
-      Validators.minLength(1),
-    ]),
+  userVerify: FormGroup= new FormGroup({
+    storeName: new FormControl(),
+    MST: new FormControl(),
+    address: new FormControl(),
   });
 
   constructor(
-    private checkoutService: CheckoutService,
-    private formBuilder: FormBuilder,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private storeService: StoreService,
+    private storage: AngularFireStorage
   ) {}
 
   ClickCheckbox(): void {
     this.isAgree = this.isAgree ? false : true;
   }
-  ChooseOption(event: any): void {
-    this.paymentType = event?.value;
-  }
 
-  onSubmit(): void {
-    this.submitted = true;
-    if (
-      this.formGroup.invalid ||
-      !this.isAgree ||
-      this.paymentType == '' ||
-      this.paymentType == null
-    ) {
-      return;
-    }
-
-    if (this.paymentType == 'Online') {
-      console.log('--------------------------');
-      this.checkoutService.goToStripe().subscribe((data) => {
-        window.open(data, '_blank');
-        window.close();
-      });
-    } else {
-      this.makeResult();
-    }
-  }
-
-  makeResult(): void {
-    var now = new Date();
-    this.postData.tinhTrang = 'Đóng gói';
-    this.postData.thoiGianDat = now;
-    this.postData.nguoiMua = this.customerID;
-    this.postData.phuongThucThanhToan = this.paymentType;
-    this.postData.cuaHang = this.myData.store;
-    this.postData.tongTien = this.myData.total;
-    this.postData.tinhTrangCu = '';
-
-    this.checkoutService.makeInvoice(this.postData).subscribe((data: any) => {
-      this.myData.product.forEach((element: any) => {
-        this.postInvoiceDetail = {
-          sanPham: element.productid,
-          soLuong: element.numOfElement,
-          donHang: data.id,
-        };
-        this.checkoutService
-          .makeInvoiceDetails(this.postInvoiceDetail)
-          .subscribe((result: any) => {});
-      });
-      this.checkoutService.clearCart(this.customerID).subscribe(() => {
-        this.router.navigate(['/invoice']);
-      });
-    });
-  }
   ngOnInit(): void {
     this.currentUser = this.auth.getUser();
     this.customerID = this.currentUser.id;
-    console.log(this.customerID);
-    this.checkoutService.getInformation(this.customerID).subscribe((data) => {
-      this.myData = data;
-      this.formGroup.controls['phoneNumber'].setValue(this.myData.phoneNumber);
-      this.formGroup.controls['address'].setValue(this.myData.address);
-      this.formGroup.controls['firstName'].setValue(this.myData.firstName);
-      this.formGroup.controls['lastName'].setValue(this.myData.lastName);
+    // console.log(this.customerID);
+  }
+
+  uploadFile1(event: any) {
+    if (event.target.files[0]) {
+      const file: File = event.target.files[0];
+      const filePath = '/images/' + file.name;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+
+      this.startUpload1 = true;
+      this.uploadPercent1 = 0;
+      this.isRunning = true;
+
+      task.percentageChanges().subscribe((percent) => {
+        this.uploadPercent1 = percent!;
+
+        if (percent == 100) {
+          this.isActive = true;
+          this.isRunning = false;
+        }
+      });
+      task
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              this.hinhAnhCMNDMatTruoc = url;
+            });
+          })
+        )
+        .subscribe();
+    }
+  }
+
+  uploadFile2(event: any) {
+    if (event.target?.files[0]) {
+      const file: File = event.target.files[0];
+      const filePath = '/images/' + file.name;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+
+      this.startUpload2 = true;
+      this.uploadPercent2 = 0;
+      this.isRunning = true;
+
+      task.percentageChanges().subscribe((percent) => {
+        this.uploadPercent2 = percent!;
+
+        if (percent == 100) {
+          this.isActive = true;
+          this.isRunning = false;
+        }
+      });
+      task
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              this.hinhAnhCMNDMatSau = url;
+            });
+          })
+        )
+        .subscribe();
+    }
+  }
+
+  uploadData() {
+    this.auth.verifyUser(this.customerID, this.hinhAnhCMNDMatTruoc,this.hinhAnhCMNDMatSau).subscribe((data)=>{
     });
   }
 }
