@@ -72,15 +72,17 @@ import { AuthGuard } from './auth.guard';
 import { HeaderComponent } from './share/header/header.component';
 import { FooterComponent } from './share/footer/footer.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
-import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
 import { UploadProductComponent } from './components/upload-product/upload-product.component';
-
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { StoreInfoComponent } from './components/store-info/store-info.component';
+import { CartComponent } from './components/cart/cart.component';
+import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { EssentialProductComponent } from './components/essential-product/essential-product.component';
+import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
 
 export function tokenGetter() {
   return localStorage.getItem('contact-manager-jwt');
@@ -112,6 +114,7 @@ export function tokenGetter() {
     UploadProductComponent,
     InvoiceDetailComponent,
     StoreInfoComponent,
+    CartComponent,
     ProductDetailComponent,
     CommentsComponent,
     RatingComponent,
@@ -122,6 +125,8 @@ export function tokenGetter() {
     AccountPaymentComponent,
     AccountPasswordComponent,
     AccountInvoiceComponent,
+    PaymentSuccessComponent,
+    PaymentFailedComponent
   ],
   imports: [
     AppRoutingModule,
@@ -165,7 +170,7 @@ export function tokenGetter() {
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     ProgressBarModule,
-    MatDialogModule,
+    MatDialogModule
   ],
   providers: [
     AuthService,

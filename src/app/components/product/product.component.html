@@ -1,11 +1,16 @@
 <div class="row find_product">
     <form action="" method="POST" class="form-inline" [formGroup]="searchForm" (ngSubmit)="onSearch()">
-        <div class="form-group">
-            <input class="form-control mr-sm-2 w-20" formControlName="name" type="search" placeholder="Tìm kiếm" aria-label="Search">
+        <div>
+            <div class="form-group input-group mb-3">
+                <input class="form-control mr-sm-2 w-20" formControlName="name" type="search" placeholder="Tìm kiếm"
+                    aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success my-2 my-sm-0 w-5" type="submit">Tìm kiếm</button>
+                </div>
+            </div>
         </div>
-            <button class="btn btn-outline-success my-2 my-sm-0 w-5" type="submit">Tìm kiếm</button>
     </form>
-</div>  
+</div>
 
 <div class="products__container">
     <ng-container *ngFor="let product of listProduct">
@@ -17,17 +22,15 @@
                 <div class="product__content">
                     <strong class="product__title">{{ product.tenSanPham }}</strong>
                     <em class="product__price">{{ product.giaTien | currency: 'VND' }}/{{product.donViTinh}}</em>
-                   
+
                 </div>
             </a>
-            <div class="list-store__item__link__note__rating">
-                <i class="material-icons">star_half</i>
-                <section>3</section>
-                <i class="material-icons">place</i>
-                <section>11km</section>
+            <div id="groupMuaNgayVaThemVaoGio">
+                <button class="snip1457" id="buttonMuaNgay">Mua ngay</button>
+                <button class="snip1457" (click)="onInsertCart(product.id)" id="buttonThemVaoGio">Thêm vào giỏ</button>
             </div>
 
         </section>
     </ng-container>
-    
+
 </div>

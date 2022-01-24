@@ -13,6 +13,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { InvoiceOfStoreComponent } from './components/invoice-of-store/invoice-of-store.component';
 import { AccountProfileComponent } from './components/account-profile/account-profile.component';
 import { FindShipperComponent } from './components/find-shipper/find-shipper.component';
+import { UploadProductComponent } from './components/upload-product/upload-product.component';
+import { CartComponent } from './components/cart/cart.component';
 import { DeliHistoryComponent } from './components/deli-history/deli-history.component';
 import { ProductComponent } from './components/product/product.component';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
@@ -25,6 +27,8 @@ import { AccountStoreComponent } from './components/account-store/account-store.
 import { AccountPaymentComponent } from './components/account-payment/account-payment.component';
 import { AccountPasswordComponent } from './components/account-password/account-password.component';
 import { AccountInvoiceComponent } from './components/account-invoice/account-invoice.component';
+import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'checkout', component: CheckoutComponent },
@@ -46,6 +50,8 @@ const routes: Routes = [
     ],
   },
   { path: 'product', component: ProductComponent },
+  { path: 'uploadproduct', component: UploadProductComponent },
+  { path: 'cart', component: CartComponent },
   {
     path: 'manage/store',
     component: StoreComponent,
@@ -60,10 +66,15 @@ const routes: Routes = [
     component: ListStoreComponent,
   },
   {
+    path: 'find/shipper/:id',
+    component: FindShipperComponent,
+  },
+  {
     path: 'find/shipper',
     component: FindShipperComponent,
   },
   //{path:'userinside',component:UserinfoComponent },
+  { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
   { path: 'invoice-of-store', component: InvoiceOfStoreComponent },
   {
     path: 'manage/account/invoice-detail/:id',
@@ -78,6 +89,8 @@ const routes: Routes = [
     component: ProductDetailComponent,
   },
   { path: 'essential', component: EssentialProductComponent },
+  { path: 'payment/success', component: PaymentSuccessComponent },
+  { path: 'payment/failed', component: PaymentFailedComponent },
 ];
 
 @NgModule({

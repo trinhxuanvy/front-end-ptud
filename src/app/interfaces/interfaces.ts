@@ -30,7 +30,13 @@ declare interface Shipper {
   tiemNgua: TiemNgua;
   trangThaiHoatDong: number;
 }
-
+declare interface ShipperVanDon {
+  _id: string;
+  vandonid: string;
+  shipper: string;
+  khoangcach: number;
+  trangthai: string;
+}
 declare interface Location {
   id: string;
   latitude: number;
@@ -82,7 +88,7 @@ declare interface Detail {
   donHang: string;
   sanPham: string;
   soLuong: string;
-  phanHoi: string
+  phanHoi: string;
 }
 
 export {
@@ -93,4 +99,5 @@ export {
   Shipper,
   NearestShipper,
   Detail,
+  ShipperVanDon,
 };

@@ -101,7 +101,7 @@ export class CheckoutComponent implements OnInit {
           .subscribe((result: any) => {});
       });
       this.checkoutService.clearCart(this.customerID).subscribe(() => {
-        this.router.navigate(['/invoice']);
+        this.router.navigate(['/manage/account/invoice']);
       });
     });
   }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { InvoiceService } from '../../services/invoice.service';
-import { CheckoutService } from '../../services/checkout.service';
 import { AuthService } from 'src/app/share/auth/auth.service';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-account-invoice',
@@ -17,15 +16,12 @@ export class AccountInvoiceComponent implements OnInit {
   myCheckoutData: any;
   postData: any = {};
   postInvoiceDetail: any = {};
+  typeUser: number = 0;
+  storeID: string = '';
 
-  constructor(
-    private checkoutService: CheckoutService,
-    private invoice: InvoiceService,
-    private activatedRoute: ActivatedRoute,
-    private auth: AuthService,
-    private router: Router
-  ) {}
-  UpdateInvoice(cusID: string) {
+  constructor(private invoice: InvoiceService, private auth: AuthService, private storeService: StoreService) {}
+  UpdateInvoice(cusID: string, storeID: string) {
+    if(this.typeUser === 1){
     this.invoice
       .GetInfOfInvoicesByCus(cusID)
       .subscribe((originalData: Array<Invoice>) => {
@@ -34,30 +30,31 @@ export class AccountInvoiceComponent implements OnInit {
           this.datashow.push(true);
         }
       });
+    }
+    else if (this.typeUser === 2) {
+      this.invoice
+      .GetInfOfInvoicesByStore(storeID)
+      .subscribe((originalData: Array<Invoice>) => {
+        this.data = originalData;
+        for (var i = 0; i < this.data.length; i++) {
+          this.datashow.push(true);
+        }
+      });
+    }
   }
 
   ngOnInit(): void {
     this.currentUser = this.auth.getUser();
+    this.typeUser = this.currentUser.loaiND;
     this.customerID = this.currentUser.id;
-
-    this.checkoutService
-      .getInformation(this.customerID)
-      .subscribe((checkoutdata) => {
-        this.myCheckoutData = checkoutdata;
-
-        this.activatedRoute.queryParams.subscribe((testdata: any) => {
-          //console.log(testdata?.success);
-          if (testdata?.success == 'true') {
-            this.makeResult(true);
-          } else {
-            if (testdata?.success == 'false') {
-              this.makeResult(false);
-            }
-          }
-          this.UpdateInvoice(this.customerID);
-        });
-        //this.UpdateInvoice(this.customerID);
-      });
+    if(this.typeUser === 1)
+    this.UpdateInvoice(this.customerID, '');
+    else if(this.typeUser === 2) {
+    this.storeService.getStoreByOwner(this.currentUser.id).subscribe(data => {
+      this.storeID = data.id;
+      this.UpdateInvoice('', this.storeID);
+    });
+    }
   }
   clickShow(id: any) {
     this.datashow[id] = this.datashow[id] ? false : true;
@@ -65,39 +62,7 @@ export class AccountInvoiceComponent implements OnInit {
 
   CancelInvoice(data: any): void {
     this.invoice.CancelInvoice(data).subscribe(() => {
-      this.UpdateInvoice(this.customerID);
-    });
-  }
-  makeResult(option: boolean): void {
-    var now = new Date();
-    if (option) {
-      this.postData.tinhTrang = 'Đóng gói';
-    } else {
-      this.postData.tinhTrang = 'Thanh toán thất bại';
-    }
-    this.postData.thoiGianDat = now;
-    this.postData.nguoiMua = this.customerID;
-    this.postData.phuongThucThanhToan = 'Online';
-    this.postData.cuaHang = this.myCheckoutData.store;
-    this.postData.tongTien = this.myCheckoutData.total;
-    this.postData.tinhTrangCu = '';
-
-    this.checkoutService.makeInvoice(this.postData).subscribe((data: any) => {
-      console.log('data');
-      console.log(data);
-      this.myCheckoutData.product.forEach((element: any) => {
-        this.postInvoiceDetail = {
-          sanPham: element.productid,
-          soLuong: element.numOfElement,
-          donHang: data.id,
-        };
-        this.checkoutService
-          .makeInvoiceDetails(this.postInvoiceDetail)
-          .subscribe((result: any) => {});
-      });
-      this.checkoutService.clearCart(this.customerID).subscribe(() => {
-        this.router.navigate(['/invoice']);
-      });
+      this.UpdateInvoice(this.customerID, '');
     });
   }
 }
