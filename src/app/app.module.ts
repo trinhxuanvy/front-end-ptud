@@ -89,6 +89,7 @@ import { PaymentSuccessComponent } from './components/payment-success/payment-su
 import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
 import { DiseaseStoreComponent } from './components/disease-store/disease-store.component';
 import { ResponseComponent } from './components/response/response.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { PolicyDiaglog } from './components/contract/contract.component';
 
 export function tokenGetter() {
@@ -137,8 +138,8 @@ export function tokenGetter() {
     PaymentFailedComponent,
     DiseaseStoreComponent,
     ResponseComponent,
+    AdminComponent,
     PolicyDiaglog
-
   ],
   imports: [
     AppRoutingModule,

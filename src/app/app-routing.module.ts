@@ -32,6 +32,7 @@ import { PaymentFailedComponent } from './components/payment-failed/payment-fail
 
 import { DiseaseStoreComponent } from './components/disease-store/disease-store.component';
 import { ResponseComponent } from './components/response/response.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   { path: 'order', component: OrderComponent },
@@ -78,11 +79,6 @@ const routes: Routes = [
     path: 'find/shipper',
     component: FindShipperComponent,
   },
-  //{path:'userinside',component:UserinfoComponent },
-  { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
-
-  { path: 'invoice-of-store/:id', component: InvoiceOfStoreComponent },
-  { path: 'invoice-of-store', component: InvoiceOfStoreComponent },
   {
     path: 'manage/account/invoice-detail/:id',
     component: InvoiceDetailComponent,
@@ -99,10 +95,11 @@ const routes: Routes = [
   { path: 'payment/success', component: PaymentSuccessComponent },
   { path: 'payment/failed', component: PaymentFailedComponent },
   { path: 'disease-store', component: DiseaseStoreComponent },
+  { path: 'admin', component: AdminComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

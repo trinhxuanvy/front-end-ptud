@@ -1,128 +1,165 @@
 <div class="container shadow-lg p-3 mb-5 bg-white rounded">
-    <div class="py-5 text-center">
-        <h2>Thông tin tài khoản</h2>
+  <div class="py-5 text-center">
+    <h2>Thông tin tài khoản</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+      <div class="col-6">
+        <div class="store-certificate__item">
+          <h4 class="store-certificate__header">Avatar</h4>
+          <div class="store-certificate__image">
+            <img
+              [src]="
+                !currentUser?.hinhAnh
+                  ? 'assets/images/no-image.jpg'
+                  : currentUser?.hinhAnh
+              "
+              alt="Avatar"
+            />
+          </div>
+          <div class="store-certificate__form">
+            <input
+              #input2
+              type="file"
+              hidden="true"
+              accept=".jpg"
+              (change)="uploadFile2($event)"
+            />
+            <div class="store-certificate__form__info">
+              <progress-bar
+                *ngIf="startUpload2"
+                [color-degraded]="{
+                  '0': '#f12711',
+                  '10': '#f5af19',
+                  '20': '#FDC830',
+                  '30': '#FFF200',
+                  '40': '#ffff1c',
+                  '50': '#a8e063',
+                  '60': '#24FE41',
+                  '70': '#96c93d',
+                  '80': '#00F260',
+                  '90': '#56ab2f'
+                }"
+                progress="{{ uploadPercent2 }}"
+                [disable-percentage]="false"
+              ></progress-bar>
+              <button
+                class="store-certificate__button"
+                mat-flat-button
+                color="warn"
+                (click)="input2.click()"
+              >
+                Chọn ảnh khác
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">Giỏ hàng</span>
-            </h4>
-
-            <ul class="list-group mb-3" *ngFor="let item of myData?.product">
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">{{item?.product}}</h6>
-                        <small class="text-muted">Đơn giá: {{item?.price}}VND</small>
-                        <br>
-                        <small class="text-muted">Số lượng: {{item?.numOfElement}}</small>
-                        <br>
-                        <small class="text-muted">Đơn vị: {{item?.unit}}</small>
-                    </div>
-                    <span class="text-muted">{{item?.total}}VND</span>
-                </li>
-            </ul>
-            <ul class="list-group mb-3">
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Tổng tiền</h6>
-                        <small class="text-muted">Tổng số tiền cần phải thanh toán.</small>
-                    </div>
-                    <span class="text-muted">{{myData?.total}}VND</span>
-                </li>
-            </ul>
-        </div>
-
-        <div class="col-md-8 order-md-1">
-            <form [formGroup]="formGroup">
-                <div class="card">
-                    <h5 class="card-header">Thông tin cá nhân</h5>
-                    <div class="card-body">
-                        <div class="row" style="width: 100%;">
-                            <div class="form-group col-6">
-                                <div style="display: flex;">
-                                    <label for="firstName">Họ Và Tên </label>
-                                    <div *ngIf="(!formGroup.get('firstName')?.valid && submitted) || formGroup.get('firstName')?.errors"
-                                        style="color: red;"> *</div>
-                                </div>
-                                <input type="text" formControlName="firstName" class="form-control mt-1"
-                                    placeholder="Hưng Thịnh" style="width: 100%;" />
-                                <div *ngIf="formGroup.get('firstName')?.invalid && (formGroup.get('firstName')?.dirty || formGroup.get('firstName')?.touched)"
-                                    class="alert alert-danger mt-2" style="margin-bottom: 0px !important;">
-                                    <div
-                                        *ngIf="formGroup.get('firstName')?.errors?.['required'] || formGroup.get('firstName')?.errors">
-                                        Tên là thông tin bắt buộc.
-                                    </div>
-                                    <div
-                                        *ngIf="!formGroup.get('firstName')?.errors?.['required'] && (formGroup.get('firstName')?.invalid && (formGroup.get('firstName')?.dirty || formGroup.get('firstName')?.touched))">
-                                        Thông tin chưa chính xác.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group col-6">
-                                <div style="display: flex;">
-                                    <label for="lastName">Họ </label>
-                                    <div *ngIf="(!formGroup.get('lastName')?.valid && submitted) || formGroup.get('lastName')?.errors"
-                                        style="color: red;"> *</div>
-                                </div>
-                                <input type="text" formControlName="lastName" class="form-control mt-1"
-                                    placeholder="Nguyễn Phúc" style="width: 100%;" [disabled]="true" />
-                                <div *ngIf="formGroup.get('lastName')?.invalid && (formGroup.get('lastName')?.dirty || formGroup.get('lastName')?.touched)"
-                                    class="alert alert-danger mt-2" style="margin-bottom: 0px !important;">
-                                    <div *ngIf="formGroup.get('lastName')?.errors?.['required']">
-                                        Họ là thông tin bắt buộc.
-                                    </div>
-                                    <div
-                                        *ngIf="!formGroup.get('lastName')?.errors?.['required'] && (formGroup.get('lastName')?.invalid && (formGroup.get('lastName')?.dirty || formGroup.get('lastName')?.touched))">
-                                        Thông tin bị lỗi.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group mt-2">
-                            <div style="display: flex;">
-                                <label for="phoneNumber">Số điện thoại </label>
-                                <div *ngIf="(!formGroup.get('phoneNumber')?.valid && submitted) || formGroup.get('phoneNumber')?.errors"
-                                    style="color: red;"> *</div>
-                            </div>
-                            <input type="text" formControlName="phoneNumber" class="form-control mt-1"
-                                placeholder="0829060806" style="width: 100%;" />
-                            <div *ngIf="formGroup.get('phoneNumber')?.invalid && (formGroup.get('phoneNumber')?.dirty || formGroup.get('phoneNumber')?.touched)"
-                                class="alert alert-danger mt-2" style="margin-bottom: 0px !important;">
-                                <div *ngIf="formGroup.get('phoneNumber')?.errors?.['required']">
-                                    Số điện thoại là thông tin bắt buộc.
-                                </div>
-                                <div
-                                    *ngIf="!formGroup.get('phoneNumber')?.errors?.['required'] && (formGroup.get('phoneNumber')?.invalid && (formGroup.get('phoneNumber')?.dirty || formGroup.get('phoneNumber')?.touched))">
-                                    Thông tin chưa chính xác.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group mt-2">
-                            <div style="display: flex;">
-                                <label for="address">Địa chỉ nhận hàng </label>
-                                <div *ngIf="(!formGroup.get('address')?.valid && submitted) || formGroup.get('address')?.errors"
-                                    style="color: red;"> *</div>
-                            </div>
-                            <input type="text" formControlName="address" class="form-control mt-1"
-                                placeholder="69, Rạch Mây, Tuyên Bình, Vĩnh Hưng, Long An" style="width: 100%;" />
-                            <div *ngIf="formGroup.get('address')?.invalid && (formGroup.get('address')?.dirty || formGroup.get('address')?.touched)"
-                                class="alert alert-danger mt-2" style="margin-bottom: 0px !important;">
-                                <div *ngIf="formGroup.get('address')?.errors?.['required']">
-                                    Địa chỉ là thông tin bắt buộc.
-                                </div>
-                                <div
-                                    *ngIf="!formGroup.get('address')?.errors?.['required'] && (formGroup.get('address')?.invalid && (formGroup.get('address')?.dirty || formGroup.get('address')?.touched))">
-                                    Thông tin chưa chính xác.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="col-md-8 order-md-1">
+      <form [formGroup]="profileUser">
+        <div class="card">
+          <h5 class="card-header">Thông tin cá nhân</h5>
+          <div class="card-body">
+            <div class="row" style="width: 100%">
+              <div class="form-group col-6">
+                <div style="display: flex">
+                  <label for="fullName">Họ Và Tên </label>
                 </div>
-            </form>
-        </div>
+                <input
+                  type="text"
+                  formControlName="fullName"
+                  class="form-control mt-1"
+                  placeholder=""
+                  style="width: 100%"
+                />
+              </div>
 
+              <div class="form-group col-6">
+                <div style="display: flex">
+                  <label for="dateOfBirth">Ngày sinh </label>
+                </div>
+                <input
+                  type="text"
+                  formControlName="dateOfBirth"
+                  class="form-control mt-1"
+                  placeholder=""
+                  style="width: 100%"
+                />
+              </div>
+            </div>
+
+            <div class="row" style="width: 100%">
+              <div class="form-group col-6">
+                <div style="display: flex">
+                  <label for="sdt">Số điện thoại </label>
+                </div>
+                <input
+                  type="text"
+                  formControlName="sdt"
+                  class="form-control mt-1"
+                  placeholder=""
+                  style="width: 100%"
+                />
+              </div>
+
+              <div class="form-group col-6">
+                <div style="display: flex">
+                  <label for="gender">Giới tính </label>
+                </div>
+                <input
+                  type="text"
+                  formControlName="gender"
+                  class="form-control mt-1"
+                  placeholder=""
+                  style="width: 100%"
+                  [disabled]="true"
+                />
+              </div>
+            </div>
+
+            <div class="form-group mt-2">
+              <div style="display: flex">
+                <label for="address">Địa chỉ </label>
+              </div>
+              <input
+                type="text"
+                formControlName="address"
+                class="form-control mt-1"
+                style="width: 100%"
+              />
+            </div>
+            <div class="mt-3">
+              <mat-checkbox
+                class="checkbox"
+                color="primary"
+                (change)="ClickCheckbox()"
+                [checked]="isAgree"
+                style="text-align: left; display: block"
+                >Đồng ý chịu trách nhiệm với những thông tin đã cung
+                cấp</mat-checkbox
+              >
+            </div>
+            <button
+              [disabled]="!isActive || isRunning"
+              mat-raised-button
+              color="success"
+              class="store-certificate__upload"
+              (click)="uploadData()"
+            >
+              Cập nhập
+              <mat-spinner
+                *ngIf="isUploadSuccess"
+                style="margin-left: 8px"
+                [diameter]="20"
+                color="light"
+              ></mat-spinner>
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
 </div>

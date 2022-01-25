@@ -1,8 +1,10 @@
 import { Router} from '@angular/router';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { CheckoutService } from '../../services/checkout.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/share/auth/auth.service';
+import { CustomerService } from 'src/app/services/customer.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-account-profile',
@@ -20,101 +22,103 @@ export class AccountProfileComponent implements OnInit {
   handler: any = null;
   postData: any = {};
   postInvoiceDetail: any = {};
+  uploadPercent1 = 0;
+  uploadPercent2 = 0;
+  startUpload1 = false;
+  startUpload2 = false;
+  isActive = false;
+  isUploadSuccess = false;
+  isRunning = false;
+  fullName ='';
+  dateOfBirth ='';
+  sdt ='';
+  address ='';
+  gender ='';
+  hinhAnh = '';
 
   hiddenSuccessPaymentDisplay = true;
 
-  formGroup = this.formBuilder.group({
-    firstName: new FormControl({ value: '', disabled: true }, [
-      Validators.required,
-      Validators.maxLength(50),
-    ]),
-    lastName: new FormControl({ value: '', disabled: true }, [
-      Validators.required,
-      Validators.minLength(1),
-      Validators.maxLength(50),
-    ]),
-    phoneNumber: new FormControl({ value: '', disabled: true }, [
-      Validators.required,
-      Validators.pattern('^[0-9]{10}$'),
-    ]),
-    address: new FormControl({ value: '', disabled: true }, [
-      Validators.required,
-      Validators.minLength(1),
-    ]),
+  profileUser: FormGroup= new FormGroup({
+    fullName: new FormControl(),
+    dateOfBirth: new FormControl(),
+    sdt: new FormControl(),
+    gender: new FormControl(),
+    address: new FormControl(),
   });
 
   constructor(
-    private checkoutService: CheckoutService,
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private cusService: CustomerService,
+    private storage: AngularFireStorage,
   ) {}
 
   ClickCheckbox(): void {
     this.isAgree = this.isAgree ? false : true;
   }
-  ChooseOption(event: any): void {
-    this.paymentType = event?.value;
-  }
 
-  onSubmit(): void {
-    this.submitted = true;
-    if (
-      this.formGroup.invalid ||
-      !this.isAgree ||
-      this.paymentType == '' ||
-      this.paymentType == null
-    ) {
-      return;
-    }
-
-    if (this.paymentType == 'Online') {
-      console.log('--------------------------');
-      this.checkoutService.goToStripe().subscribe((data) => {
-        window.open(data, '_blank');
-        window.close();
-      });
-    } else {
-      this.makeResult();
-    }
-  }
-
-  makeResult(): void {
-    var now = new Date();
-    this.postData.tinhTrang = 'Đóng gói';
-    this.postData.thoiGianDat = now;
-    this.postData.nguoiMua = this.customerID;
-    this.postData.phuongThucThanhToan = this.paymentType;
-    this.postData.cuaHang = this.myData.store;
-    this.postData.tongTien = this.myData.total;
-    this.postData.tinhTrangCu = '';
-
-    this.checkoutService.makeInvoice(this.postData).subscribe((data: any) => {
-      this.myData.product.forEach((element: any) => {
-        this.postInvoiceDetail = {
-          sanPham: element.productid,
-          soLuong: element.numOfElement,
-          donHang: data.id,
-        };
-        this.checkoutService
-          .makeInvoiceDetails(this.postInvoiceDetail)
-          .subscribe((result: any) => {});
-      });
-      this.checkoutService.clearCart(this.customerID).subscribe(() => {
-        this.router.navigate(['/invoice']);
-      });
-    });
-  }
   ngOnInit(): void {
     this.currentUser = this.auth.getUser();
-    this.customerID = this.currentUser.id;
-    console.log(this.customerID);
-    this.checkoutService.getInformation(this.customerID).subscribe((data) => {
-      this.myData = data;
-      this.formGroup.controls['phoneNumber'].setValue(this.myData.phoneNumber);
-      this.formGroup.controls['address'].setValue(this.myData.address);
-      this.formGroup.controls['firstName'].setValue(this.myData.firstName);
-      this.formGroup.controls['lastName'].setValue(this.myData.lastName);
+    this.customerID = this.currentUser?.id;
+    this.fullName = this.currentUser?.hoTen || '';;
+    this.dateOfBirth = this.currentUser?.ngaySinh || '';;
+    this.sdt = this.currentUser?.sdt || '';;
+    this.address = this.currentUser?.diaChi || '';;
+    this.gender = this.currentUser?.gioiTinh || '';;
+    this.profileUser.controls['fullName'].setValue(this.fullName);
+    this.profileUser.controls['dateOfBirth'].setValue(this.dateOfBirth);
+    this.profileUser.controls['sdt'].setValue(this.sdt);
+    this.profileUser.controls['address'].setValue(this.address);
+    this.profileUser.controls['gender'].setValue(this.gender);
+  }
+
+  uploadFile2(event: any) {
+    if (event.target?.files[0]) {
+      const file: File = event.target.files[0];
+      const filePath = '/images/' + file.name;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+
+      this.startUpload2 = true;
+      this.uploadPercent2 = 0;
+      this.isRunning = true;
+
+      task.percentageChanges().subscribe((percent) => {
+        this.uploadPercent2 = percent!;
+
+        if (percent == 100) {
+          this.isActive = true;
+          this.isRunning = false;
+        }
+      });
+      task
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              this.hinhAnh = url;
+            });
+          })
+        )
+        .subscribe();
+    }
+  }
+
+  uploadData() {
+    this.isActive = false;
+    this.isUploadSuccess = true;
+    this.startUpload1 = false;
+    this.startUpload2 = false;
+    let newUser = this.currentUser;
+    this.currentUser.hoTen = this.profileUser.value.fullName;
+    this.currentUser.ngaySinh = this.profileUser.value.dateOfBirth;
+    this.currentUser.sdt = this.profileUser.value.sdt;
+    this.currentUser.diaChi = this.profileUser.value.address;
+    this.currentUser.gioiTinh = this.profileUser.value.gender;
+    this.currentUser.hinhAnh = this.hinhAnh;
+    console.log(newUser);
+    this.cusService.uploadCus(newUser).subscribe((data) => {
+      this.isUploadSuccess = false;
+      this.auth.saveUser(data);
     });
   }
 }
