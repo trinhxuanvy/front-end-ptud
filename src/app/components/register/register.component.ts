@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
       const user = (<any>response).user;
       console.log(user);
       this.auth.saveUser(user);
-      this.router.navigate(['find/store']);
+      this.router.navigate(['login']);
     }, err =>
     {
       this.invalidAccount = true;

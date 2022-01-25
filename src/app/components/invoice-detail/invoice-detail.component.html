@@ -10,7 +10,7 @@
   <h5 id="total">Ngày đặt: {{ invoice.timeOrder }}</h5>
   <div>
     <button mat-button color="accent" id="button"
-      *ngIf="invoice.status === 'Đang giao hàng' && currentUser.loaiND === 1" (click)="daNhanHang(invoice.invoiceID)">
+      *ngIf="invoice.status === 'Giao thành công' && currentUser.loaiND === 1" (click)="daNhanHang(invoice.invoiceID)">
       Đã nhận hàng
     </button>
   </div>

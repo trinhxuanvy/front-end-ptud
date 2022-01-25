@@ -25,12 +25,7 @@ export class InvoiceDetailComponent implements OnInit {
   currentUser: any;
   DetailInvoiceData: DetailInvoice[] = [];
   dataSource = this.DetailInvoiceData;
-  displayedColumns: string[] = [
-    'product',
-    'price',
-    'numOfElement',
-    'unit'
-  ];
+  displayedColumns: string[] = ['product', 'price', 'numOfElement', 'unit'];
   invoiceId: string = '';
   totalPrice: number = 0;
   detail: Detail[] = [];
@@ -67,8 +62,9 @@ export class InvoiceDetailComponent implements OnInit {
         // choose display column
         if (
           this.currentUser.loaiND === 1 &&
-          (this.invoice.status === 'Đã giao' ||
-            this.invoice.status === 'Giao thành công')
+          (
+            this.invoice.status === 'Giao thành công' ||
+            this.invoice.status === 'Đã nhận hàng')
         ) {
           this.displayedColumns = [
             'product',
@@ -100,11 +96,11 @@ export class InvoiceDetailComponent implements OnInit {
       console.log(data);
       let routeUrl = `${'/find/shipper'}/${id}`;
 
-      this.router.navigateByUrl(routeUrl).then(e => {
+      this.router.navigateByUrl(routeUrl).then((e) => {
         if (e) {
-          console.log("Navigation is successful!");
+          console.log('Navigation is successful!');
         } else {
-          console.log("Navigation has failed!");
+          console.log('Navigation has failed!');
         }
       });
     });
