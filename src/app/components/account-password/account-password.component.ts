@@ -24,6 +24,8 @@ export class AccountPasswordComponent implements OnInit {
   currentUser: any;
   customerID = '';
   myData: any;
+  isActive = true;
+  isRunning = false;
   paymentType = '';
   handler: any = null;
   postData: any = {};
@@ -62,9 +64,11 @@ export class AccountPasswordComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.isActive=false;
     this.postPw=this.formGroup.get('newpassword');
     this.postRetypePw=this.formGroup.get('retypepass');
     if(this.postPw.value !== this.postRetypePw.value){
+      this.isActive = true;
     this._snackBar.open(
       'Mật khẩu không trùng khớp!',
       'Đóng',
