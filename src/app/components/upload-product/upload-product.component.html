@@ -6,6 +6,7 @@
         <button class="btn btn-primary" (click)="onImport();">Upload</button>
     </div>
 </div>
+
 <h2>Sản phẩm của của hàng vừa upload</h2>
 <div class="products__container">
     <ng-container *ngFor="let product of listProduct">
@@ -21,28 +22,4 @@
             </a>
         </section>
     </ng-container>
-<!--<form action="" method="POST" class="form-inline" [formGroup]="importForm" (ngSubmit)="onImport()">
-    <div class="form-group">
-        <input class="form-control mr-sm-2 w-20" formControlName="file" type="file" placeholder="nhập file sản phẩm" accept=".xlsx, .xls, .csv" #fileInput>
-    </div>
-        <button class="btn btn-outline-success my-2 my-sm-0 w-5" type="submit" (click)="onImport()">upload sản phẩm</button>
-</form>
-<br>
-<br>
-<h2>Sản phẩm của của hàng vừa upload</h2>
-<div class="products__container">
-    <ng-container *ngFor="let product of listProduct">
-        <section class="product__item">
-            <figure class="product__figure">
-                <img *ngIf="product.hinhAnh" class="product__image" [src]="product.hinhAnh" alt="" />
-            </figure>
-            <a [routerLink]="['/product/' + product.id]">
-                <div class="product__content">
-                    <strong class="product__title">{{ product.tenSanPham }}</strong>
-                    <em class="product__price">{{ product.giaTien | currency: 'VND' }}/{{product.donViTinh}}</em>
-                </div>
-            </a>
-        </section>
-    </ng-container>
-    
-</div>-->
+</div>
