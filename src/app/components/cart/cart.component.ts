@@ -33,11 +33,18 @@ export class CartComponent implements OnInit {
     this.customerService.updateNumProductInCart(this.customerID,proid,event.target.value).subscribe((data)=>{
       this.ischange=data;
     })
-    if(this.ischange)
-    return this.customerService.getCartById(this.customerID).subscribe((data1)=>{
+    this.customerService.getCartById(this.customerID).subscribe((data1)=>{
       this.mycart=data1;
     });
-    return;
+  }
+  onDeleteItemInCart(proid: String)
+  {
+    this.customerService.deleteitemCart(this.customerID,proid).subscribe((data)=>{
+      this.currentUser=data;
+    })
+    this.customerService.getCartById(this.customerID).subscribe((data1)=>{
+      this.mycart=data1;
+    });
   }
 
 }
