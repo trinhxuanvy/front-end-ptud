@@ -16,7 +16,7 @@
         </thead>
         <tbody *ngFor="let SanPham of this.dataP">
             <tr *ngIf="SanPham.thietYeu">
-                <a [routerLink]="['/product/',SanPham?.id]">{{SanPham?.tenSanPham}} </a>
+                <a [routerLink]="['/product/', SanPham.id]">{{SanPham?.tenSanPham}} </a>
                 <td>{{SanPham.xuatXu}}</td>
                 <td>{{SanPham.tenLoaiHang}}</td>
                 <td>{{SanPham.giaTien }}đ/{{SanPham.donViTinh}}</td>

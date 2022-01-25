@@ -9,6 +9,7 @@ import { Product } from '../interfaces/interfaces';
 })
 export class ProductService {
   private readonly apiURL = 'https://localhost:44349/api/sanpham';
+  private readonly apiURLJava = 'http://localhost:8080/api/sanpham';
 
   constructor(private http: HttpClient) {}
 
@@ -27,10 +28,10 @@ export class ProductService {
     return this.http.get<Product[]>(this.apiURL + `/find/${name}`);
   }
   geEssentialProduct(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiURL + `/essential`);
+    return this.http.get<Product[]>(this.apiURLJava + `/essential`);
   }
 
-  getProductById2(id: any): Observable<Product[]> {
+  getProductById2(id: string): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiURL + `/${id}`);
   }
   upLoadProductsByExcel(form:FormData,id:String):Observable<Product[]>{

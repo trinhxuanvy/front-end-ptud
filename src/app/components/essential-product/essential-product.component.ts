@@ -14,7 +14,6 @@ export class EssentialProductComponent implements OnInit {
   ngOnInit(): void {
     this.productService.geEssentialProduct().subscribe((originalData: Array<Product>)=>{
       this.dataP=originalData;
-      console.log(this.dataP);
     })
   }
 
