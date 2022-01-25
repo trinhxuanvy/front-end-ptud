@@ -36,7 +36,7 @@ export class FindShipperComponent implements OnInit {
   currentUser: any;
   isFinding = false;
   radius = 6378;
-  limitDistance = 20;
+  limitDistance = 50;
   storeID = '';
   listLocation: Location[] = [];
   listShipper: Shipper[] = [];
@@ -120,11 +120,13 @@ export class FindShipperComponent implements OnInit {
   getMyLocation() {
     this.locationService.getLocationOneStore(this.storeID).subscribe((data) => {
       this.myLocation = data;
+      console.log(this.myLocation);
     });
   }
   getShipper() {
     this.shipperService.getAllShipper().subscribe((data) => {
       this.listShipper = data;
+      console.log(this.listShipper);
     });
   }
 
@@ -133,15 +135,8 @@ export class FindShipperComponent implements OnInit {
     let tempObj: Shipper[];
 
     this.locationService.getLocationShipper().subscribe((data) => {
-      this._snackBar.open(
-        'Yêu cầu vận chuyển của bạn đã được gửi đi!',
-        'Đóng',
-        {
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-        }
-      );
       if (data.length > 0) {
+        console.log('có Data');
         this.filterShipper = [];
 
         data.slice(0, 5).forEach((item) => {
@@ -151,7 +146,7 @@ export class FindShipperComponent implements OnInit {
             item.latitude,
             item.longtitude
           );
-
+          console.log(tempD);
           if (tempD <= this.limitDistance) {
             tempObj = this.listShipper.filter(
               (shipper) => shipper._id == item.objectId
@@ -179,6 +174,14 @@ export class FindShipperComponent implements OnInit {
             }
           }
         });
+        this._snackBar.open(
+          'Yêu cầu vận chuyển của bạn đã được gửi đi!',
+          'Đóng',
+          {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+          }
+        );
       }
       this.isFinding = false;
     });

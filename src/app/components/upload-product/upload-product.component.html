@@ -3,29 +3,26 @@
   <button class="btn btn-primary" (click)="onImport()">Upload</button>
 </div>
 
+<<<<<<< Updated upstream
 <h2>Sản phẩm của của hàng vừa upload</h2>
 <div class="products__container">
 <h4 class="title">Sản phẩm của của hàng vừa upload</h4>
+=======
+<h4 class="title" *ngIf="listProduct.length > 0">Sản phẩm của của hàng vừa upload</h4>
+>>>>>>> Stashed changes
 <div class="products__container">
   <div class="row">
     <div class="col-4" *ngFor="let product of listProduct">
       <section class="product__item">
         <figure class="product__figure">
-          <img
-            *ngIf="product.hinhAnh"
-            class="product__image"
-            [src]="product.hinhAnh"
-            alt=""
-          />
+          <img *ngIf="product.hinhAnh" class="product__image" [src]="product.hinhAnh" alt="" />
         </figure>
         <a [routerLink]="['/product/' + product.id]">
           <div class="product__content">
-            <strong class="product__title">{{ product.tenSanPham }}</strong>
-            <em class="product__price"
-              >{{ product.giaTien | currency: "VND" }}/{{
-                product.donViTinh
-              }}</em
-            >
+            <h6 class="product__title">{{ product.tenSanPham }}</h6>
+            <p class="product__price">{{ product.giaTien | currency: "VND" }}/{{
+              product.donViTinh
+              }}</p>
           </div>
         </a>
       </section>
@@ -60,5 +57,9 @@
 =======
     
 </div>-->
+<<<<<<< Updated upstream
 </div>
 
+=======
+</div>
+>>>>>>> Stashed changes

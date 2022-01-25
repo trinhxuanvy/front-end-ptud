@@ -98,7 +98,7 @@ export class InvoiceDetailComponent implements OnInit {
     console.log(id);
     this.invoiceService.ChangeStatusToPrepared(id).subscribe((data) => {
       console.log(data);
-      let routeUrl = `${'/find/shipper/'}/${id}`;
+      let routeUrl = `${'/find/shipper'}/${id}`;
 
       this.router.navigateByUrl(routeUrl).then(e => {
         if (e) {
