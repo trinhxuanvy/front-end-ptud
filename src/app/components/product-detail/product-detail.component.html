@@ -14,7 +14,7 @@
             <p class="product__info__price">Giá: {{ product?.giaTien | currency: 'VND': 'symbol' }} / Kg</p>
             <p class="product__info__store">Cửa hàng: <a [routerLink]="['/store/',product?.cuaHang]">{{ product?.tenCuaHang }}</a></p>
             <p class="product__info__note">Ghi chú: Bạn có thể gọi trước của hàng để được tư vấn. Xin cảm ơn</p>
-            <button mat-raised-button color="success">Thêm vào giỏ hàng</button>
+            <button mat-raised-button color="success" (click)="onInsertCart(product.id)">Thêm vào giỏ hàng</button>
         </div>
     </div>
   </div>

@@ -15,6 +15,8 @@ export class AccountListStoreComponent implements OnInit {
   customerID: any;
   listStore: Store[] = [];
 
+  isDisplayNoStore = false;
+
   constructor(
     private auth: AuthService,
     private storeService: StoreService,
@@ -29,10 +31,14 @@ export class AccountListStoreComponent implements OnInit {
   getListStore() {
     this.storeService.getStoresByOwner(this.customerID).subscribe((data) => {
       this.listStore = data;
+      console.log(this.listStore);
+      if (!this.listStore || this.listStore.length == 0) {
+        this.isDisplayNoStore = true;
+      }
     });
   }
 
-  ManageStore(id: string){
-    this.router.navigate(['manage/store/'+ id]);
+  ManageStore(id: string) {
+    this.router.navigate(['manage/store/' + id]);
   }
 }

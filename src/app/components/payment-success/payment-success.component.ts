@@ -32,7 +32,7 @@ export class PaymentSuccessComponent implements OnInit {
   makeResult(option: boolean): void {
     var now = new Date();
     if (option) {
-      this.postData.tinhTrang = 'Đóng gói';
+      this.postData.tinhTrang = 'Mới tạo';
     } else {
       this.postData.tinhTrang = 'Thanh toán thất bại';
     }
@@ -44,8 +44,6 @@ export class PaymentSuccessComponent implements OnInit {
     this.postData.tinhTrangCu = '';
 
     this.checkoutService.makeInvoice(this.postData).subscribe((data: any) => {
-      console.log('data');
-      console.log(data);
       this.myCheckoutData.product.forEach((element: any) => {
         this.postInvoiceDetail = {
           sanPham: element.productid,

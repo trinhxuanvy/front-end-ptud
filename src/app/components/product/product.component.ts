@@ -94,7 +94,6 @@ export class ProductComponent implements OnInit {
     this.customerService.insertProductToCart(proid,this.customerID).subscribe((data)=>{
       console.log("đã thêm vào giỏ hàng");
     })
-
   }
   
 }
